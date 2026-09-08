@@ -1,0 +1,54 @@
+[
+  {
+    "id": "INQ-2026-004",
+    "name": "V. Senthil Kumar",
+    "phone": "+91 94882 25273",
+    "email": "senthil@property.com",
+    "division": "AM Real Estate's",
+    "message": "Looking for 5 commercial plots along Ambasamudram highway corridor.",
+    "source": "Quote Estimator",
+    "quoteDetails": "Commercial Plot Vetting (₹18,000 – ₹35,000)",
+    "status": "In Progress",
+    "createdAt": "2026-09-08T12:49:42.331Z",
+    "updatedAt": "2026-09-08T12:49:42.339Z"
+  },
+  {
+    "id": "INQ-2026-001",
+    "name": "K. Ramanathan",
+    "phone": "+91 98421 54321",
+    "email": "ramanathan@enterprises.com",
+    "division": "AM Infotech",
+    "message": "Interested in building an enterprise web portal with custom cloud hosting and responsive UI/UX architecture.",
+    "source": "Contact Form",
+    "quoteDetails": "Professional Web App & Cloud Setup (₹25,000 – ₹45,000)",
+    "status": "Contacted",
+    "createdAt": "2026-09-06T12:49:42.330Z",
+    "updatedAt": "2026-09-08T00:49:42.331Z"
+  },
+  {
+    "id": "INQ-2026-002",
+    "name": "S. Murugan & Family",
+    "phone": "+91 94432 10987",
+    "email": "murugan.events@gmail.com",
+    "division": "A² Royal Events",
+    "message": "Planning grand royal wedding reception. Need complete palace stage architecture, luxury BMW/Audi motorcade, and banquet feast.",
+    "source": "Quote Estimator",
+    "quoteDetails": "Grand Royal Wedding & Motorcade (₹1,50,000 – ₹3,50,000)",
+    "status": "In Progress",
+    "createdAt": "2026-09-07T22:49:42.331Z",
+    "updatedAt": "2026-09-08T08:49:42.331Z"
+  },
+  {
+    "id": "INQ-2026-003",
+    "name": "Anand Prabhu",
+    "phone": "+91 88703 11223",
+    "email": "anand.catering@yahoo.co.in",
+    "division": "SB Food Production",
+    "message": "Looking for bulk monthly supply of authentic stone-ground sambar powder and turmeric for 5 catering kitchens.",
+    "source": "Modal Quick Form",
+    "quoteDetails": "Commercial Bulk Supply for Banquets (₹15,000 – ₹35,000)",
+    "status": "Pending",
+    "createdAt": "2026-09-08T10:49:42.331Z",
+    "updatedAt": "2026-09-08T10:49:42.331Z"
+  }
+]

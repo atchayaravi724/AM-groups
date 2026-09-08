@@ -1,0 +1,26 @@
+{
+  "name": "am-global-groups-portal",
+  "version": "1.0.0",
+  "description": "Official Corporate Portal and CRM Backend for AM Global Groups",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "am-global-groups",
+    "am-infotech",
+    "am-consultancy",
+    "am-real-estate",
+    "a2-royal-events",
+    "sb-food-production",
+    "corporate-portal",
+    "crm"
+  ],
+  "author": "AM Global Groups",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

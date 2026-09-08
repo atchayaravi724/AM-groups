@@ -1,0 +1,381 @@
+/* ==========================================================================
+   AM GLOBAL GROUPS — Executive Design System & Custom Stylesheet
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-obsidian: #050b14;
+  --primary-navy: #0a1324;
+  --navy-card: #0f1c34;
+  --navy-card-border: rgba(255, 255, 255, 0.08);
+  --accent-blue: #2563eb;
+  --accent-blue-hover: #1d4ed8;
+  --accent-cyan: #06b6d4;
+  --gold-primary: #d4af37;
+  --gold-glow: #f59e0b;
+  --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f59e0b 50%, #fbbf24 100%);
+  --emerald-growth: #10b981;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-royal: 'Cinzel', serif;
+}
+
+/* Base Document Styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #1e293b;
+  background-color: #f8fafc;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.font-royal {
+  font-family: var(--font-royal);
+  letter-spacing: 0.02em;
+}
+
+/* Glassmorphism & Header */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.glass-card-dark {
+  background: rgba(15, 28, 52, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-dark:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(18, 34, 64, 0.9);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+}
+
+/* Ambient Hero Lighting */
+.hero-glow-1 {
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, rgba(14, 165, 233, 0.08) 50%, transparent 70%);
+}
+
+.hero-glow-2 {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 70%);
+}
+
+.hero-glow-3 {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 65%);
+}
+
+/* Text Gradients */
+.gradient-text-blue {
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 50%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-royal {
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 60%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Clean Hover & Animation Utility Classes */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+/* Division Brand Badges */
+.badge-infotech {
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.badge-consultancy {
+  background: rgba(16, 185, 129, 0.08);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-realestate {
+  background: rgba(217, 119, 6, 0.08);
+  color: #b45309;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.badge-events {
+  background: rgba(180, 83, 9, 0.1);
+  color: #92400e;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-food {
+  background: rgba(13, 148, 136, 0.08);
+  color: #0f766e;
+  border: 1px solid rgba(13, 148, 136, 0.2);
+}
+
+/* Logo Image Styling */
+.brand-logo-img {
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.06));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-card:hover .brand-logo-img {
+  transform: scale(1.06);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Range input styling for quote estimator */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #334155;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #2563eb;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.18);
+  background: #1d4ed8;
+}
+
+/* FAQ Accordion Transitions */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  transition: max-height 0.45s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.3s ease;
+  opacity: 1;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* Testimonials Carousel */
+.testimonial-slide {
+  transition: opacity 0.45s ease-in-out, transform 0.45s ease-in-out;
+}
+
+/* Active Nav Indicator */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link.active {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: #2563eb;
+  border-radius: 9999px;
+}
+
+/* Floating Concierge Pulse */
+@keyframes pulse-ring {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.concierge-pulse {
+  animation: pulse-ring 2.5s infinite;
+}
+
+/* Royal Luxury Gold Theme */
+.royal-gold-card {
+  background: linear-gradient(145deg, #070a12 0%, #0d1322 50%, #171410 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(212, 175, 55, 0.15);
+}
+
+.royal-gold-card:hover {
+  border-color: rgba(245, 158, 11, 0.65);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px 0 rgba(245, 158, 11, 0.25);
+}
+
+.royal-gold-badge {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(245, 158, 11, 0.28) 100%);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+.gold-gradient-btn {
+  background: linear-gradient(135deg, #d4af37 0%, #f59e0b 50%, #d97706 100%);
+  color: #050b14;
+  font-weight: 800;
+  transition: all 0.3s ease;
+}
+
+.gold-gradient-btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d4af37 100%);
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   Gallery Showcase & Lightbox Styles
+   ========================================== */
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #0b1329;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 11, 20, 0) 30%, rgba(5, 11, 20, 0.85) 75%, rgba(5, 11, 20, 0.98) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-zoom-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card:hover .gallery-zoom-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes lightboxZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-animate {
+  animation: lightboxZoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
