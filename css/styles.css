@@ -437,61 +437,124 @@ input[type="range"]::-webkit-slider-thumb:hover {
   animation: lightboxZoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Movement Words & Infinite Marquee Ticker */
-@keyframes marqueeScroll {
+/* ==========================================
+   Real Images Moving Reel & Infinite Carousel
+   ========================================== */
+@keyframes imageReelScroll {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
   100% {
     transform: translateX(-50%);
   }
 }
 
-.marquee-container {
-  display: flex;
+.image-reel-wrapper {
+  position: relative;
+  width: 100%;
   overflow: hidden;
-  user-select: none;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  padding: 0.75rem 0;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
 }
 
-.marquee-content {
+.image-reel-track {
   display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  animation: marqueeScroll 28s linear infinite;
-  white-space: nowrap;
-  flex-shrink: 0;
+  gap: 1.5rem;
+  width: max-content;
+  animation: imageReelScroll 30s linear infinite;
+  will-change: transform;
 }
 
-.marquee-container:hover .marquee-content {
+.image-reel-track.is-paused {
+  animation-play-state: paused !important;
+}
+
+.image-reel-track:hover {
   animation-play-state: paused;
 }
 
-/* Blinking Cursor for Movement Words */
-.typing-cursor {
-  display: inline-block;
-  width: 3px;
-  margin-left: 4px;
-  background-color: #38bdf8;
-  animation: cursorBlink 0.9s infinite;
-  vertical-align: baseline;
-  height: 1.05em;
-  border-radius: 2px;
+.moving-gallery-card {
+  flex: 0 0 320px;
+  width: 320px;
+  height: 230px;
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #0b1329;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+@media (min-width: 640px) {
+  .moving-gallery-card {
+    flex: 0 0 380px;
+    width: 380px;
+    height: 255px;
+  }
 }
 
-/* Movement word gradient transition */
-.movement-word-highlight {
-  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 40%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transition: all 0.3s ease;
+.moving-gallery-card:hover {
+  transform: translateY(-8px) scale(1.025);
+  border-color: rgba(96, 165, 250, 0.6);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(59, 130, 246, 0.25);
+  z-index: 10;
 }
+
+.moving-gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.moving-gallery-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.06);
+}
+
+.moving-gallery-card .gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 11, 20, 0) 30%, rgba(5, 11, 20, 0.82) 75%, rgba(5, 11, 20, 0.96) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  transition: opacity 0.3s ease;
+}
+
+.moving-gallery-card .gallery-zoom-badge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.moving-gallery-card:hover .gallery-zoom-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Control Pills */
+.gallery-mode-btn.active {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
 
 

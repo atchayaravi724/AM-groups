@@ -809,7 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 15. GALLERY FILTERING & LIGHTBOX MODAL
+  // 15. GALLERY FILTERING, MOVING REEL & LIGHTBOX
   // ==========================================
   const galleryFilterBtns = document.querySelectorAll('.gallery-filter-btn');
   const galleryCards = document.querySelectorAll('.gallery-card');
@@ -822,7 +822,80 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxInquireBtn = document.getElementById('lightboxInquireBtn');
   const lightboxWhatsAppBtn = document.getElementById('lightboxWhatsAppBtn');
 
-  // Filter functionality
+  // Reel & Grid Mode Switching Elements
+  const viewReelBtn = document.getElementById('viewReelBtn');
+  const viewGridBtn = document.getElementById('viewGridBtn');
+  const galleryReelContainer = document.getElementById('galleryReelContainer');
+  const galleryGrid = document.getElementById('galleryGrid');
+  const reelControls = document.getElementById('reelControls');
+  const imageReelTrack = document.getElementById('imageReelTrack');
+  const reelPauseBtn = document.getElementById('reelPauseBtn');
+  const reelPauseIcon = document.getElementById('reelPauseIcon');
+  const reelPauseText = document.getElementById('reelPauseText');
+  const reelPrevBtn = document.getElementById('reelPrevBtn');
+  const reelNextBtn = document.getElementById('reelNextBtn');
+
+  // 15.1 View Mode Toggle (Continuous Motion Reel vs Full Grid)
+  if (viewReelBtn && viewGridBtn && galleryReelContainer && galleryGrid) {
+    viewReelBtn.addEventListener('click', () => {
+      viewReelBtn.classList.add('active', 'bg-blue-600', 'text-white', 'shadow');
+      viewReelBtn.classList.remove('text-slate-400');
+      viewGridBtn.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow');
+      viewGridBtn.classList.add('text-slate-400');
+
+      galleryReelContainer.classList.remove('hidden');
+      if (reelControls) reelControls.classList.remove('hidden');
+      galleryGrid.classList.add('hidden');
+    });
+
+    viewGridBtn.addEventListener('click', () => {
+      viewGridBtn.classList.add('active', 'bg-blue-600', 'text-white', 'shadow');
+      viewGridBtn.classList.remove('text-slate-400');
+      viewReelBtn.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow');
+      viewReelBtn.classList.add('text-slate-400');
+
+      galleryGrid.classList.remove('hidden');
+      galleryReelContainer.classList.add('hidden');
+      if (reelControls) reelControls.classList.add('hidden');
+    });
+  }
+
+  // 15.2 Moving Reel Motion Controls (Pause / Resume / Nudge)
+  let isReelPaused = false;
+  if (reelPauseBtn && imageReelTrack) {
+    reelPauseBtn.addEventListener('click', () => {
+      isReelPaused = !isReelPaused;
+      if (isReelPaused) {
+        imageReelTrack.classList.add('is-paused');
+        if (reelPauseIcon) {
+          reelPauseIcon.classList.remove('fa-pause', 'text-amber-400');
+          reelPauseIcon.classList.add('fa-play', 'text-emerald-400');
+        }
+        if (reelPauseText) reelPauseText.textContent = 'Resume Motion';
+      } else {
+        imageReelTrack.classList.remove('is-paused');
+        if (reelPauseIcon) {
+          reelPauseIcon.classList.remove('fa-play', 'text-emerald-400');
+          reelPauseIcon.classList.add('fa-pause', 'text-amber-400');
+        }
+        if (reelPauseText) reelPauseText.textContent = 'Pause Motion';
+      }
+    });
+  }
+
+  if (reelPrevBtn && galleryReelContainer) {
+    reelPrevBtn.addEventListener('click', () => {
+      galleryReelContainer.scrollBy({ left: -260, behavior: 'smooth' });
+    });
+  }
+
+  if (reelNextBtn && galleryReelContainer) {
+    reelNextBtn.addEventListener('click', () => {
+      galleryReelContainer.scrollBy({ left: 260, behavior: 'smooth' });
+    });
+  }
+
+  // 15.3 Category Filtering
   galleryFilterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-gallery-filter');
@@ -835,7 +908,12 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.remove('bg-slate-800', 'text-slate-300');
       btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
 
-      // Filter cards
+      // If user filters specifically in reel mode, switch to grid view for convenient inspection
+      if (filter !== 'all' && galleryGrid && galleryGrid.classList.contains('hidden')) {
+        if (viewGridBtn) viewGridBtn.click();
+      }
+
+      // Filter grid and moving cards
       galleryCards.forEach(card => {
         const cat = card.getAttribute('data-gallery-category');
         if (filter === 'all' || cat === filter) {

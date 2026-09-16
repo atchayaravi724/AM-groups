@@ -249,65 +249,6 @@
         </div>
       </div>
 
-      <!-- Infinite Movement Words Marquee Ticker -->
-      <div class="mt-10 py-3 px-4 rounded-2xl bg-slate-900/70 border border-slate-800/90 backdrop-blur-md overflow-hidden shadow-inner">
-        <div class="marquee-container">
-          <div class="marquee-content">
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-blue-400">
-              <i class="fa-solid fa-code"></i> AM INFOTECH • CLOUD & WEB PLATFORMS
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400">
-              <i class="fa-solid fa-chart-line"></i> AM CONSULTANCY • STRATEGIC ADVISORY
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-amber-400">
-              <i class="fa-solid fa-building"></i> AM REAL ESTATE'S • PRIME PLOTTED LANDS
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-yellow-400 font-royal">
-              <i class="fa-solid fa-crown"></i> A² ROYAL EVENTS • WEDDINGS & MOTORCADES
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-teal-400">
-              <i class="fa-solid fa-pepper-hot"></i> SB FOOD PRODUCTION • PURE SPICES
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-purple-400">
-              <i class="fa-solid fa-certificate"></i> MSME REGISTERED • UDYAM-TN-18-0102459
-            </span>
-            <span class="text-slate-600">•</span>
-          </div>
-          <!-- Duplicate for seamless infinite loop -->
-          <div class="marquee-content" aria-hidden="true">
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-blue-400">
-              <i class="fa-solid fa-code"></i> AM INFOTECH • CLOUD & WEB PLATFORMS
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400">
-              <i class="fa-solid fa-chart-line"></i> AM CONSULTANCY • STRATEGIC ADVISORY
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-amber-400">
-              <i class="fa-solid fa-building"></i> AM REAL ESTATE'S • PRIME PLOTTED LANDS
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-yellow-400 font-royal">
-              <i class="fa-solid fa-crown"></i> A² ROYAL EVENTS • WEDDINGS & MOTORCADES
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-teal-400">
-              <i class="fa-solid fa-pepper-hot"></i> SB FOOD PRODUCTION • PURE SPICES
-            </span>
-            <span class="text-slate-600">•</span>
-            <span class="inline-flex items-center gap-2 text-xs font-bold text-purple-400">
-              <i class="fa-solid fa-certificate"></i> MSME REGISTERED • UDYAM-TN-18-0102459
-            </span>
-            <span class="text-slate-600">•</span>
-          </div>
-        </div>
-      </div>
-
       <!-- Hero 5-Division Interactive Preview Ribbon -->
       <div class="mt-12 pt-8 border-t border-slate-800/80">
         <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
@@ -1038,8 +979,37 @@
         </p>
       </div>
 
-      <!-- Gallery Filter Tabs -->
-      <div class="flex items-center justify-center flex-wrap gap-1.5 mb-8" id="galleryFilterTabs">
+      <!-- Gallery Mode & Interactive Reel Controls -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+        <!-- View Mode Switcher Tabs -->
+        <div class="inline-flex p-1 rounded-xl bg-slate-800/90 border border-slate-700">
+          <button id="viewReelBtn" class="gallery-mode-btn active px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow">
+            <i class="fa-solid fa-film text-blue-300"></i>
+            <span>Continuous Motion Reel</span>
+          </button>
+          <button id="viewGridBtn" class="gallery-mode-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Full Grid View</span>
+          </button>
+        </div>
+
+        <!-- Real Images Reel Motion Controls -->
+        <div id="reelControls" class="flex items-center gap-2.5">
+          <button id="reelPauseBtn" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
+            <i class="fa-solid fa-pause text-amber-400" id="reelPauseIcon"></i>
+            <span id="reelPauseText">Pause Motion</span>
+          </button>
+          <button id="reelPrevBtn" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center text-xs transition-all shadow-sm" title="Glide Left">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button id="reelNextBtn" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center text-xs transition-all shadow-sm" title="Glide Right">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Gallery Filter Tabs (Active for Grid View & Reel Highlight) -->
+      <div class="flex items-center justify-center flex-wrap gap-1.5 mb-6" id="galleryFilterTabs">
         <button type="button" data-gallery-filter="all" class="gallery-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition-all bg-blue-600 text-white shadow">
           All Portfolios
         </button>
@@ -1060,8 +1030,202 @@
         </button>
       </div>
 
-      <!-- Gallery Grid (6 Items) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="galleryGrid">
+      <!-- 1. Real Images Infinite Moving Reel (Continuous Motion Glide) -->
+      <div id="galleryReelContainer" class="image-reel-wrapper mb-8">
+        <div class="image-reel-track" id="imageReelTrack">
+          
+          <!-- Card 1: Royal Wedding Palace Stage -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="events" data-img-src="assets/images/gallery_royal_wedding.jpg" data-title="Grand Wedding Palace Stage & Mandap Architecture" data-category="A² Royal Events • Signature Wedding" data-desc="Palatial gold mandap styling, rich floral arrangements, dynamic concert lighting, and luxury seating.">
+            <img src="assets/images/gallery_royal_wedding.jpg" alt="A² Royal Events Palace Stage Setup" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/30 text-amber-300 border border-amber-500/40 w-max mb-1">
+                A² Royal Events
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                Grand Wedding Palace Stage
+              </h3>
+            </div>
+          </div>
+
+          <!-- Card 2: Luxury Wedding Cars Fleet -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="events" data-img-src="assets/images/gallery_luxury_cars.jpg" data-title="Luxury Wedding Cars Fleet (Audi, BMW, Benz, Jaguar)" data-category="A² Royal Events • Motorcade" data-desc="Premium wedding procession motorcade featuring pristine Audi, BMW, Mercedes-Benz, and Jaguar models.">
+            <img src="assets/images/gallery_luxury_cars.jpg" alt="Luxury Wedding Motorcade Fleet" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/30 text-amber-300 border border-amber-500/40 w-max mb-1">
+                A² Royal Events
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                Luxury Wedding Motorcade
+              </h3>
+            </div>
+          </div>
+
+          <!-- Card 3: Enterprise Software Lab -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="tech" data-img-src="assets/images/gallery_tech_software.jpg" data-title="Enterprise Software Engineering & Web Platforms" data-category="AM Infotech • Digital Systems" data-desc="Next-generation web applications, UI/UX design systems, cloud architecture, and corporate IT facility management.">
+            <img src="assets/images/gallery_tech_software.jpg" alt="AM Infotech Software Lab" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/30 text-blue-300 border border-blue-500/40 w-max mb-1">
+                AM Infotech
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-blue-300 transition-colors">
+                Software & Cloud Systems
+              </h3>
+            </div>
+          </div>
+
+          <!-- Card 4: Authentic Spices & Masalas -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="food" data-img-src="assets/images/gallery_spices_foods.jpg" data-title="Authentic Spices, Pure Masalas & Sambar Powder" data-category="SB Food Production • Pure Foods" data-desc="Cold-ground spices, signature authentic sambar powder, pure turmeric, and South Indian culinary seasonings.">
+            <img src="assets/images/gallery_spices_foods.jpg" alt="SB Food Production Spices" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-teal-500/30 text-teal-300 border border-teal-500/40 w-max mb-1">
+                SB Food Production
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-teal-300 transition-colors">
+                Authentic Sambar Powder & Spices
+              </h3>
+            </div>
+          </div>
+
+          <!-- Card 5: Plotted Lands & Property -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="realestate" data-img-src="assets/images/gallery_real_estate.jpg" data-title="Premium Plotted Lands & Property Development" data-category="AM Real Estate's • Lands & Plots" data-desc="Prime residential and commercial plots in Ambasamudram and Tirunelveli with 100% clear legal titles.">
+            <img src="assets/images/gallery_real_estate.jpg" alt="AM Real Estate Plotted Land" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/30 text-amber-300 border border-amber-500/40 w-max mb-1">
+                AM Real Estate's
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                Plotted Lands & Realty Assets
+              </h3>
+            </div>
+          </div>
+
+          <!-- Card 6: Corporate Strategy Boardroom -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="consultancy" data-img-src="assets/images/gallery_consultancy.jpg" data-title="Executive Strategy & Corporate Advisory Boardroom" data-category="AM Consultancy • Strategic Advisory" data-desc="Business scaling roadmaps, educational mentorship programs, advertising campaigns, and enterprise guidance.">
+            <img src="assets/images/gallery_consultancy.jpg" alt="AM Consultancy Executive Boardroom" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 w-max mb-1">
+                AM Consultancy
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-emerald-300 transition-colors">
+                Executive Strategic Advisory
+              </h3>
+            </div>
+          </div>
+
+          <!-- Duplicate Cards for Seamless Continuous Infinite Motion Glide -->
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="events" data-img-src="assets/images/gallery_royal_wedding.jpg" data-title="Grand Wedding Palace Stage & Mandap Architecture" data-category="A² Royal Events • Signature Wedding" data-desc="Palatial gold mandap styling, rich floral arrangements, dynamic concert lighting, and luxury seating." aria-hidden="true">
+            <img src="assets/images/gallery_royal_wedding.jpg" alt="A² Royal Events Palace Stage Setup" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/30 text-amber-300 border border-amber-500/40 w-max mb-1">
+                A² Royal Events
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                Grand Wedding Palace Stage
+              </h3>
+            </div>
+          </div>
+
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="events" data-img-src="assets/images/gallery_luxury_cars.jpg" data-title="Luxury Wedding Cars Fleet (Audi, BMW, Benz, Jaguar)" data-category="A² Royal Events • Motorcade" data-desc="Premium wedding procession motorcade featuring pristine Audi, BMW, Mercedes-Benz, and Jaguar models." aria-hidden="true">
+            <img src="assets/images/gallery_luxury_cars.jpg" alt="Luxury Wedding Motorcade Fleet" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/30 text-amber-300 border border-amber-500/40 w-max mb-1">
+                A² Royal Events
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                Luxury Wedding Motorcade
+              </h3>
+            </div>
+          </div>
+
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="tech" data-img-src="assets/images/gallery_tech_software.jpg" data-title="Enterprise Software Engineering & Web Platforms" data-category="AM Infotech • Digital Systems" data-desc="Next-generation web applications, UI/UX design systems, cloud architecture, and corporate IT facility management." aria-hidden="true">
+            <img src="assets/images/gallery_tech_software.jpg" alt="AM Infotech Software Lab" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/30 text-blue-300 border border-blue-500/40 w-max mb-1">
+                AM Infotech
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-blue-300 transition-colors">
+                Software & Cloud Systems
+              </h3>
+            </div>
+          </div>
+
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="food" data-img-src="assets/images/gallery_spices_foods.jpg" data-title="Authentic Spices, Pure Masalas & Sambar Powder" data-category="SB Food Production • Pure Foods" data-desc="Cold-ground spices, signature authentic sambar powder, pure turmeric, and South Indian culinary seasonings." aria-hidden="true">
+            <img src="assets/images/gallery_spices_foods.jpg" alt="SB Food Production Spices" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-teal-500/30 text-teal-300 border border-teal-500/40 w-max mb-1">
+                SB Food Production
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-teal-300 transition-colors">
+                Authentic Sambar Powder & Spices
+              </h3>
+            </div>
+          </div>
+
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="realestate" data-img-src="assets/images/gallery_real_estate.jpg" data-title="Premium Plotted Lands & Property Development" data-category="AM Real Estate's • Lands & Plots" data-desc="Prime residential and commercial plots in Ambasamudram and Tirunelveli with 100% clear legal titles." aria-hidden="true">
+            <img src="assets/images/gallery_real_estate.jpg" alt="AM Real Estate Plotted Land" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/30 text-amber-300 border border-amber-500/40 w-max mb-1">
+                AM Real Estate's
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                Plotted Lands & Realty Assets
+              </h3>
+            </div>
+          </div>
+
+          <div class="moving-gallery-card gallery-card group" data-gallery-category="consultancy" data-img-src="assets/images/gallery_consultancy.jpg" data-title="Executive Strategy & Corporate Advisory Boardroom" data-category="AM Consultancy • Strategic Advisory" data-desc="Business scaling roadmaps, educational mentorship programs, advertising campaigns, and enterprise guidance." aria-hidden="true">
+            <img src="assets/images/gallery_consultancy.jpg" alt="AM Consultancy Executive Boardroom" loading="lazy" />
+            <div class="gallery-zoom-badge">
+              <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
+            </div>
+            <div class="gallery-overlay">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 w-max mb-1">
+                AM Consultancy
+              </span>
+              <h3 class="font-bold text-sm text-white group-hover:text-emerald-300 transition-colors">
+                Executive Strategic Advisory
+              </h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Gallery Grid (6 Items) - Toggled via View Switcher -->
+      <div class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="galleryGrid">
         
         <!-- Item 1: Royal Wedding Stage -->
         <div class="gallery-card group" data-gallery-category="events" data-img-src="assets/images/gallery_royal_wedding.jpg" data-title="Grand Wedding Palace Stage & Mandap Architecture" data-category="A² Royal Events • Signature Wedding" data-desc="Palatial gold mandap styling, rich floral arrangements, dynamic concert lighting, and luxury seating.">
