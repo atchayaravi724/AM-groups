@@ -556,5 +556,70 @@ input[type="range"]::-webkit-slider-thumb:hover {
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
+/* ==========================================
+   Single Running Bar Ticker (Continuous Loop)
+   ========================================== */
+@keyframes singleBarScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.single-running-bar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  min-height: 46px;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #080d1a;
+  border-top: 1px solid rgba(59, 130, 246, 0.25);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  user-select: none;
+  z-index: 20;
+}
+
+.single-running-bar-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.25rem;
+  width: max-content;
+  white-space: nowrap;
+  animation: singleBarScroll 28s linear infinite;
+  will-change: transform;
+}
+
+.single-running-bar-track:hover {
+  animation-play-state: paused;
+}
+
+.single-running-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.single-running-item span.point-title {
+  font-weight: 800;
+}
+
+.single-running-item span.point-desc {
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+
 
 
