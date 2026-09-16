@@ -43,7 +43,7 @@ Welcome to the official corporate web portal of **AM Global Groups** — an inte
 
 - **Headquarters & Food Plant**: Flat 1a, AM Global Groups, Senaiar Street, Urkad, Ambasamudram, Tirunelveli, Tamil Nadu – 627401
 - **Business & Technology Center**: Door 19, Ambai Vrukshaa Complex, High School Road, Ambasamudram, Tirunelveli, Tamil Nadu – 627401
-- **Official Phone Lines**: `+91 94882 25273` | `+91 88703 88692`
+- **Official Phone Lines**: `+91 88703 88692` | `+91 63810 56606`
 - **Official Email**: `aariyabalaji913@gmail.com`
 
 ---

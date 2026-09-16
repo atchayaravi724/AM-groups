@@ -1,5 +1,18 @@
 [
   {
+    "id": "INQ-2026-005",
+    "name": "Test Client",
+    "phone": "+91 94882 25273",
+    "email": "",
+    "division": "AM Infotech",
+    "message": "Inquiring about full-stack enterprise web portal development.",
+    "source": "Contact Form Section",
+    "quoteDetails": null,
+    "status": "Pending",
+    "createdAt": "2026-09-14T14:43:20.833Z",
+    "updatedAt": "2026-09-14T14:43:20.833Z"
+  },
+  {
     "id": "INQ-2026-004",
     "name": "V. Senthil Kumar",
     "phone": "+91 94882 25273",

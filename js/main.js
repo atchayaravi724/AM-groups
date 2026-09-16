@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const priceText = `${formatINR(minTotal)} – ${formatINR(maxTotal)}`;
 
       let addonNote = selectedAddons.length > 0 ? `\nAdd-ons: ${selectedAddons.join(', ')}` : '';
-      const phoneNum = currentVertical === 'events' ? '918870388692' : '919488225273';
+      const phoneNum = currentVertical === 'events' ? '916381056606' : '918870388692';
       const msg = encodeURIComponent(`Hello AM Global Groups, I calculated an estimate for ${data.name}:\n• Plan: ${tier.title}\n• Range: ${priceText}\n• Timeline: ${tier.timeline}${addonNote}\nPlease provide further consultation.`);
       window.open(`https://wa.me/${phoneNum}?text=${msg}`, '_blank');
     });
@@ -752,7 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
         name: document.getElementById('formName')?.value || 'Client',
         phone: document.getElementById('formPhone')?.value || '',
         email: document.getElementById('formEmail')?.value || '',
-        division: document.getElementById('formDivisionSelect')?.value || 'AM Global Groups',
+        division: document.getElementById('formDivision')?.value || document.getElementById('formDivisionSelect')?.value || 'AM Global Groups',
         message: document.getElementById('formMessage')?.value || '',
         source: 'Contact Form Section'
       };
@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const division = btn.getAttribute('data-division') || 'AM Global Groups';
-      const phoneNum = division.includes('Events') ? '918870388692' : '919488225273';
+      const phoneNum = division.includes('Events') ? '916381056606' : '918870388692';
       const msg = encodeURIComponent(`Hello AM Global Groups, I am interested in ${division} solutions. Please share service packages and consultation slots.`);
       window.open(`https://wa.me/${phoneNum}?text=${msg}`, '_blank');
     });
@@ -889,7 +889,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Configure WhatsApp button
       if (lightboxWhatsAppBtn) {
-        const phone = currentActiveDivision.includes('Events') ? '918870388692' : '919488225273';
+        const phone = currentActiveDivision.includes('Events') ? '916381056606' : '918870388692';
         const msg = encodeURIComponent(`Hello AM Global Groups, I am inquiring about the ${title} featured in your portfolio.`);
         lightboxWhatsAppBtn.href = `https://wa.me/${phone}?text=${msg}`;
       }
@@ -944,5 +944,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ==========================================
+  // 16. DYNAMIC MOVEMENT WORDS ROTATOR ENGINE
+  // ==========================================
+  const movementWordEl = document.getElementById('movementWord');
+  if (movementWordEl) {
+    const movementWords = [
+      'Enterprise Technology',
+      'Strategic Consultancy',
+      'Prime Real Estate',
+      'A² Royal Weddings',
+      'Pure Spice Production',
+      'Digital Innovations',
+      'Corporate Growth',
+      'Luxury Motorcades',
+      'Endless Possibilities'
+    ];
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 80;
+
+    function typeMovementWords() {
+      const currentWord = movementWords[wordIndex];
+
+      if (isDeleting) {
+        movementWordEl.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 35;
+      } else {
+        movementWordEl.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 80;
+      }
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        // Pause when full word is typed
+        typeSpeed = 2200;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % movementWords.length;
+        typeSpeed = 400;
+      }
+
+      setTimeout(typeMovementWords, typeSpeed);
+    }
+
+    // Initialize typing animation after a brief delay
+    setTimeout(typeMovementWords, 500);
+  }
+
 });
+
 

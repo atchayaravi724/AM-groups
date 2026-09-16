@@ -1,21 +1,29 @@
 /* ==========================================================================
-   AM GLOBAL GROUPS — Executive Design System & Custom Stylesheet
+   AM GLOBAL GROUPS — Ultra-Executive Corporate Design System
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
 :root {
-  --primary-obsidian: #050b14;
-  --primary-navy: #0a1324;
-  --navy-card: #0f1c34;
+  --primary-obsidian: #030712;
+  --primary-slate-dark: #0b1329;
+  --primary-navy: #0f172a;
+  --navy-card: #131d36;
   --navy-card-border: rgba(255, 255, 255, 0.08);
-  --accent-blue: #2563eb;
-  --accent-blue-hover: #1d4ed8;
-  --accent-cyan: #06b6d4;
-  --gold-primary: #d4af37;
-  --gold-glow: #f59e0b;
+  
+  --brand-blue: #2563eb;
+  --brand-blue-glow: rgba(37, 99, 235, 0.35);
+  --brand-cyan: #06b6d4;
+  --brand-emerald: #10b981;
+  --brand-amber: #f59e0b;
+  --brand-gold: #d4af37;
+  --brand-gold-glow: rgba(212, 175, 55, 0.4);
+  --brand-ruby: #e11d48;
+  
   --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f59e0b 50%, #fbbf24 100%);
-  --emerald-growth: #10b981;
+  --blue-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+  --dark-gradient: linear-gradient(180deg, #030712 0%, #0b1329 50%, #030712 100%);
+  
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-heading: 'Outfit', sans-serif;
   --font-royal: 'Cinzel', serif;
@@ -24,6 +32,7 @@
 /* Base Document Styles */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,37 +45,38 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, .font-heading {
+h1, h2, h3, h4, h5, h6, .font-heading {
   font-family: var(--font-heading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .font-royal {
   font-family: var(--font-royal);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 /* Glassmorphism & Header */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
 }
 
 .glass-card-dark {
-  background: rgba(15, 28, 52, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card-dark:hover {
   border-color: rgba(96, 165, 250, 0.4);
-  background: rgba(18, 34, 64, 0.9);
+  background: rgba(19, 29, 54, 0.9);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(37, 99, 235, 0.2);
 }
 
 .glass-card-light {
@@ -78,20 +88,20 @@ h1, h2, h3, h4, .font-heading {
 
 /* Ambient Hero Lighting */
 .hero-glow-1 {
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, rgba(14, 165, 233, 0.08) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(14, 165, 233, 0.1) 50%, transparent 70%);
 }
 
 .hero-glow-2 {
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(245, 158, 11, 0.08) 50%, transparent 70%);
 }
 
 .hero-glow-3 {
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 65%);
 }
 
 /* Text Gradients */
 .gradient-text-blue {
-  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 50%, #93c5fd 100%);
+  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #93c5fd 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -103,7 +113,7 @@ h1, h2, h3, h4, .font-heading {
 }
 
 .gradient-text-royal {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 40%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -114,6 +124,31 @@ h1, h2, h3, h4, .font-heading {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-amber {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold Button & Badge */
+.gold-gradient-btn {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #d97706 100%);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-gradient-btn:hover {
+  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 60%, #f59e0b 100%);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+  transform: translateY(-2px);
+}
+
+.royal-gold-badge {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(212, 175, 55, 0.25) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
 /* Clean Hover & Animation Utility Classes */
 .hover-lift {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
@@ -121,49 +156,50 @@ h1, h2, h3, h4, .font-heading {
 
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.09), 0 0 0 1px rgba(37, 99, 235, 0.12);
 }
 
 /* Division Brand Badges */
 .badge-infotech {
   background: rgba(37, 99, 235, 0.08);
   color: #1d4ed8;
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.22);
 }
 
 .badge-consultancy {
   background: rgba(16, 185, 129, 0.08);
   color: #047857;
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.22);
 }
 
 .badge-realestate {
   background: rgba(217, 119, 6, 0.08);
   color: #b45309;
-  border: 1px solid rgba(217, 119, 6, 0.2);
+  border: 1px solid rgba(217, 119, 6, 0.22);
 }
 
 .badge-events {
   background: rgba(180, 83, 9, 0.1);
   color: #92400e;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(245, 158, 11, 0.35);
 }
 
 .badge-food {
   background: rgba(13, 148, 136, 0.08);
   color: #0f766e;
-  border: 1px solid rgba(13, 148, 136, 0.2);
+  border: 1px solid rgba(13, 148, 136, 0.22);
 }
 
-/* Logo Image Styling */
+/* Logo Image Styling (Hostinger Theme) */
 .brand-logo-img {
-  object-fit: contain;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.06));
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  object-fit: cover;
+  border-radius: 0.75rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .brand-card:hover .brand-logo-img {
-  transform: scale(1.06);
+  transform: scale(1.08);
+  filter: brightness(1.08);
 }
 
 /* Custom Scrollbar */
@@ -259,12 +295,53 @@ input[type="range"]::-webkit-slider-thumb:hover {
 /* Floating Concierge Pulse */
 @keyframes pulse-ring {
   0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+  70% { transform: scale(1); box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
   100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .concierge-pulse {
   animation: pulse-ring 2.5s infinite;
+}
+
+/* Division-Specific Card Styling */
+.card-division-tech {
+  border-top: 3px solid #2563eb;
+}
+.card-division-tech:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.15);
+}
+
+.card-division-consultancy {
+  border-top: 3px solid #10b981;
+}
+.card-division-consultancy:hover {
+  border-color: #34d399;
+  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15);
+}
+
+.card-division-realestate {
+  border-top: 3px solid #f59e0b;
+}
+.card-division-realestate:hover {
+  border-color: #fbbf24;
+  box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.15);
+}
+
+.card-division-events {
+  border-top: 3px solid #d4af37;
+}
+.card-division-events:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 20px 40px -15px rgba(212, 175, 55, 0.25);
+}
+
+.card-division-food {
+  border-top: 3px solid #0d9488;
+}
+.card-division-food:hover {
+  border-color: #14b8a6;
+  box-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.15);
 }
 
 /* Royal Luxury Gold Theme */
@@ -277,25 +354,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .royal-gold-card:hover {
   border-color: rgba(245, 158, 11, 0.65);
   box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px 0 rgba(245, 158, 11, 0.25);
-}
-
-.royal-gold-badge {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(245, 158, 11, 0.28) 100%);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.45);
-}
-
-.gold-gradient-btn {
-  background: linear-gradient(135deg, #d4af37 0%, #f59e0b 50%, #d97706 100%);
-  color: #050b14;
-  font-weight: 800;
-  transition: all 0.3s ease;
-}
-
-.gold-gradient-btn:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d4af37 100%);
-  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
-  transform: translateY(-2px);
 }
 
 /* ==========================================
@@ -378,4 +436,62 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .lightbox-animate {
   animation: lightboxZoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Movement Words & Infinite Marquee Ticker */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  animation: marqueeScroll 28s linear infinite;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Blinking Cursor for Movement Words */
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  margin-left: 4px;
+  background-color: #38bdf8;
+  animation: cursorBlink 0.9s infinite;
+  vertical-align: baseline;
+  height: 1.05em;
+  border-radius: 2px;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Movement word gradient transition */
+.movement-word-highlight {
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 40%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
 
