@@ -80,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update active button state
       filterButtons.forEach(b => {
-        b.classList.remove('bg-[#09090B]', 'text-white', 'shadow-sm', 'bg-[#BF9D87]', 'bg-[#5E8B7E]', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
-        b.classList.add('bg-white', 'text-[#71717A]', 'hover:text-[#09090B]', 'hover:bg-[#F4F4F5]', 'border-[#E4E4E7]');
+        b.classList.remove('bg-[#734E30]', 'bg-[#22231A]', 'bg-[#09090B]', 'text-white', 'shadow-sm', 'bg-[#BF9D87]', 'bg-[#5E8B7E]', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
+        b.classList.add('bg-white', 'text-[#87826E]', 'hover:text-[#22231A]', 'hover:bg-[#F1EBE4]', 'border-[#87826E]/30');
       });
-      btn.classList.add('bg-[#09090B]', 'text-white', 'shadow-sm');
-      btn.classList.remove('bg-white', 'text-[#71717A]', 'hover:bg-[#F4F4F5]');
+      btn.classList.add('bg-[#734E30]', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-white', 'text-[#87826E]', 'hover:bg-[#F1EBE4]');
 
       // Filter cards smoothly
       divisionCards.forEach(card => {
@@ -265,11 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
   calcVerticalButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       calcVerticalButtons.forEach(b => {
-        b.classList.remove('active', 'bg-white', 'text-[#09090B]', 'border-white', 'bg-[#BF9D87]', 'text-white');
-        b.classList.add('bg-[#18181B]/80', 'text-[#A1A1AA]', 'border-[#27272A]');
+        b.classList.remove('active', 'bg-[#734E30]', 'text-white', 'border-[#734E30]', 'bg-white', 'text-[#09090B]');
+        b.classList.add('bg-[#2E2F23]/80', 'text-[#87826E]', 'border-[#87826E]/30');
       });
-      btn.classList.add('active', 'bg-white', 'text-[#09090B]', 'border-white');
-      btn.classList.remove('bg-[#18181B]/80', 'text-[#A1A1AA]', 'border-[#27272A]');
+      btn.classList.add('active', 'bg-[#734E30]', 'text-white', 'border-[#734E30]');
+      btn.classList.remove('bg-[#2E2F23]/80', 'text-[#87826E]', 'border-[#87826E]/30');
 
       currentVertical = btn.getAttribute('data-vertical') || 'tech';
       
@@ -542,9 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     testimonialDots.forEach((dot, i) => {
       if (i === index) {
-        dot.className = 'w-8 h-2 rounded-full bg-[#09090B] transition-all';
+        dot.className = 'w-8 h-2 rounded-full bg-[#734E30] transition-all';
       } else {
-        dot.className = 'w-2 h-2 rounded-full bg-[#D4D4D8] hover:bg-[#71717A] transition-all';
+        dot.className = 'w-2 h-2 rounded-full bg-[#87826E]/40 hover:bg-[#87826E] transition-all';
       }
     });
 
@@ -676,11 +676,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const icon = toastNotification.querySelector('i');
     if (icon) {
-      icon.className = isSuccess ? 'fa-solid fa-circle-check text-base text-[#C5A880]' : 'fa-solid fa-triangle-exclamation text-base text-rose-400';
+      icon.className = isSuccess ? 'fa-solid fa-circle-check text-base text-[#734E30]' : 'fa-solid fa-triangle-exclamation text-base text-rose-400';
     }
 
     toastNotification.className = `fixed bottom-6 right-6 z-50 px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-100 ${
-      isSuccess ? 'bg-[#09090B] border border-white/15 text-white' : 'bg-rose-900 border border-rose-500 text-white'
+      isSuccess ? 'bg-[#22231A] border border-[#87826E]/40 text-white' : 'bg-rose-900 border border-rose-500 text-white'
     }`;
 
     toastNotification.classList.remove('hidden');
@@ -838,10 +838,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 15.1 View Mode Toggle (Continuous Motion Reel vs Full Grid)
   if (viewReelBtn && viewGridBtn && galleryReelContainer && galleryGrid) {
     viewReelBtn.addEventListener('click', () => {
-      viewReelBtn.classList.add('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
-      viewReelBtn.classList.remove('text-[#A1A1AA]');
-      viewGridBtn.classList.remove('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
-      viewGridBtn.classList.add('text-[#A1A1AA]');
+      viewReelBtn.classList.add('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
+      viewReelBtn.classList.remove('text-[#87826E]');
+      viewGridBtn.classList.remove('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
+      viewGridBtn.classList.add('text-[#87826E]');
 
       galleryReelContainer.classList.remove('hidden');
       if (reelControls) reelControls.classList.remove('hidden');
@@ -849,10 +849,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     viewGridBtn.addEventListener('click', () => {
-      viewGridBtn.classList.add('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
-      viewGridBtn.classList.remove('text-[#A1A1AA]');
-      viewReelBtn.classList.remove('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
-      viewReelBtn.classList.add('text-[#A1A1AA]');
+      viewGridBtn.classList.add('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
+      viewGridBtn.classList.remove('text-[#87826E]');
+      viewReelBtn.classList.remove('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
+      viewReelBtn.classList.add('text-[#87826E]');
 
       galleryGrid.classList.remove('hidden');
       galleryReelContainer.classList.add('hidden');
@@ -902,11 +902,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update button state
       galleryFilterBtns.forEach(b => {
-        b.classList.remove('bg-white', 'text-[#09090B]', 'shadow-sm', 'bg-[#BF9D87]', 'text-white');
-        b.classList.add('bg-[#18181B]', 'text-[#A1A1AA]');
+        b.classList.remove('bg-[#734E30]', 'bg-white', 'text-[#22231A]', 'shadow-sm', 'text-white');
+        b.classList.add('bg-[#2E2F23]', 'text-[#87826E]');
       });
-      btn.classList.remove('bg-[#18181B]', 'text-[#A1A1AA]');
-      btn.classList.add('bg-white', 'text-[#09090B]', 'shadow-sm');
+      btn.classList.remove('bg-[#2E2F23]', 'text-[#87826E]');
+      btn.classList.add('bg-[#734E30]', 'text-white', 'shadow-sm');
 
       // If user filters specifically in reel mode, switch to grid view for convenient inspection
       if (filter !== 'all' && galleryGrid && galleryGrid.classList.contains('hidden')) {
