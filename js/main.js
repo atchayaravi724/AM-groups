@@ -80,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update active button state
       filterButtons.forEach(b => {
-        b.classList.remove('bg-indigo-600', 'bg-blue-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
-        b.classList.add('bg-white', 'text-slate-700', 'hover:bg-slate-200');
+        b.classList.remove('bg-[#5E8B7E]', 'text-white', 'shadow-md', 'shadow-[#5E8B7E]/30', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
+        b.classList.add('bg-white', 'text-[#22333B]', 'hover:bg-[#EFF3F1]', 'border-[#5E8B7E]/30');
       });
-      btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
-      btn.classList.remove('bg-white', 'text-slate-700', 'hover:bg-slate-200');
+      btn.classList.add('bg-[#5E8B7E]', 'text-white', 'shadow-md', 'shadow-[#5E8B7E]/30');
+      btn.classList.remove('bg-white', 'text-[#22333B]', 'hover:bg-[#EFF3F1]');
 
       // Filter cards smoothly
       divisionCards.forEach(card => {
@@ -265,11 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
   calcVerticalButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       calcVerticalButtons.forEach(b => {
-        b.classList.remove('active', 'bg-blue-600', 'text-white', 'border-blue-500');
-        b.classList.add('bg-slate-900/60', 'text-slate-300', 'border-slate-700');
+        b.classList.remove('active', 'bg-[#5E8B7E]', 'text-white', 'border-[#C7A17A]/60', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
+        b.classList.add('bg-[#1A282F]/80', 'text-[#EFF3F1]', 'border-[#2C3E47]');
       });
-      btn.classList.add('active', 'bg-blue-600', 'text-white', 'border-blue-500');
-      btn.classList.remove('bg-slate-900/60', 'text-slate-300', 'border-slate-700');
+      btn.classList.add('active', 'bg-[#5E8B7E]', 'text-white', 'border-[#C7A17A]/60');
+      btn.classList.remove('bg-[#1A282F]/80', 'text-[#EFF3F1]', 'border-[#2C3E47]');
 
       currentVertical = btn.getAttribute('data-vertical') || 'tech';
       
@@ -542,9 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     testimonialDots.forEach((dot, i) => {
       if (i === index) {
-        dot.className = 'w-8 h-2.5 rounded-full bg-blue-600 transition-all';
+        dot.className = 'w-8 h-2.5 rounded-full bg-[#5E8B7E] transition-all';
       } else {
-        dot.className = 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all';
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-[#C7A17A] hover:bg-[#5E8B7E] transition-all';
       }
     });
 
@@ -676,11 +676,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const icon = toastNotification.querySelector('i');
     if (icon) {
-      icon.className = isSuccess ? 'fa-solid fa-circle-check text-xl text-emerald-400' : 'fa-solid fa-triangle-exclamation text-xl text-rose-400';
+      icon.className = isSuccess ? 'fa-solid fa-circle-check text-xl text-[#5E8B7E]' : 'fa-solid fa-triangle-exclamation text-xl text-rose-400';
     }
 
     toastNotification.className = `fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-100 ${
-      isSuccess ? 'bg-slate-900 border border-emerald-500/50 text-emerald-400' : 'bg-rose-900 border border-rose-500 text-white'
+      isSuccess ? 'bg-[#1A282F] border border-[#5E8B7E]/60 text-white' : 'bg-rose-900 border border-rose-500 text-white'
     }`;
 
     toastNotification.classList.remove('hidden');
@@ -838,10 +838,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 15.1 View Mode Toggle (Continuous Motion Reel vs Full Grid)
   if (viewReelBtn && viewGridBtn && galleryReelContainer && galleryGrid) {
     viewReelBtn.addEventListener('click', () => {
-      viewReelBtn.classList.add('active', 'bg-blue-600', 'text-white', 'shadow');
-      viewReelBtn.classList.remove('text-slate-400');
-      viewGridBtn.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow');
-      viewGridBtn.classList.add('text-slate-400');
+      viewReelBtn.classList.add('active', 'bg-[#5E8B7E]', 'text-white', 'shadow');
+      viewReelBtn.classList.remove('text-[#C7A17A]');
+      viewGridBtn.classList.remove('active', 'bg-[#5E8B7E]', 'text-white', 'shadow');
+      viewGridBtn.classList.add('text-[#C7A17A]');
 
       galleryReelContainer.classList.remove('hidden');
       if (reelControls) reelControls.classList.remove('hidden');
@@ -849,10 +849,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     viewGridBtn.addEventListener('click', () => {
-      viewGridBtn.classList.add('active', 'bg-blue-600', 'text-white', 'shadow');
-      viewGridBtn.classList.remove('text-slate-400');
-      viewReelBtn.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow');
-      viewReelBtn.classList.add('text-slate-400');
+      viewGridBtn.classList.add('active', 'bg-[#5E8B7E]', 'text-white', 'shadow');
+      viewGridBtn.classList.remove('text-[#C7A17A]');
+      viewReelBtn.classList.remove('active', 'bg-[#5E8B7E]', 'text-white', 'shadow');
+      viewReelBtn.classList.add('text-[#C7A17A]');
 
       galleryGrid.classList.remove('hidden');
       galleryReelContainer.classList.add('hidden');
@@ -868,15 +868,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isReelPaused) {
         imageReelTrack.classList.add('is-paused');
         if (reelPauseIcon) {
-          reelPauseIcon.classList.remove('fa-pause', 'text-amber-400');
-          reelPauseIcon.classList.add('fa-play', 'text-emerald-400');
+          reelPauseIcon.classList.remove('fa-pause');
+          reelPauseIcon.classList.add('fa-play');
         }
         if (reelPauseText) reelPauseText.textContent = 'Resume Motion';
       } else {
         imageReelTrack.classList.remove('is-paused');
         if (reelPauseIcon) {
-          reelPauseIcon.classList.remove('fa-play', 'text-emerald-400');
-          reelPauseIcon.classList.add('fa-pause', 'text-amber-400');
+          reelPauseIcon.classList.remove('fa-play');
+          reelPauseIcon.classList.add('fa-pause');
         }
         if (reelPauseText) reelPauseText.textContent = 'Pause Motion';
       }
@@ -902,11 +902,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update button state
       galleryFilterBtns.forEach(b => {
-        b.classList.remove('bg-indigo-600', 'bg-blue-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
-        b.classList.add('bg-slate-800', 'text-slate-300');
+        b.classList.remove('bg-[#5E8B7E]', 'text-white', 'shadow-md', 'shadow-[#5E8B7E]/40', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
+        b.classList.add('bg-[#22333B]', 'text-[#EFF3F1]');
       });
-      btn.classList.remove('bg-slate-800', 'text-slate-300');
-      btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
+      btn.classList.remove('bg-[#22333B]', 'text-[#EFF3F1]');
+      btn.classList.add('bg-[#5E8B7E]', 'text-white', 'shadow-md', 'shadow-[#5E8B7E]/40');
 
       // If user filters specifically in reel mode, switch to grid view for convenient inspection
       if (filter !== 'all' && galleryGrid && galleryGrid.classList.contains('hidden')) {
@@ -1116,5 +1116,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
-
-

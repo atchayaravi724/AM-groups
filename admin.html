@@ -23,6 +23,25 @@
     tailwind.config = {
       theme: {
         extend: {
+          colors: {
+            palette: {
+              mint: '#EFF3F1',
+              slate: '#22333B',
+              sage: '#5E8B7E',
+              sandstone: '#C7A17A',
+              white: '#FFFFFF',
+              slateDark: '#1A282F',
+              slateCard: '#2C3E47'
+            },
+            brand: {
+              mint: '#EFF3F1',
+              slate: '#22333B',
+              sage: '#5E8B7E',
+              sandstone: '#C7A17A',
+              dark: '#1A282F',
+              card: '#2C3E47'
+            }
+          },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             heading: ['"Outfit"', 'sans-serif'],
@@ -31,38 +50,39 @@
         }
       }
     }
+    }
   </script>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
+<body class="bg-[#1A282F] text-[#C7A17A] min-h-screen font-sans flex flex-col justify-between selection:bg-[#C7A17A] selection:text-[#1A282F]">
 
   <!-- Top Navigation Header -->
-  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+  <header class="sticky top-0 z-40 bg-[#1A282F]/90 backdrop-blur-md border-b border-[#2C3E47]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
         <!-- Brand & System Title -->
         <div class="flex items-center gap-3.5">
-          <img src="assets/images/new_unified/am-global-logo.jpg" alt="AM Global Groups Logo" class="w-12 h-12 rounded-xl border border-slate-700 shadow object-cover" />
+          <img src="assets/images/new_unified/am-global-logo.jpg" alt="AM Global Groups Logo" class="w-12 h-12 rounded-xl border border-[#C7A17A]/30 shadow-md object-cover" />
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-extrabold text-white text-base tracking-tight font-heading">AM GLOBAL GROUPS</span>
-              <span class="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-bold uppercase">CRM Governance</span>
+              <span class="font-extrabold text-[#FFFFFF] text-base tracking-tight font-heading">AM GLOBAL GROUPS</span>
+              <span class="px-2 py-0.5 rounded-full bg-[#C7A17A]/20 text-[#C7A17A] border border-[#C7A17A]/40 text-[10px] font-bold uppercase tracking-wider">CRM Governance</span>
             </div>
-            <p class="text-[10px] text-slate-400 font-medium">UDYAM-TN-18-0102459 • Executive Lead Management Console</p>
+            <p class="text-[10px] text-[#C7A17A]/70 font-medium">UDYAM-TN-18-0102459 • Executive Lead Management Console</p>
           </div>
         </div>
 
         <!-- Right Quick Actions -->
         <div class="flex items-center gap-2.5">
-          <a href="/" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all flex items-center gap-1.5">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-blue-400"></i>
+          <a href="/" class="px-3.5 py-2 rounded-xl bg-[#22333B] hover:bg-[#2C3E47] text-[#FFFFFF] text-xs font-semibold border border-[#C7A17A]/20 transition-all flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-[#C7A17A]"></i>
             <span>Public Portal</span>
           </a>
-          <a href="/download/zip" download="AM_Global_Groups_Complete_Project.zip" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/30 transition-all flex items-center gap-1.5" title="Download Complete Project ZIP">
-            <i class="fa-solid fa-file-zipper text-xs"></i>
+          <a href="/download/zip" download="AM_Global_Groups_Complete_Project.zip" class="px-3.5 py-2 rounded-xl bg-[#5E8B7E] hover:bg-[#5E8B7E] text-[#FFFFFF] text-xs font-bold shadow-md transition-all flex items-center gap-1.5 border border-[#C7A17A]/20" title="Download Complete Project ZIP">
+            <i class="fa-solid fa-file-zipper text-xs text-[#FFFFFF]"></i>
             <span>Download ZIP</span>
           </a>
-          <button id="exportCsvBtn" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition-all flex items-center gap-1.5">
+          <button id="exportCsvBtn" class="px-3.5 py-2 rounded-xl bg-[#C7A17A] hover:bg-[#C7A17A] text-[#1A282F] text-xs font-bold shadow-md transition-all flex items-center gap-1.5">
             <i class="fa-solid fa-file-csv"></i>
             <span>Export CSV</span>
           </button>
@@ -78,18 +98,18 @@
     <!-- Welcome Strip & Summary Cards -->
     <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-heading">Inquiry & Client Lead Pipeline</h1>
-        <p class="text-xs sm:text-sm text-slate-400 mt-1">Real-time incoming proposals, estimations, and customer consultation requests across all 5 subsidiaries.</p>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-[#FFFFFF] tracking-tight font-heading">Inquiry & Client Lead Pipeline</h1>
+        <p class="text-xs sm:text-sm text-[#C7A17A]/80 mt-1">Real-time incoming proposals, estimations, and customer consultation requests across all 5 subsidiaries.</p>
       </div>
 
       <div class="flex items-center gap-2 flex-wrap">
-        <button id="openDbModalBtn" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-emerald-500/40 hover:border-emerald-400 text-xs text-emerald-400 font-semibold transition-all shadow-sm shadow-emerald-950" title="Click to view SQL Database Diagnostics">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <button id="openDbModalBtn" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#22333B] border border-[#C7A17A]/40 hover:border-[#C7A17A] text-xs text-[#C7A17A] font-semibold transition-all shadow-sm" title="Click to view SQL Database Diagnostics">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#C7A17A] animate-pulse"></span>
           <span id="dbStatusLabel">🟢 SQLite Database: Connected</span>
-          <i class="fa-solid fa-database text-[11px] text-emerald-400/80 ml-1"></i>
+          <i class="fa-solid fa-database text-[11px] text-[#C7A17A]/80 ml-1"></i>
         </button>
-        <button id="refreshBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors" title="Refresh Leads from Database">
-          <i class="fa-solid fa-arrows-rotate text-xs"></i>
+        <button id="refreshBtn" class="p-2.5 rounded-xl bg-[#22333B] hover:bg-[#2C3E47] text-[#C7A17A] border border-[#2C3E47] transition-colors" title="Refresh Leads from Database">
+          <i class="fa-solid fa-arrows-rotate text-xs text-[#C7A17A]"></i>
         </button>
       </div>
     </div>
@@ -97,65 +117,65 @@
     <!-- 4 KPI Summary Cards -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       
-      <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700/80 shadow-lg">
+      <div class="bg-[#22333B] rounded-2xl p-5 border border-[#2C3E47] shadow-lg hover:border-[#C7A17A]/40 transition-all">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Total Inquiries</span>
-          <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm border border-blue-500/30">
+          <span class="text-xs uppercase tracking-wider text-[#C7A17A]/70 font-bold">Total Inquiries</span>
+          <div class="w-9 h-9 rounded-xl bg-[#C7A17A]/20 text-[#C7A17A] flex items-center justify-center text-sm border border-[#C7A17A]/30">
             <i class="fa-solid fa-inbox"></i>
           </div>
         </div>
-        <div id="statTotal" class="text-2xl sm:text-3xl font-black text-white font-heading">0</div>
-        <span class="text-[11px] text-slate-400 mt-1 block">Lifetime portal leads</span>
+        <div id="statTotal" class="text-2xl sm:text-3xl font-black text-[#FFFFFF] font-heading">0</div>
+        <span class="text-[11px] text-[#C7A17A]/60 mt-1 block">Lifetime portal leads</span>
       </div>
 
-      <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700/80 shadow-lg">
+      <div class="bg-[#22333B] rounded-2xl p-5 border border-[#2C3E47] shadow-lg hover:border-[#C7A17A]/40 transition-all">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">New (24 Hours)</span>
-          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm border border-emerald-500/30">
+          <span class="text-xs uppercase tracking-wider text-[#C7A17A]/70 font-bold">New (24 Hours)</span>
+          <div class="w-9 h-9 rounded-xl bg-[#C7A17A]/20 text-[#C7A17A] flex items-center justify-center text-sm border border-[#C7A17A]/30">
             <i class="fa-solid fa-clock"></i>
           </div>
         </div>
-        <div id="statNew24h" class="text-2xl sm:text-3xl font-black text-emerald-400 font-heading">0</div>
-        <span class="text-[11px] text-slate-400 mt-1 block">Requires prompt review</span>
+        <div id="statNew24h" class="text-2xl sm:text-3xl font-black text-[#C7A17A] font-heading">0</div>
+        <span class="text-[11px] text-[#C7A17A]/60 mt-1 block">Requires prompt review</span>
       </div>
 
-      <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700/80 shadow-lg">
+      <div class="bg-[#22333B] rounded-2xl p-5 border border-[#2C3E47] shadow-lg hover:border-[#5E8B7E]/40 transition-all">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">In Progress</span>
-          <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm border border-amber-500/30">
+          <span class="text-xs uppercase tracking-wider text-[#C7A17A]/70 font-bold">In Progress</span>
+          <div class="w-9 h-9 rounded-xl bg-[#5E8B7E]/20 text-[#5E8B7E] flex items-center justify-center text-sm border border-[#5E8B7E]/30">
             <i class="fa-solid fa-spinner"></i>
           </div>
         </div>
-        <div id="statInProgress" class="text-2xl sm:text-3xl font-black text-amber-400 font-heading">0</div>
-        <span class="text-[11px] text-slate-400 mt-1 block">Active negotiations</span>
+        <div id="statInProgress" class="text-2xl sm:text-3xl font-black text-[#5E8B7E] font-heading">0</div>
+        <span class="text-[11px] text-[#C7A17A]/60 mt-1 block">Active negotiations</span>
       </div>
 
-      <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700/80 shadow-lg">
+      <div class="bg-[#22333B] rounded-2xl p-5 border border-[#2C3E47] shadow-lg hover:border-[#C7A17A]/40 transition-all">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Completed</span>
-          <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm border border-purple-500/30">
+          <span class="text-xs uppercase tracking-wider text-[#C7A17A]/70 font-bold">Completed</span>
+          <div class="w-9 h-9 rounded-xl bg-[#FFFFFF]/20 text-[#FFFFFF] flex items-center justify-center text-sm border border-[#FFFFFF]/30">
             <i class="fa-solid fa-circle-check"></i>
           </div>
         </div>
-        <div id="statCompleted" class="text-2xl sm:text-3xl font-black text-purple-400 font-heading">0</div>
-        <span class="text-[11px] text-slate-400 mt-1 block">Executed contracts</span>
+        <div id="statCompleted" class="text-2xl sm:text-3xl font-black text-[#FFFFFF] font-heading">0</div>
+        <span class="text-[11px] text-[#C7A17A]/60 mt-1 block">Executed contracts</span>
       </div>
 
     </div>
 
     <!-- Filters & Search Toolbar -->
-    <div class="bg-slate-800/90 rounded-2xl p-4 sm:p-5 border border-slate-700 shadow-xl mb-6">
+    <div class="bg-[#22333B] rounded-2xl p-4 sm:p-5 border border-[#2C3E47] shadow-xl mb-6">
       <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
         
         <!-- Search Keyword -->
         <div class="sm:col-span-6 relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-          <input type="text" id="searchInput" placeholder="Search by client name, phone, email, division, or keyword..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all" />
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#C7A17A]/60 text-xs"></i>
+          <input type="text" id="searchInput" placeholder="Search by client name, phone, email, division, or keyword..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#1A282F] border border-[#2C3E47] text-xs text-[#FFFFFF] placeholder-[#C7A17A]/40 focus:outline-none focus:border-[#C7A17A] transition-all" />
         </div>
 
         <!-- Filter by Division -->
         <div class="sm:col-span-3">
-          <select id="filterDivision" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500 transition-all">
+          <select id="filterDivision" class="w-full px-3.5 py-2.5 rounded-xl bg-[#1A282F] border border-[#2C3E47] text-xs text-[#FFFFFF] focus:outline-none focus:border-[#C7A17A] transition-all">
             <option value="all">All Divisions (5 Verticals)</option>
             <option value="AM Infotech">AM Infotech</option>
             <option value="AM Consultancy">AM Consultancy</option>
@@ -168,7 +188,7 @@
 
         <!-- Filter by Status -->
         <div class="sm:col-span-3">
-          <select id="filterStatus" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500 transition-all">
+          <select id="filterStatus" class="w-full px-3.5 py-2.5 rounded-xl bg-[#1A282F] border border-[#2C3E47] text-xs text-[#FFFFFF] focus:outline-none focus:border-[#C7A17A] transition-all">
             <option value="all">All Statuses</option>
             <option value="Pending">Pending (New)</option>
             <option value="In Progress">In Progress</option>
@@ -181,10 +201,10 @@
     </div>
 
     <!-- Leads Table Container -->
-    <div class="bg-slate-800/90 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden">
+    <div class="bg-[#22333B] rounded-2xl border border-[#2C3E47] shadow-2xl overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-left text-xs">
-          <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-700 text-[11px]">
+          <thead class="bg-[#1A282F] text-[#C7A17A]/80 uppercase tracking-wider font-semibold border-b border-[#2C3E47] text-[11px]">
             <tr>
               <th class="py-4 px-4 sm:px-6">Lead ID & Date</th>
               <th class="py-4 px-4">Client Details</th>
@@ -194,11 +214,11 @@
               <th class="py-4 px-4 sm:px-6 text-right">Instant Actions</th>
             </tr>
           </thead>
-          <tbody id="inquiriesTableBody" class="divide-y divide-slate-700/60 text-slate-200">
+          <tbody id="inquiriesTableBody" class="divide-y divide-[#2C3E47] text-[#C7A17A]">
             <!-- Dynamic Rows Injected by JS -->
             <tr>
-              <td colspan="6" class="py-12 text-center text-slate-400">
-                <i class="fa-solid fa-spinner animate-spin text-xl text-blue-500 mb-2 block"></i>
+              <td colspan="6" class="py-12 text-center text-[#C7A17A]/60">
+                <i class="fa-solid fa-spinner animate-spin text-xl text-[#C7A17A] mb-2 block"></i>
                 Loading client leads from backend database...
               </td>
             </tr>
@@ -207,60 +227,60 @@
       </div>
 
       <!-- Table Footer / Count -->
-      <div class="bg-slate-950 px-6 py-3.5 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+      <div class="bg-[#1A282F] px-6 py-3.5 border-t border-[#2C3E47] flex items-center justify-between text-xs text-[#C7A17A]/70">
         <span id="showingCount">Showing 0 of 0 inquiries</span>
-        <span class="text-[11px]">AM Global Groups Enterprise Management</span>
+        <span class="text-[11px] text-[#C7A17A]">AM Global Groups Enterprise Management</span>
       </div>
     </div>
 
   </main>
 
   <!-- Lead Detail Modal -->
-  <div id="leadModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-700 max-h-[90vh] overflow-y-auto">
-      <button id="closeLeadModalBtn" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-base transition-colors">
+  <div id="leadModal" class="fixed inset-0 z-50 bg-[#1A282F]/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-[#22333B] rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative border border-[#C7A17A]/30 max-h-[90vh] overflow-y-auto">
+      <button id="closeLeadModalBtn" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#1A282F] hover:bg-[#2C3E47] text-[#C7A17A] hover:text-[#FFFFFF] flex items-center justify-center text-base transition-colors border border-[#2C3E47]">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
       <div class="flex items-center gap-3 mb-4">
-        <span id="modalLeadId" class="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-400 font-mono font-bold text-xs">INQ-2026-000</span>
-        <span id="modalLeadDate" class="text-xs text-slate-400">Date</span>
+        <span id="modalLeadId" class="px-2.5 py-1 rounded-lg bg-[#C7A17A]/20 text-[#C7A17A] font-mono font-bold text-xs border border-[#C7A17A]/30">INQ-2026-000</span>
+        <span id="modalLeadDate" class="text-xs text-[#C7A17A]/60">Date</span>
       </div>
 
-      <h3 id="modalLeadName" class="text-xl font-bold text-white font-heading mb-1">Client Name</h3>
-      <div id="modalLeadDivision" class="text-xs font-semibold text-blue-400 mb-4">Division</div>
+      <h3 id="modalLeadName" class="text-xl font-bold text-[#FFFFFF] font-heading mb-1">Client Name</h3>
+      <div id="modalLeadDivision" class="text-xs font-semibold text-[#C7A17A] mb-4">Division</div>
 
-      <div class="space-y-3 text-xs bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-5">
+      <div class="space-y-3 text-xs bg-[#1A282F] p-4 rounded-2xl border border-[#2C3E47] mb-5">
         <div class="flex justify-between">
-          <span class="text-slate-400">Phone / WhatsApp:</span>
-          <span id="modalLeadPhone" class="text-white font-mono font-bold"></span>
+          <span class="text-[#C7A17A]/60">Phone / WhatsApp:</span>
+          <span id="modalLeadPhone" class="text-[#FFFFFF] font-mono font-bold"></span>
         </div>
         <div class="flex justify-between">
-          <span class="text-slate-400">Email Address:</span>
-          <span id="modalLeadEmail" class="text-white"></span>
+          <span class="text-[#C7A17A]/60">Email Address:</span>
+          <span id="modalLeadEmail" class="text-[#FFFFFF]"></span>
         </div>
         <div class="flex justify-between">
-          <span class="text-slate-400">Submission Channel:</span>
-          <span id="modalLeadSource" class="text-slate-300"></span>
+          <span class="text-[#C7A17A]/60">Submission Channel:</span>
+          <span id="modalLeadSource" class="text-[#C7A17A]"></span>
         </div>
-        <div id="modalLeadQuoteRow" class="pt-2 border-t border-slate-800 flex flex-col gap-1">
-          <span class="text-slate-400 font-semibold">Calculator Estimation Details:</span>
-          <p id="modalLeadQuote" class="text-amber-300 bg-amber-950/40 p-2.5 rounded-xl border border-amber-500/20 font-mono text-[11px]"></p>
+        <div id="modalLeadQuoteRow" class="pt-2 border-t border-[#2C3E47] flex flex-col gap-1">
+          <span class="text-[#C7A17A]/70 font-semibold">Calculator Estimation Details:</span>
+          <p id="modalLeadQuote" class="text-[#FFFFFF] bg-[#2C3E47] p-2.5 rounded-xl border border-[#5E8B7E]/30 font-mono text-[11px]"></p>
         </div>
       </div>
 
       <div class="mb-5">
-        <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block mb-1.5">Project Message / Specifications:</span>
-        <p id="modalLeadMessage" class="text-xs text-slate-200 leading-relaxed bg-slate-950 p-4 rounded-2xl border border-slate-800 whitespace-pre-line"></p>
+        <span class="text-xs uppercase tracking-wider text-[#C7A17A]/70 font-bold block mb-1.5">Project Message / Specifications:</span>
+        <p id="modalLeadMessage" class="text-xs text-[#C7A17A] leading-relaxed bg-[#1A282F] p-4 rounded-2xl border border-[#2C3E47] whitespace-pre-line"></p>
       </div>
 
-      <div class="flex items-center justify-between gap-3 pt-4 border-t border-slate-800">
-        <a id="modalCallBtn" href="#" class="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors">
-          <i class="fa-solid fa-phone text-emerald-400"></i>
+      <div class="flex items-center justify-between gap-3 pt-4 border-t border-[#2C3E47]">
+        <a id="modalCallBtn" href="#" class="flex-1 py-3 rounded-xl bg-[#2C3E47] hover:bg-[#5E8B7E] text-[#FFFFFF] font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors border border-[#C7A17A]/20">
+          <i class="fa-solid fa-phone text-[#C7A17A]"></i>
           <span>Call Client</span>
         </a>
-        <a id="modalWhatsAppBtn" href="#" target="_blank" class="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors">
-          <i class="fa-brands fa-whatsapp text-sm"></i>
+        <a id="modalWhatsAppBtn" href="#" target="_blank" class="flex-1 py-3 rounded-xl bg-[#5E8B7E] hover:bg-[#5E8B7E] text-[#FFFFFF] font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors shadow-md">
+          <i class="fa-brands fa-whatsapp text-sm text-[#FFFFFF]"></i>
           <span>Chat on WhatsApp</span>
         </a>
       </div>
@@ -268,67 +288,67 @@
   </div>
 
   <!-- MODAL: Database Diagnostics & Health Inspector -->
-  <div id="dbDiagnosticsModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+  <div id="dbDiagnosticsModal" class="fixed inset-0 z-50 bg-[#1A282F]/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-[#22333B] border border-[#C7A17A]/30 rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
+      <div class="flex items-center justify-between pb-4 border-b border-[#2C3E47] mb-5">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+          <div class="w-10 h-10 rounded-2xl bg-[#C7A17A]/20 text-[#C7A17A] flex items-center justify-center border border-[#C7A17A]/40">
             <i class="fa-solid fa-database text-lg"></i>
           </div>
           <div>
-            <h3 class="text-lg font-extrabold text-white font-heading">SQL Database Diagnostics</h3>
-            <p class="text-xs text-slate-400">Persistent Relational Storage Engine</p>
+            <h3 class="text-lg font-extrabold text-[#FFFFFF] font-heading">SQL Database Diagnostics</h3>
+            <p class="text-xs text-[#C7A17A]/70">Persistent Relational Storage Engine</p>
           </div>
         </div>
-        <button id="closeDbModalBtn" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+        <button id="closeDbModalBtn" class="w-8 h-8 rounded-full bg-[#1A282F] hover:bg-[#2C3E47] text-[#C7A17A] hover:text-[#FFFFFF] flex items-center justify-center transition-colors border border-[#2C3E47]">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
       <!-- Live Connection Status Pill -->
-      <div class="p-4 rounded-2xl bg-slate-950 border border-emerald-500/30 mb-5 flex items-center justify-between">
+      <div class="p-4 rounded-2xl bg-[#1A282F] border border-[#C7A17A]/40 mb-5 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="w-3 h-3 rounded-full bg-[#C7A17A] animate-ping"></span>
           <div>
-            <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Storage Engine Active</div>
-            <div id="diagDbEngine" class="text-[11px] text-slate-300 font-mono mt-0.5">SQLite 3.x (WAL Enabled)</div>
+            <div class="text-xs font-bold text-[#C7A17A] uppercase tracking-wider">Storage Engine Active</div>
+            <div id="diagDbEngine" class="text-[11px] text-[#C7A17A] font-mono mt-0.5">SQLite 3.x (WAL Enabled)</div>
           </div>
         </div>
-        <span id="diagDbSize" class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold">-- KB</span>
+        <span id="diagDbSize" class="px-2.5 py-1 rounded-lg bg-[#22333B] border border-[#C7A17A]/30 text-[#FFFFFF] font-mono text-xs font-bold">-- KB</span>
       </div>
 
       <!-- Database Details Grid -->
       <div class="space-y-3 text-xs mb-5">
-        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
-          <span class="text-slate-400 block text-[10px] uppercase font-bold tracking-wider mb-1">Database File Location</span>
-          <code id="diagDbPath" class="text-blue-400 font-mono text-[11px] break-all">data/am_global_groups.sqlite</code>
+        <div class="bg-[#1A282F] p-3 rounded-xl border border-[#2C3E47]">
+          <span class="text-[#C7A17A]/60 block text-[10px] uppercase font-bold tracking-wider mb-1">Database File Location</span>
+          <code id="diagDbPath" class="text-[#C7A17A] font-mono text-[11px] break-all">data/am_global_groups.sqlite</code>
         </div>
 
-        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
-          <span class="text-slate-400 block text-[10px] uppercase font-bold tracking-wider mb-1">Government Compliance Registration</span>
-          <span class="text-amber-300 font-bold font-mono">UDYAM-TN-18-0102459 (Ministry of MSME)</span>
+        <div class="bg-[#1A282F] p-3 rounded-xl border border-[#2C3E47]">
+          <span class="text-[#C7A17A]/60 block text-[10px] uppercase font-bold tracking-wider mb-1">Government Compliance Registration</span>
+          <span class="text-[#FFFFFF] font-bold font-mono">UDYAM-TN-18-0102459 (Ministry of MSME)</span>
         </div>
       </div>
 
       <!-- SQL Tables Breakdown -->
       <div class="mb-5">
-        <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block mb-2.5">Active SQL Relational Tables:</span>
-        <div class="rounded-2xl border border-slate-800 overflow-hidden bg-slate-950">
+        <span class="text-xs uppercase tracking-wider text-[#C7A17A]/80 font-bold block mb-2.5">Active SQL Relational Tables:</span>
+        <div class="rounded-2xl border border-[#2C3E47] overflow-hidden bg-[#1A282F]">
           <table class="w-full text-left text-xs">
-            <thead class="bg-slate-900/80 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+            <thead class="bg-[#22333B] text-[#C7A17A]/80 uppercase text-[10px] tracking-wider border-b border-[#2C3E47]">
               <tr>
                 <th class="py-2.5 px-3">Table Name</th>
                 <th class="py-2.5 px-3 text-center">Row Count</th>
                 <th class="py-2.5 px-3">Purpose</th>
               </tr>
             </thead>
-            <tbody id="diagTablesBody" class="divide-y divide-slate-800 text-slate-300 font-mono text-[11px]">
+            <tbody id="diagTablesBody" class="divide-y divide-[#2C3E47] text-[#C7A17A] font-mono text-[11px]">
               <tr>
-                <td class="py-2.5 px-3 text-blue-400 font-bold">inquiries</td>
-                <td class="py-2.5 px-3 text-center font-bold text-white">--</td>
-                <td class="py-2.5 px-3 text-[10px] text-slate-400 font-sans">Client leads & quotations</td>
+                <td class="py-2.5 px-3 text-[#C7A17A] font-bold">inquiries</td>
+                <td class="py-2.5 px-3 text-center font-bold text-[#FFFFFF]">--</td>
+                <td class="py-2.5 px-3 text-[10px] text-[#C7A17A]/60 font-sans">Client leads & quotations</td>
               </tr>
             </tbody>
           </table>
@@ -336,12 +356,12 @@
       </div>
 
       <!-- Actions -->
-      <div class="flex items-center gap-3 pt-4 border-t border-slate-800">
-        <button id="pingDbBtn" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors">
-          <i class="fa-solid fa-bolt text-amber-300"></i>
+      <div class="flex items-center gap-3 pt-4 border-t border-[#2C3E47]">
+        <button id="pingDbBtn" class="flex-1 py-2.5 rounded-xl bg-[#5E8B7E] hover:bg-[#5E8B7E] text-[#FFFFFF] font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-md">
+          <i class="fa-solid fa-bolt text-[#FFFFFF]"></i>
           <span>Run Live DB Ping Test</span>
         </button>
-        <button id="closeDbModalBtn2" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-colors">
+        <button id="closeDbModalBtn2" class="px-5 py-2.5 rounded-xl bg-[#2C3E47] hover:bg-[#1A282F] text-[#C7A17A] font-semibold text-xs transition-colors border border-[#2C3E47]">
           Close
         </button>
       </div>
@@ -351,14 +371,14 @@
 
   <!-- Toast Notification -->
   <div id="toastNotification" class="fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 hidden">
-    <i class="fa-solid fa-circle-check text-xl text-emerald-400"></i>
-    <span id="toastMessage" class="text-xs font-bold text-white"></span>
+    <i class="fa-solid fa-circle-check text-xl text-[#C7A17A]"></i>
+    <span id="toastMessage" class="text-xs font-bold text-[#FFFFFF]"></span>
   </div>
 
   <!-- Footer -->
-  <footer class="bg-slate-950 text-slate-500 text-xs py-5 border-t border-slate-800/80 text-center">
+  <footer class="bg-[#1A282F] text-[#C7A17A]/60 text-xs py-5 border-t border-[#2C3E47] text-center">
     <div class="max-w-7xl mx-auto px-4">
-      &copy; 2026 <strong>AM Global Groups</strong> • Confidential Corporate Governance System • All Rights Reserved.
+      &copy; 2026 <strong class="text-[#FFFFFF]">AM Global Groups</strong> • Confidential Corporate Governance System • All Rights Reserved.
     </div>
   </footer>
 
@@ -395,7 +415,7 @@
         if (!toastNotification || !toastMessage) return;
         toastMessage.textContent = msg;
         toastNotification.className = `fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-100 ${
-          isSuccess ? 'bg-slate-950 border border-emerald-500/50 text-emerald-400' : 'bg-rose-900 border border-rose-500 text-white'
+          isSuccess ? 'bg-[#22333B] border border-[#C7A17A] text-[#C7A17A]' : 'bg-[#5E8B7E] border border-rose-400 text-white'
         }`;
         toastNotification.classList.remove('hidden');
         setTimeout(() => {
@@ -424,12 +444,12 @@
 
             if (diagBody && data.tables) {
               diagBody.innerHTML = data.tables.map(t => `
-                <tr class="hover:bg-slate-900 transition-colors">
-                  <td class="py-2.5 px-3 text-blue-400 font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-table text-[10px] text-slate-500"></i> ${t.name}
+                <tr class="hover:bg-[#22333B] transition-colors">
+                  <td class="py-2.5 px-3 text-[#C7A17A] font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-table text-[10px] text-[#C7A17A]/50"></i> ${t.name}
                   </td>
-                  <td class="py-2.5 px-3 text-center font-bold text-white">${t.rowCount}</td>
-                  <td class="py-2.5 px-3 text-[10px] text-slate-400 font-sans">${t.description}</td>
+                  <td class="py-2.5 px-3 text-center font-bold text-[#FFFFFF]">${t.rowCount}</td>
+                  <td class="py-2.5 px-3 text-[10px] text-[#C7A17A]/70 font-sans">${t.description}</td>
                 </tr>
               `).join('');
             }
@@ -487,17 +507,17 @@
 
       const getDivisionBadge = (division) => {
         if (division.includes('Infotech')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">AM Infotech</span>';
+          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#C7A17A]/20 text-[#C7A17A] border border-[#C7A17A]/40">AM Infotech</span>';
         } else if (division.includes('Events')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">A² Royal Events</span>';
+          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#5E8B7E]/20 text-[#5E8B7E] border border-[#5E8B7E]/40">A² Royal Events</span>';
         } else if (division.includes('Food')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-teal-500/20 text-teal-400 border border-teal-500/30">SB Food</span>';
+          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#C7A17A]/20 text-[#C7A17A] border border-[#C7A17A]/40">SB Food</span>';
         } else if (division.includes('Real Estate')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">AM Real Estate</span>';
+          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#FFFFFF]/20 text-[#FFFFFF] border border-[#FFFFFF]/40">AM Real Estate</span>';
         } else if (division.includes('Consultancy')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">AM Consultancy</span>';
+          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#5E8B7E]/40 text-[#C7A17A] border border-[#5E8B7E]">AM Consultancy</span>';
         } else {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-700 text-slate-300">AM Global Groups</span>';
+          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#2C3E47] text-[#C7A17A]">AM Global Groups</span>';
         }
       };
 
@@ -507,8 +527,8 @@
         if (items.length === 0) {
           inquiriesTableBody.innerHTML = `
             <tr>
-              <td colspan="6" class="py-12 text-center text-slate-400">
-                <i class="fa-solid fa-inbox text-2xl text-slate-600 mb-2 block"></i>
+              <td colspan="6" class="py-12 text-center text-[#C7A17A]/60">
+                <i class="fa-solid fa-inbox text-2xl text-[#2C3E47] mb-2 block"></i>
                 No inquiries found matching your filters.
               </td>
             </tr>
@@ -532,19 +552,19 @@
           const waMsg = encodeURIComponent(`Hello ${item.name}, thank you for contacting AM Global Groups regarding ${item.division}.`);
 
           return `
-            <tr class="hover:bg-slate-800/50 transition-colors">
+            <tr class="hover:bg-[#2C3E47]/60 transition-colors">
               <td class="py-4 px-4 sm:px-6">
-                <div class="font-mono font-bold text-blue-400 text-xs">${item.id}</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">${dateStr}</div>
-                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[9px] bg-slate-800 text-slate-400 border border-slate-700">${item.source || 'Portal'}</span>
+                <div class="font-mono font-bold text-[#C7A17A] text-xs">${item.id}</div>
+                <div class="text-[10px] text-[#C7A17A]/60 mt-0.5">${dateStr}</div>
+                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[9px] bg-[#1A282F] text-[#C7A17A]/70 border border-[#2C3E47]">${item.source || 'Portal'}</span>
               </td>
 
               <td class="py-4 px-4">
-                <div class="font-bold text-white text-xs">${item.name}</div>
-                <div class="font-mono text-slate-400 text-[11px] mt-0.5 flex items-center gap-1">
-                  <i class="fa-solid fa-phone text-[9px] text-emerald-400"></i> ${item.phone}
+                <div class="font-bold text-[#FFFFFF] text-xs">${item.name}</div>
+                <div class="font-mono text-[#C7A17A]/70 text-[11px] mt-0.5 flex items-center gap-1">
+                  <i class="fa-solid fa-phone text-[9px] text-[#C7A17A]"></i> ${item.phone}
                 </div>
-                ${item.email ? `<div class="text-slate-400 text-[10px] truncate max-w-[150px]">${item.email}</div>` : ''}
+                ${item.email ? `<div class="text-[#C7A17A]/60 text-[10px] truncate max-w-[150px]">${item.email}</div>` : ''}
               </td>
 
               <td class="py-4 px-4">
@@ -552,17 +572,17 @@
               </td>
 
               <td class="py-4 px-4 max-w-xs">
-                <p class="text-xs text-slate-300 line-clamp-2">${item.message || 'No description provided.'}</p>
-                ${item.quoteDetails ? `<span class="inline-block mt-1 text-[10px] text-amber-300 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-500/20 font-mono truncate max-w-xs block">Quote: ${item.quoteDetails}</span>` : ''}
-                <button onclick="viewLeadDetail('${item.id}')" class="text-[10px] text-blue-400 hover:text-blue-300 underline mt-1 font-semibold">View Full Details</button>
+                <p class="text-xs text-[#C7A17A] line-clamp-2">${item.message || 'No description provided.'}</p>
+                ${item.quoteDetails ? `<span class="inline-block mt-1 text-[10px] text-[#FFFFFF] bg-[#1A282F] px-2 py-0.5 rounded border border-[#5E8B7E]/30 font-mono truncate max-w-xs block">Quote: ${item.quoteDetails}</span>` : ''}
+                <button onclick="viewLeadDetail('${item.id}')" class="text-[10px] text-[#C7A17A] hover:text-[#FFFFFF] underline mt-1 font-semibold">View Full Details</button>
               </td>
 
               <td class="py-4 px-4">
-                <select onchange="updateLeadStatus('${item.id}', this.value)" class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs font-semibold ${
-                  item.status === 'Completed' ? 'text-purple-400 border-purple-500/40' :
-                  item.status === 'In Progress' ? 'text-amber-400 border-amber-500/40' :
-                  item.status === 'Contacted' ? 'text-blue-400 border-blue-500/40' :
-                  'text-emerald-400 border-emerald-500/40'
+                <select onchange="updateLeadStatus('${item.id}', this.value)" class="px-2.5 py-1.5 rounded-lg bg-[#1A282F] border border-[#2C3E47] text-xs font-semibold ${
+                  item.status === 'Completed' ? 'text-[#FFFFFF] border-[#C7A17A]/40' :
+                  item.status === 'In Progress' ? 'text-[#5E8B7E] border-[#5E8B7E]/40' :
+                  item.status === 'Contacted' ? 'text-[#C7A17A] border-[#C7A17A]/40' :
+                  'text-[#C7A17A] border-[#C7A17A]/40'
                 } focus:outline-none cursor-pointer">
                   <option value="Pending" ${item.status === 'Pending' ? 'selected' : ''}>Pending</option>
                   <option value="In Progress" ${item.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
@@ -573,13 +593,13 @@
 
               <td class="py-4 px-4 sm:px-6 text-right">
                 <div class="flex items-center justify-end gap-1.5">
-                  <a href="tel:${item.phone}" class="p-2 rounded-lg bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white transition-all shadow-sm" title="Call Client">
-                    <i class="fa-solid fa-phone text-xs"></i>
+                  <a href="tel:${item.phone}" class="p-2 rounded-lg bg-[#1A282F] hover:bg-[#5E8B7E] text-[#C7A17A] hover:text-[#FFFFFF] transition-all shadow-sm border border-[#2C3E47]" title="Call Client">
+                    <i class="fa-solid fa-phone text-xs text-[#C7A17A]"></i>
                   </a>
-                  <a href="https://wa.me/${cleanPhone}?text=${waMsg}" target="_blank" class="p-2 rounded-lg bg-emerald-600/80 hover:bg-emerald-500 text-white transition-all shadow-sm" title="WhatsApp Chat">
-                    <i class="fa-brands fa-whatsapp text-xs"></i>
+                  <a href="https://wa.me/${cleanPhone}?text=${waMsg}" target="_blank" class="p-2 rounded-lg bg-[#5E8B7E] hover:bg-[#5E8B7E] text-[#FFFFFF] transition-all shadow-sm border border-[#C7A17A]/20" title="WhatsApp Chat">
+                    <i class="fa-brands fa-whatsapp text-xs text-[#FFFFFF]"></i>
                   </a>
-                  <button onclick="deleteLead('${item.id}')" class="p-2 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-400 hover:text-white transition-all" title="Delete Lead">
+                  <button onclick="deleteLead('${item.id}')" class="p-2 rounded-lg bg-[#1A282F] hover:bg-rose-900 text-[#C7A17A]/60 hover:text-rose-200 transition-all border border-[#2C3E47]" title="Delete Lead">
                     <i class="fa-solid fa-trash text-xs"></i>
                   </button>
                 </div>
