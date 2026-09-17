@@ -838,10 +838,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 15.1 View Mode Toggle (Continuous Motion Reel vs Full Grid)
   if (viewReelBtn && viewGridBtn && galleryReelContainer && galleryGrid) {
     viewReelBtn.addEventListener('click', () => {
-      viewReelBtn.classList.add('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
-      viewReelBtn.classList.remove('text-[#87826E]');
-      viewGridBtn.classList.remove('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
-      viewGridBtn.classList.add('text-[#87826E]');
+      viewReelBtn.classList.add('active', 'bg-[#825C42]', 'text-white', 'shadow-sm');
+      viewReelBtn.classList.remove('text-[#BBB1A4]');
+      viewGridBtn.classList.remove('active', 'bg-[#825C42]', 'text-white', 'shadow-sm');
+      viewGridBtn.classList.add('text-[#BBB1A4]');
 
       galleryReelContainer.classList.remove('hidden');
       if (reelControls) reelControls.classList.remove('hidden');
@@ -849,10 +849,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     viewGridBtn.addEventListener('click', () => {
-      viewGridBtn.classList.add('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
-      viewGridBtn.classList.remove('text-[#87826E]');
-      viewReelBtn.classList.remove('active', 'bg-[#734E30]', 'text-white', 'shadow-sm');
-      viewReelBtn.classList.add('text-[#87826E]');
+      viewGridBtn.classList.add('active', 'bg-[#825C42]', 'text-white', 'shadow-sm');
+      viewGridBtn.classList.remove('text-[#BBB1A4]');
+      viewReelBtn.classList.remove('active', 'bg-[#825C42]', 'text-white', 'shadow-sm');
+      viewReelBtn.classList.add('text-[#BBB1A4]');
 
       galleryGrid.classList.remove('hidden');
       galleryReelContainer.classList.add('hidden');
