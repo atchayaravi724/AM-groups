@@ -80,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update active button state
       filterButtons.forEach(b => {
-        b.classList.remove('bg-[#BF9D87]', 'text-white', 'shadow-md', 'shadow-[#BF9D87]/30', 'bg-[#5E8B7E]', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
-        b.classList.add('bg-white', 'text-[#19201F]', 'hover:bg-[#F7F5F0]', 'border-[#E9D7CE]');
+        b.classList.remove('bg-[#09090B]', 'text-white', 'shadow-sm', 'bg-[#BF9D87]', 'bg-[#5E8B7E]', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
+        b.classList.add('bg-white', 'text-[#71717A]', 'hover:text-[#09090B]', 'hover:bg-[#F4F4F5]', 'border-[#E4E4E7]');
       });
-      btn.classList.add('bg-[#BF9D87]', 'text-white', 'shadow-md', 'shadow-[#BF9D87]/30');
-      btn.classList.remove('bg-white', 'text-[#19201F]', 'hover:bg-[#F7F5F0]');
+      btn.classList.add('bg-[#09090B]', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-white', 'text-[#71717A]', 'hover:bg-[#F4F4F5]');
 
       // Filter cards smoothly
       divisionCards.forEach(card => {
@@ -94,11 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
           requestAnimationFrame(() => {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
-            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
           });
         } else {
           card.style.opacity = '0';
-          card.style.transform = 'translateY(12px)';
+          card.style.transform = 'translateY(8px)';
           card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
           setTimeout(() => {
             if (btn.getAttribute('data-filter') !== 'all' && card.getAttribute('data-category') !== btn.getAttribute('data-filter')) {
@@ -265,11 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
   calcVerticalButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       calcVerticalButtons.forEach(b => {
-        b.classList.remove('active', 'bg-[#BF9D87]', 'text-white', 'border-[#A18E72]/60', 'bg-[#5E8B7E]', 'bg-[#455A64]', 'bg-[#70594B]', 'text-[#FFF8D6]');
-        b.classList.add('bg-[#131918]/80', 'text-[#E9D7CE]', 'border-[#242D2C]');
+        b.classList.remove('active', 'bg-white', 'text-[#09090B]', 'border-white', 'bg-[#BF9D87]', 'text-white');
+        b.classList.add('bg-[#18181B]/80', 'text-[#A1A1AA]', 'border-[#27272A]');
       });
-      btn.classList.add('active', 'bg-[#BF9D87]', 'text-white', 'border-[#A18E72]/60');
-      btn.classList.remove('bg-[#131918]/80', 'text-[#E9D7CE]', 'border-[#242D2C]');
+      btn.classList.add('active', 'bg-white', 'text-[#09090B]', 'border-white');
+      btn.classList.remove('bg-[#18181B]/80', 'text-[#A1A1AA]', 'border-[#27272A]');
 
       currentVertical = btn.getAttribute('data-vertical') || 'tech';
       
@@ -542,9 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     testimonialDots.forEach((dot, i) => {
       if (i === index) {
-        dot.className = 'w-8 h-2.5 rounded-full bg-[#BF9D87] transition-all';
+        dot.className = 'w-8 h-2 rounded-full bg-[#09090B] transition-all';
       } else {
-        dot.className = 'w-2.5 h-2.5 rounded-full bg-[#E9D7CE] hover:bg-[#BF9D87] transition-all';
+        dot.className = 'w-2 h-2 rounded-full bg-[#D4D4D8] hover:bg-[#71717A] transition-all';
       }
     });
 
@@ -676,11 +676,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const icon = toastNotification.querySelector('i');
     if (icon) {
-      icon.className = isSuccess ? 'fa-solid fa-circle-check text-xl text-[#BF9D87]' : 'fa-solid fa-triangle-exclamation text-xl text-rose-400';
+      icon.className = isSuccess ? 'fa-solid fa-circle-check text-base text-[#C5A880]' : 'fa-solid fa-triangle-exclamation text-base text-rose-400';
     }
 
-    toastNotification.className = `fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-100 ${
-      isSuccess ? 'bg-[#131918] border border-[#BF9D87]/60 text-white' : 'bg-rose-900 border border-rose-500 text-white'
+    toastNotification.className = `fixed bottom-6 right-6 z-50 px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-100 ${
+      isSuccess ? 'bg-[#09090B] border border-white/15 text-white' : 'bg-rose-900 border border-rose-500 text-white'
     }`;
 
     toastNotification.classList.remove('hidden');
@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <svg class="animate-spin -ml-1 mr-2.5 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg> Registering with Governance Desk...
+      </svg> Submitting...
     `;
 
     try {
@@ -838,10 +838,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 15.1 View Mode Toggle (Continuous Motion Reel vs Full Grid)
   if (viewReelBtn && viewGridBtn && galleryReelContainer && galleryGrid) {
     viewReelBtn.addEventListener('click', () => {
-      viewReelBtn.classList.add('active', 'bg-[#BF9D87]', 'text-white', 'shadow');
-      viewReelBtn.classList.remove('text-[#E9D7CE]');
-      viewGridBtn.classList.remove('active', 'bg-[#BF9D87]', 'text-white', 'shadow');
-      viewGridBtn.classList.add('text-[#E9D7CE]');
+      viewReelBtn.classList.add('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
+      viewReelBtn.classList.remove('text-[#A1A1AA]');
+      viewGridBtn.classList.remove('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
+      viewGridBtn.classList.add('text-[#A1A1AA]');
 
       galleryReelContainer.classList.remove('hidden');
       if (reelControls) reelControls.classList.remove('hidden');
@@ -849,10 +849,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     viewGridBtn.addEventListener('click', () => {
-      viewGridBtn.classList.add('active', 'bg-[#BF9D87]', 'text-white', 'shadow');
-      viewGridBtn.classList.remove('text-[#E9D7CE]');
-      viewReelBtn.classList.remove('active', 'bg-[#BF9D87]', 'text-white', 'shadow');
-      viewReelBtn.classList.add('text-[#E9D7CE]');
+      viewGridBtn.classList.add('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
+      viewGridBtn.classList.remove('text-[#A1A1AA]');
+      viewReelBtn.classList.remove('active', 'bg-white', 'text-[#09090B]', 'shadow-sm');
+      viewReelBtn.classList.add('text-[#A1A1AA]');
 
       galleryGrid.classList.remove('hidden');
       galleryReelContainer.classList.add('hidden');
@@ -871,14 +871,14 @@ document.addEventListener('DOMContentLoaded', () => {
           reelPauseIcon.classList.remove('fa-pause');
           reelPauseIcon.classList.add('fa-play');
         }
-        if (reelPauseText) reelPauseText.textContent = 'Resume Motion';
+        if (reelPauseText) reelPauseText.textContent = 'Resume';
       } else {
         imageReelTrack.classList.remove('is-paused');
         if (reelPauseIcon) {
           reelPauseIcon.classList.remove('fa-play');
           reelPauseIcon.classList.add('fa-pause');
         }
-        if (reelPauseText) reelPauseText.textContent = 'Pause Motion';
+        if (reelPauseText) reelPauseText.textContent = 'Pause';
       }
     });
   }
@@ -902,11 +902,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update button state
       galleryFilterBtns.forEach(b => {
-        b.classList.remove('bg-[#BF9D87]', 'text-white', 'shadow-md', 'shadow-[#BF9D87]/40', 'bg-[#5E8B7E]', 'bg-[#70594B]', 'text-[#FFF8D6]');
-        b.classList.add('bg-[#19201F]', 'text-[#E9D7CE]');
+        b.classList.remove('bg-white', 'text-[#09090B]', 'shadow-sm', 'bg-[#BF9D87]', 'text-white');
+        b.classList.add('bg-[#18181B]', 'text-[#A1A1AA]');
       });
-      btn.classList.remove('bg-[#19201F]', 'text-[#E9D7CE]');
-      btn.classList.add('bg-[#BF9D87]', 'text-white', 'shadow-md', 'shadow-[#BF9D87]/40');
+      btn.classList.remove('bg-[#18181B]', 'text-[#A1A1AA]');
+      btn.classList.add('bg-white', 'text-[#09090B]', 'shadow-sm');
 
       // If user filters specifically in reel mode, switch to grid view for convenient inspection
       if (filter !== 'all' && galleryGrid && galleryGrid.classList.contains('hidden')) {
@@ -924,7 +924,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         } else {
           card.style.opacity = '0';
-          card.style.transform = 'translateY(10px)';
+          card.style.transform = 'translateY(8px)';
           setTimeout(() => {
             if (btn.getAttribute('data-gallery-filter') !== 'all' && card.getAttribute('data-gallery-category') !== btn.getAttribute('data-gallery-filter')) {
               card.classList.add('hidden');
