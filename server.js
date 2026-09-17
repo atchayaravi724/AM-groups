@@ -1,6 +1,8 @@
 /**
  * AM GLOBAL GROUPS — Official Corporate Backend & CRM API Server
  * Registered under Ministry of MSME, Govt of India (UDYAM-TN-18-0102459)
+ * 
+ * Powered by Persistent SQLite Relational Database Engine
  */
 
 const express = require('express');
@@ -8,84 +10,18 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
+// Database Layer
+const db = require('./db/database');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Data Storage Paths
-const DATA_DIR = path.join(__dirname, 'data');
-const DB_FILE = path.join(DATA_DIR, 'inquiries.json');
-
-// Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+// Initialize Database on server startup
+try {
+  db.initDatabase();
+} catch (dbInitErr) {
+  console.error('[DATABASE] Critical: Failed to start database:', dbInitErr);
 }
-
-// Database Helper Functions
-const readDB = () => {
-  try {
-    if (!fs.existsSync(DB_FILE)) {
-      // Initialize with sample inquiries for immediate CRM demonstration
-      const initialData = [
-        {
-          id: 'INQ-2026-001',
-          name: 'K. Ramanathan',
-          phone: '+91 98421 54321',
-          email: 'ramanathan@enterprises.com',
-          division: 'AM Infotech',
-          message: 'Interested in building an enterprise web portal with custom cloud hosting and responsive UI/UX architecture.',
-          source: 'Contact Form',
-          quoteDetails: 'Professional Web App & Cloud Setup (₹25,000 – ₹45,000)',
-          status: 'Contacted',
-          createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
-          updatedAt: new Date(Date.now() - 3600000 * 12).toISOString()
-        },
-        {
-          id: 'INQ-2026-002',
-          name: 'S. Murugan & Family',
-          phone: '+91 94432 10987',
-          email: 'murugan.events@gmail.com',
-          division: 'A² Royal Events',
-          message: 'Planning grand royal wedding reception. Need complete palace stage architecture, luxury BMW/Audi motorcade, and banquet feast.',
-          source: 'Quote Estimator',
-          quoteDetails: 'Grand Royal Wedding & Motorcade (₹1,50,000 – ₹3,50,000)',
-          status: 'In Progress',
-          createdAt: new Date(Date.now() - 3600000 * 14).toISOString(),
-          updatedAt: new Date(Date.now() - 3600000 * 4).toISOString()
-        },
-        {
-          id: 'INQ-2026-003',
-          name: 'Anand Prabhu',
-          phone: '+91 88703 11223',
-          email: 'anand.catering@yahoo.co.in',
-          division: 'SB Food Production',
-          message: 'Looking for bulk monthly supply of authentic stone-ground sambar powder and turmeric for 5 catering kitchens.',
-          source: 'Modal Quick Form',
-          quoteDetails: 'Commercial Bulk Supply for Banquets (₹15,000 – ₹35,000)',
-          status: 'Pending',
-          createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-          updatedAt: new Date(Date.now() - 3600000 * 2).toISOString()
-        }
-      ];
-      fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), 'utf8');
-      return initialData;
-    }
-    const content = fs.readFileSync(DB_FILE, 'utf8');
-    return JSON.parse(content || '[]');
-  } catch (err) {
-    console.error('Error reading database:', err);
-    return [];
-  }
-};
-
-const writeDB = (data) => {
-  try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
-    return true;
-  } catch (err) {
-    console.error('Error writing database:', err);
-    return false;
-  }
-};
 
 // Middleware
 app.use(cors());
@@ -104,6 +40,23 @@ app.get('/admin', (req, res) => {
 // REST API ROUTES
 // ==========================================
 
+// 0. Database Status & Diagnostics Health Check
+app.get('/api/db/status', (req, res) => {
+  try {
+    const status = db.getDatabaseStatus();
+    return res.json({
+      success: true,
+      ...status
+    });
+  } catch (err) {
+    console.error('Error fetching database status:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve database status'
+    });
+  }
+});
+
 // 1. Submit New Inquiry / Quote
 app.post('/api/inquiries', (req, res) => {
   try {
@@ -116,38 +69,28 @@ app.post('/api/inquiries', (req, res) => {
       });
     }
 
-    const inquiries = readDB();
-    const newId = `INQ-2026-${String(inquiries.length + 1).padStart(3, '0')}`;
+    const createdInquiry = db.createInquiry({
+      name,
+      phone,
+      email,
+      division,
+      message,
+      source,
+      quoteDetails
+    });
 
-    const newInquiry = {
-      id: newId,
-      name: name.trim(),
-      phone: phone.trim(),
-      email: (email || '').trim(),
-      division: division || 'AM Global Groups',
-      message: (message || '').trim(),
-      source: source || 'Website Portal',
-      quoteDetails: quoteDetails || null,
-      status: 'Pending',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-
-    inquiries.unshift(newInquiry);
-    writeDB(inquiries);
-
-    console.log(`[NEW LEAD] ${newInquiry.id} - ${newInquiry.name} (${newInquiry.division})`);
+    console.log(`[SQL INSERT] ${createdInquiry.id} - ${createdInquiry.name} (${createdInquiry.division})`);
 
     return res.status(201).json({
       success: true,
-      message: 'Inquiry successfully registered in AM Global Groups Governance System.',
-      data: newInquiry
+      message: 'Inquiry successfully registered in AM Global Groups SQL Database.',
+      data: createdInquiry
     });
   } catch (err) {
-    console.error('Error creating inquiry:', err);
+    console.error('Error creating inquiry in database:', err);
     return res.status(500).json({
       success: false,
-      error: 'Internal Server Error'
+      error: 'Internal Server Database Error'
     });
   }
 });
@@ -155,32 +98,8 @@ app.post('/api/inquiries', (req, res) => {
 // 2. Get Inquiries with Search & Filter
 app.get('/api/inquiries', (req, res) => {
   try {
-    let inquiries = readDB();
     const { division, status, search } = req.query;
-
-    if (division && division !== 'all') {
-      inquiries = inquiries.filter(item => 
-        item.division.toLowerCase().includes(division.toLowerCase())
-      );
-    }
-
-    if (status && status !== 'all') {
-      inquiries = inquiries.filter(item => 
-        item.status.toLowerCase() === status.toLowerCase()
-      );
-    }
-
-    if (search) {
-      const q = search.toLowerCase();
-      inquiries = inquiries.filter(item => 
-        item.name.toLowerCase().includes(q) ||
-        item.phone.toLowerCase().includes(q) ||
-        item.email.toLowerCase().includes(q) ||
-        item.division.toLowerCase().includes(q) ||
-        item.message.toLowerCase().includes(q) ||
-        item.id.toLowerCase().includes(q)
-      );
-    }
+    const inquiries = db.getInquiries({ division, status, search });
 
     return res.json({
       success: true,
@@ -188,10 +107,10 @@ app.get('/api/inquiries', (req, res) => {
       data: inquiries
     });
   } catch (err) {
-    console.error('Error fetching inquiries:', err);
+    console.error('Error fetching inquiries from database:', err);
     return res.status(500).json({
       success: false,
-      error: 'Internal Server Error'
+      error: 'Internal Server Database Error'
     });
   }
 });
@@ -210,30 +129,26 @@ app.patch('/api/inquiries/:id/status', (req, res) => {
       });
     }
 
-    const inquiries = readDB();
-    const itemIndex = inquiries.findIndex(item => item.id === id);
-
-    if (itemIndex === -1) {
-      return res.status(400).json({
+    const existing = db.getInquiryById(id);
+    if (!existing) {
+      return res.status(404).json({
         success: false,
-        error: 'Inquiry record not found.'
+        error: 'Inquiry record not found in database.'
       });
     }
 
-    inquiries[itemIndex].status = status;
-    inquiries[itemIndex].updatedAt = new Date().toISOString();
-    writeDB(inquiries);
+    const updated = db.updateInquiryStatus(id, status);
 
     return res.json({
       success: true,
-      message: `Status updated to '${status}'.`,
-      data: inquiries[itemIndex]
+      message: `Status updated to '${status}' in SQL Database.`,
+      data: updated
     });
   } catch (err) {
-    console.error('Error updating status:', err);
+    console.error('Error updating status in database:', err);
     return res.status(500).json({
       success: false,
-      error: 'Internal Server Error'
+      error: 'Internal Server Database Error'
     });
   }
 });
@@ -242,29 +157,26 @@ app.patch('/api/inquiries/:id/status', (req, res) => {
 app.delete('/api/inquiries/:id', (req, res) => {
   try {
     const { id } = req.params;
-    let inquiries = readDB();
-    const initialLen = inquiries.length;
+    const existing = db.getInquiryById(id);
 
-    inquiries = inquiries.filter(item => item.id !== id);
-
-    if (inquiries.length === initialLen) {
+    if (!existing) {
       return res.status(404).json({
         success: false,
-        error: 'Inquiry record not found.'
+        error: 'Inquiry record not found in database.'
       });
     }
 
-    writeDB(inquiries);
+    db.deleteInquiry(id);
 
     return res.json({
       success: true,
-      message: `Inquiry ${id} deleted successfully.`
+      message: `Inquiry ${id} deleted successfully from database.`
     });
   } catch (err) {
-    console.error('Error deleting inquiry:', err);
+    console.error('Error deleting inquiry from database:', err);
     return res.status(500).json({
       success: false,
-      error: 'Internal Server Error'
+      error: 'Internal Server Database Error'
     });
   }
 });
@@ -272,68 +184,50 @@ app.delete('/api/inquiries/:id', (req, res) => {
 // 5. Aggregate Analytics & Stats
 app.get('/api/stats', (req, res) => {
   try {
-    const inquiries = readDB();
-    
-    const byDivision = {
-      'AM Infotech': 0,
-      'AM Consultancy': 0,
-      "AM Real Estate's": 0,
-      'A² Royal Events': 0,
-      'SB Food Production': 0,
-      'Multi-Service / General': 0
-    };
-
-    const byStatus = {
-      'Pending': 0,
-      'In Progress': 0,
-      'Contacted': 0,
-      'Completed': 0
-    };
-
-    inquiries.forEach(item => {
-      // Division grouping
-      let matchedDiv = false;
-      for (const key of Object.keys(byDivision)) {
-        if (item.division && item.division.toLowerCase().includes(key.toLowerCase())) {
-          byDivision[key]++;
-          matchedDiv = true;
-          break;
-        }
-      }
-      if (!matchedDiv) byDivision['Multi-Service / General']++;
-
-      // Status grouping
-      if (byStatus[item.status] !== undefined) {
-        byStatus[item.status]++;
-      } else {
-        byStatus['Pending']++;
-      }
-    });
-
-    const now = new Date();
-    const past24h = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-    const newLast24h = inquiries.filter(i => new Date(i.createdAt) >= past24h).length;
-
+    const stats = db.getStatistics();
     return res.json({
       success: true,
-      totalInquiries: inquiries.length,
-      newLast24h,
-      byDivision,
-      byStatus
+      ...stats
     });
   } catch (err) {
-    console.error('Error fetching stats:', err);
+    console.error('Error fetching statistics:', err);
     return res.status(500).json({
       success: false,
-      error: 'Internal Server Error'
+      error: 'Internal Server Database Error'
     });
   }
 });
 
-// 6. CSV Export of Inquiries
+// 6. Newsletter Subscription
+app.post('/api/newsletter', (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({
+        success: false,
+        error: 'A valid email address is required.'
+      });
+    }
+
+    db.addNewsletterSubscriber(email);
+
+    return res.status(201).json({
+      success: true,
+      message: 'Subscribed to AM Global Groups updates successfully.'
+    });
+  } catch (err) {
+    console.error('Error adding subscriber:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to record subscription.'
+    });
+  }
+});
+
+// 7. CSV Export of Inquiries
 app.get('/api/export/csv', (req, res) => {
   try {
-    const inquiries = readDB();
+    const inquiries = db.getAllInquiries();
     const headers = ['ID', 'Date', 'Full Name', 'Phone', 'Email', 'Division', 'Status', 'Source', 'Quote Details', 'Message'];
     
     const rows = inquiries.map(item => [
@@ -363,7 +257,7 @@ app.get('/api/export/csv', (req, res) => {
   }
 });
 
-// 7. Direct Project ZIP Archive Download
+// 8. Direct Project ZIP Archive Download
 app.get(['/download/zip', '/api/download/project-zip', '/download/project.zip'], (req, res) => {
   const zipFile = path.join(__dirname, 'AM_Global_Groups_Complete_Project.zip');
   if (fs.existsSync(zipFile)) {
@@ -379,11 +273,15 @@ app.get(['/download/zip', '/api/download/project-zip', '/download/project.zip'],
 });
 
 app.listen(PORT, () => {
+  const dbStatus = db.getDatabaseStatus();
   console.log('====================================================');
   console.log(` AM GLOBAL GROUPS — Enterprise Server Active`);
   console.log(` Registered Udyam: UDYAM-TN-18-0102459 (MSME Govt of India)`);
+  console.log(` Database:      🟢 CONNECTED (${dbStatus.dbType})`);
+  console.log(` Database File: ${dbStatus.dbFile} (${dbStatus.fileSizeFormatted})`);
   console.log(` Portal URL:    http://localhost:${PORT}`);
   console.log(` CRM Admin URL: http://localhost:${PORT}/admin`);
   console.log(` API Endpoint:  http://localhost:${PORT}/api/inquiries`);
+  console.log(` DB Status API: http://localhost:${PORT}/api/db/status`);
   console.log('====================================================');
 });

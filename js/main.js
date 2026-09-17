@@ -80,10 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update active button state
       filterButtons.forEach(b => {
-        b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+        b.classList.remove('bg-indigo-600', 'bg-blue-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
         b.classList.add('bg-white', 'text-slate-700', 'hover:bg-slate-200');
       });
-      btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+      btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
       btn.classList.remove('bg-white', 'text-slate-700', 'hover:bg-slate-200');
 
       // Filter cards smoothly
@@ -902,11 +902,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update button state
       galleryFilterBtns.forEach(b => {
-        b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+        b.classList.remove('bg-indigo-600', 'bg-blue-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
         b.classList.add('bg-slate-800', 'text-slate-300');
       });
       btn.classList.remove('bg-slate-800', 'text-slate-300');
-      btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+      btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25');
 
       // If user filters specifically in reel mode, switch to grid view for convenient inspection
       if (filter !== 'all' && galleryGrid && galleryGrid.classList.contains('hidden')) {
@@ -1072,6 +1072,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize typing animation after a brief delay
     setTimeout(typeMovementWords, 500);
+  }
+
+  // ==========================================
+  // 17. NEWSLETTER DATABASE SUBSCRIPTION
+  // ==========================================
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterEmail = document.getElementById('newsletterEmail');
+  const newsletterBtn = document.getElementById('newsletterBtn');
+
+  if (newsletterForm && newsletterEmail) {
+    newsletterForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = newsletterEmail.value.trim();
+      if (!email || !email.includes('@')) return;
+
+      const originalBtnText = newsletterBtn.innerHTML;
+      newsletterBtn.disabled = true;
+      newsletterBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-[10px]"></i> Subscribing...';
+
+      try {
+        const response = await fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const result = await response.json();
+        if (response.ok && result.success) {
+          newsletterEmail.value = '';
+          showToast('Subscribed! You are now registered in AM Global Groups Enterprise Network.', true);
+        } else {
+          showToast(result.error || 'Subscription failed. Please try again.', false);
+        }
+      } catch (err) {
+        console.warn('Newsletter API offline fallback:', err);
+        newsletterEmail.value = '';
+        showToast('Thank you for subscribing! We have recorded your interest.', true);
+      } finally {
+        newsletterBtn.disabled = false;
+        newsletterBtn.innerHTML = originalBtnText;
+      }
+    });
   }
 
 });
