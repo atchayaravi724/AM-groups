@@ -499,9 +499,7 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'Enterprise Cloud Portal & Web Application',
           comment: 'AM Infotech engineered our corporate web portal with extreme precision, modern Nordic design aesthetics, and fast load speeds. Top-notch technical advisory and dependable ongoing maintenance.',
-          photos: JSON.stringify([
-            'assets/images/gallery_tech_software.jpg'
-          ]),
+          photos: JSON.stringify([]),
           status: 'Approved',
           avatar_initials: 'KR',
           created_at: new Date(Date.now() - 4 * 86400000).toISOString()
@@ -514,9 +512,7 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'Bulk Pure Masalas & Traditional Spices',
           comment: 'We procure SB Food authentic sambar and chili powders for our commercial catering operations in bulk. The aroma, color purity, and flavor consistency are truly unparalleled across Tamil Nadu.',
-          photos: JSON.stringify([
-            'assets/images/gallery_spices_foods.jpg'
-          ]),
+          photos: JSON.stringify([]),
           status: 'Approved',
           avatar_initials: 'AP',
           created_at: new Date(Date.now() - 7 * 86400000).toISOString()
@@ -529,9 +525,7 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'MSME Business Advisory & GST Auditing',
           comment: 'AM Consultancy streamlined our clinic company registration, GST compliance, and government subsidy filings seamlessly without any hassle. Highly professional and transparent documentation.',
-          photos: JSON.stringify([
-            'assets/images/gallery_consultancy.jpg'
-          ]),
+          photos: JSON.stringify([]),
           status: 'Approved',
           avatar_initials: 'VR',
           created_at: new Date(Date.now() - 10 * 86400000).toISOString()
@@ -544,9 +538,7 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'DTCP Approved Villa Plot Purchase',
           comment: 'Transparent documentation and 100% clear DTCP titles. AM Real Estate guided us through site visits, legal verification, and registration smoothly. Excellent investment value!',
-          photos: JSON.stringify([
-            'assets/images/gallery_real_estate.jpg'
-          ]),
+          photos: JSON.stringify([]),
           status: 'Approved',
           avatar_initials: 'CV',
           created_at: new Date(Date.now() - 14 * 86400000).toISOString()
