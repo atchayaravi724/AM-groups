@@ -821,6 +821,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxDesc = document.getElementById('lightboxDesc');
   const lightboxInquireBtn = document.getElementById('lightboxInquireBtn');
   const lightboxWhatsAppBtn = document.getElementById('lightboxWhatsAppBtn');
+  const lightboxInstaBtn = document.getElementById('lightboxInstaBtn');
+  const lightboxInstaText = document.getElementById('lightboxInstaText');
 
   // Reel & Grid Mode Switching Elements
   const viewReelBtn = document.getElementById('viewReelBtn');
@@ -970,6 +972,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = currentActiveDivision.includes('Events') ? '916381056606' : '918870388692';
         const msg = encodeURIComponent(`Hello AM Global Groups, I am inquiring about the ${title} featured in your portfolio.`);
         lightboxWhatsAppBtn.href = `https://wa.me/${phone}?text=${msg}`;
+      }
+
+      // Configure Instagram button
+      if (lightboxInstaBtn) {
+        if (currentActiveDivision.includes('Events') || (imgSrc && imgSrc.includes('portfolio_live')) || title.includes('Events')) {
+          lightboxInstaBtn.href = 'https://www.instagram.com/a_square_royalevents_/';
+          if (lightboxInstaText) lightboxInstaText.textContent = '@a_square_royalevents_';
+        } else {
+          lightboxInstaBtn.href = 'https://www.instagram.com/am_global_groups/';
+          if (lightboxInstaText) lightboxInstaText.textContent = '@am_global_groups';
+        }
       }
 
       if (galleryLightboxModal) {
