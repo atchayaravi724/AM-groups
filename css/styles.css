@@ -574,7 +574,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   display: flex;
   gap: 1.25rem;
   width: max-content;
-  animation: imageReelScroll 600s linear infinite;
+  animation: imageReelScroll 100s linear infinite;
   will-change: transform;
 }
 
