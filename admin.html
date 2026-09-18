@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AM Global Groups | Executive CRM & Lead Governance Portal</title>
+  <title>Owner Executive Dashboard | AM Global Groups</title>
+  <meta name="description" content="Proprietary Owner Dashboard for AM Global Groups - Leads, Growth Analytics, 5 Division Comparison, and PDF Reporting." />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,803 +12,773 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- html2pdf.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            palette: {
-              platinum: '#E0E1DD',
-              sage: '#B3AF8F',
-              slate: '#415A77',
-              navy: '#1B263B',
-              obsidian: '#0D1B2A',
-              bg: '#E0E1DD',
-              surface: '#FFFFFF',
-              border: '#B3AF8F',
-              dark: '#0D1B2A',
-              darkCard: '#1B263B',
-              accent: '#415A77',
-              muted: '#415A77'
-            },
             brand: {
-              dark: '#0D1B2A',
-              navy: '#1B263B',
-              slate: '#415A77',
-              sage: '#B3AF8F',
+              navy: '#0D1B2A',
               card: '#1B263B',
-              surface: '#FFFFFF',
-              platinum: '#E0E1DD'
+              border: '#415A77',
+              accent: '#2563EB',
+              emerald: '#059669',
+              gold: '#D4AF37'
             }
           },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            heading: ['"Outfit"', 'sans-serif'],
-            royal: ['"Cinzel"', 'serif']
-          }
-        }
-      }
-    },
-            brand: {
-              dark: '#0D1B2A',
-              gold: '#415A77',
-              card: '#1B263B',
-              surface: '#FFFFFF'
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            heading: ['"Outfit"', 'sans-serif'],
-            royal: ['"Cinzel"', 'serif']
+            heading: ['"Outfit"', 'sans-serif']
           }
         }
       }
     }
   </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0B1320;
+      color: #E0E1DD;
+    }
+    .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+    .glass-card {
+      background: rgba(27, 38, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(65, 90, 119, 0.35);
+    }
+    .glass-nav {
+      background: rgba(13, 27, 42, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(65, 90, 119, 0.3);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0D1B2A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #415A77;
+      border-radius: 4px;
+    }
+    /* PDF styling wrapper */
+    #pdfReportTemplate {
+      background-color: #FFFFFF;
+      color: #1F2937;
+    }
+  </style>
 </head>
-<body class="bg-[#0D1B2A] text-[#E0E1DD] min-h-screen font-sans flex flex-col justify-between selection:bg-[#415A77] selection:text-[#FFFFFF]">
+<body class="min-h-screen flex flex-col antialiased">
 
-  <!-- Top Navigation Header -->
-  <header class="sticky top-0 z-40 bg-[#0D1B2A]/90 backdrop-blur-md border-b border-[#1B263B]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        
-        <!-- Brand & System Title -->
-        <div class="flex items-center gap-3.5">
-          <img src="assets/images/new_unified/am-global-logo.jpg" alt="AM Global Groups Logo" class="w-12 h-12 rounded-xl border border-[#415A77]/30 shadow-md object-cover" />
+  <!-- ========================================================================= -->
+  <!-- 1. SECURITY LOCK SCREEN (PIN AUTHENTICATION) -->
+  <!-- ========================================================================= -->
+  <div id="authOverlay" class="fixed inset-0 z-50 bg-[#0B1320] flex items-center justify-center p-4">
+    <div class="max-w-md w-full glass-card p-8 rounded-3xl shadow-2xl border border-blue-500/30 text-center relative overflow-hidden">
+      <!-- Glow background -->
+      <div class="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl bg-white p-2 shadow-lg flex items-center justify-center">
+          <img src="assets/images/new_unified/am-global-logo.jpg" alt="AM Global Groups" class="w-full h-full object-contain" />
+        </div>
+
+        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 text-[11px] font-bold uppercase tracking-wider inline-block mb-2">
+          Management Access Only
+        </span>
+
+        <h2 class="text-2xl font-extrabold text-white font-heading">Owner Executive Portal</h2>
+        <p class="text-xs text-slate-400 mt-1 mb-6">
+          Govt Udyam MSME: <span class="text-slate-200 font-mono">UDYAM-TN-18-0102459</span>
+        </p>
+
+        <form id="authForm" class="space-y-4">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="font-extrabold text-[#FFFFFF] text-base tracking-tight font-heading">AM GLOBAL GROUPS</span>
-              <span class="px-2 py-0.5 rounded-full bg-[#415A77]/20 text-[#415A77] border border-[#415A77]/40 text-[10px] font-bold uppercase tracking-wider">CRM Governance</span>
+            <label class="block text-xs font-semibold text-slate-300 text-left mb-1.5 uppercase tracking-wider">
+              Enter Owner Security PIN
+            </label>
+            <div class="relative">
+              <input 
+                type="password" 
+                id="pinInput" 
+                maxlength="6" 
+                placeholder="Enter 4-digit PIN (Default: 1234)" 
+                required 
+                autocomplete="current-password"
+                class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-center text-lg tracking-widest font-mono focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 outline-none transition-all" 
+              />
+              <button type="button" id="togglePinVisibility" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-sm">
+                <i class="fa-regular fa-eye"></i>
+              </button>
             </div>
-            <p class="text-[10px] text-[#415A77] font-medium">UDYAM-TN-18-0102459 • Executive Lead Management Console</p>
+            <p id="authError" class="text-xs text-rose-400 font-medium text-left mt-1.5 hidden flex items-center gap-1">
+              <i class="fa-solid fa-triangle-exclamation"></i> Incorrect PIN. Default Demo PIN is: <strong class="underline ml-1">1234</strong>
+            </p>
           </div>
-        </div>
 
-        <!-- Right Quick Actions -->
-        <div class="flex items-center gap-2.5">
-          <a href="https://www.instagram.com/am_global_groups/" target="_blank" rel="noopener noreferrer" class="hidden md:flex px-3 py-2 rounded-xl bg-[#1B263B] hover:bg-pink-950 text-[#FFFFFF] text-xs font-semibold border border-[#415A77]/20 transition-all items-center gap-1.5 shadow-sm" title="Instagram: @am_global_groups">
-            <i class="fa-brands fa-instagram text-pink-500 text-sm"></i>
-            <span>@am_global_groups</span>
-          </a>
-          <a href="https://www.instagram.com/a_square_royalevents_/" target="_blank" rel="noopener noreferrer" class="hidden lg:flex px-3 py-2 rounded-xl bg-[#1B263B] hover:bg-pink-950 text-[#FFFFFF] text-xs font-semibold border border-[#415A77]/20 transition-all items-center gap-1.5 shadow-sm font-royal" title="Instagram: @a_square_royalevents_">
-            <i class="fa-brands fa-instagram text-pink-500 text-sm"></i>
-            <span>@a_square_royalevents_</span>
-          </a>
-          <a href="/" class="px-3.5 py-2 rounded-xl bg-[#1B263B] hover:bg-[#415A77] text-[#FFFFFF] text-xs font-semibold border border-[#415A77]/20 transition-all flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-[#415A77]"></i>
-            <span>Public Portal</span>
-          </a>
-          <a href="/download/zip" download="AM_Global_Groups_Complete_Project.zip" class="px-3.5 py-2 rounded-xl bg-[#415A77] hover:bg-[#415A77] text-[#FFFFFF] text-xs font-bold shadow-md transition-all flex items-center gap-1.5 border border-[#415A77]/20" title="Download Complete Project ZIP">
-            <i class="fa-solid fa-file-zipper text-xs text-[#FFFFFF]"></i>
-            <span>Download ZIP</span>
-          </a>
-          <button id="exportCsvBtn" class="px-3.5 py-2 rounded-xl bg-[#415A77] hover:bg-[#415A77] text-[#FFFFFF] text-xs font-bold shadow-md transition-all flex items-center gap-1.5">
-            <i class="fa-solid fa-file-csv"></i>
-            <span>Export CSV</span>
+          <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" id="rememberSession" class="rounded bg-slate-900 border-slate-700 text-blue-600 focus:ring-0 w-4 h-4 cursor-pointer" />
+              <span>Remember session</span>
+            </label>
+            <span class="text-slate-500">PIN: <code class="text-blue-400 font-bold font-mono">1234</code></span>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-lock-open text-xs"></i>
+            <span>Unlock Executive Dashboard</span>
           </button>
+        </form>
+
+        <div class="mt-6 pt-5 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+          <a href="index.html" class="hover:text-white transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i> Back to Customer Site
+          </a>
+          <span class="text-[11px] text-slate-500">AM Global Groups © 2026</span>
         </div>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content Container -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
-    
-    <!-- Welcome Strip & Summary Cards -->
-    <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-[#FFFFFF] tracking-tight font-heading">Inquiry & Client Lead Pipeline</h1>
-        <p class="text-xs sm:text-sm text-[#415A77]/80 mt-1">Real-time incoming proposals, estimations, and customer consultation requests across all 5 subsidiaries.</p>
-      </div>
-
-      <div class="flex items-center gap-2 flex-wrap">
-        <button id="openDbModalBtn" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#0D1B2A] border border-[#415A77]/40 hover:border-[#415A77] text-xs text-[#415A77] font-semibold transition-all shadow-sm" title="Click to view SQL Database Diagnostics">
-          <span class="w-2.5 h-2.5 rounded-full bg-[#415A77] animate-pulse"></span>
-          <span id="dbStatusLabel">🟢 SQLite Database: Connected</span>
-          <i class="fa-solid fa-database text-[11px] text-[#415A77]/80 ml-1"></i>
-        </button>
-        <button id="refreshBtn" class="p-2.5 rounded-xl bg-[#0D1B2A] hover:bg-[#1B263B] text-[#415A77] border border-[#1B263B] transition-colors" title="Refresh Leads from Database">
-          <i class="fa-solid fa-arrows-rotate text-xs text-[#415A77]"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- 4 KPI Summary Cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      
-      <div class="bg-[#0D1B2A] rounded-2xl p-5 border border-[#1B263B] shadow-lg hover:border-[#415A77]/40 transition-all">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-[#415A77]/70 font-bold">Total Inquiries</span>
-          <div class="w-9 h-9 rounded-xl bg-[#415A77]/20 text-[#415A77] flex items-center justify-center text-sm border border-[#415A77]/30">
-            <i class="fa-solid fa-inbox"></i>
-          </div>
-        </div>
-        <div id="statTotal" class="text-2xl sm:text-3xl font-black text-[#FFFFFF] font-heading">0</div>
-        <span class="text-[11px] text-[#415A77]/60 mt-1 block">Lifetime portal leads</span>
-      </div>
-
-      <div class="bg-[#0D1B2A] rounded-2xl p-5 border border-[#1B263B] shadow-lg hover:border-[#415A77]/40 transition-all">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-[#415A77]/70 font-bold">New (24 Hours)</span>
-          <div class="w-9 h-9 rounded-xl bg-[#415A77]/20 text-[#415A77] flex items-center justify-center text-sm border border-[#415A77]/30">
-            <i class="fa-solid fa-clock"></i>
-          </div>
-        </div>
-        <div id="statNew24h" class="text-2xl sm:text-3xl font-black text-[#415A77] font-heading">0</div>
-        <span class="text-[11px] text-[#415A77]/60 mt-1 block">Requires prompt review</span>
-      </div>
-
-      <div class="bg-[#0D1B2A] rounded-2xl p-5 border border-[#1B263B] shadow-lg hover:border-[#0D1B2A]/40 transition-all">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-[#415A77]/70 font-bold">In Progress</span>
-          <div class="w-9 h-9 rounded-xl bg-[#0D1B2A]/20 text-[#0D1B2A] flex items-center justify-center text-sm border border-[#0D1B2A]/30">
-            <i class="fa-solid fa-spinner"></i>
-          </div>
-        </div>
-        <div id="statInProgress" class="text-2xl sm:text-3xl font-black text-[#0D1B2A] font-heading">0</div>
-        <span class="text-[11px] text-[#415A77]/60 mt-1 block">Active negotiations</span>
-      </div>
-
-      <div class="bg-[#0D1B2A] rounded-2xl p-5 border border-[#1B263B] shadow-lg hover:border-[#415A77]/40 transition-all">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-xs uppercase tracking-wider text-[#415A77]/70 font-bold">Completed</span>
-          <div class="w-9 h-9 rounded-xl bg-[#FFFFFF]/20 text-[#FFFFFF] flex items-center justify-center text-sm border border-[#FFFFFF]/30">
-            <i class="fa-solid fa-circle-check"></i>
-          </div>
-        </div>
-        <div id="statCompleted" class="text-2xl sm:text-3xl font-black text-[#FFFFFF] font-heading">0</div>
-        <span class="text-[11px] text-[#415A77]/60 mt-1 block">Executed contracts</span>
-      </div>
-
-    </div>
-
-    <!-- Filters & Search Toolbar -->
-    <div class="bg-[#0D1B2A] rounded-2xl p-4 sm:p-5 border border-[#1B263B] shadow-xl mb-6">
-      <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
-        
-        <!-- Search Keyword -->
-        <div class="sm:col-span-6 relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#415A77]/60 text-xs"></i>
-          <input type="text" id="searchInput" placeholder="Search by client name, phone, email, division, or keyword..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0D1B2A] border border-[#1B263B] text-xs text-[#FFFFFF] placeholder-[#415A77]/40 focus:outline-none focus:border-[#415A77] transition-all" />
-        </div>
-
-        <!-- Filter by Division -->
-        <div class="sm:col-span-3">
-          <select id="filterDivision" class="w-full px-3.5 py-2.5 rounded-xl bg-[#0D1B2A] border border-[#1B263B] text-xs text-[#FFFFFF] focus:outline-none focus:border-[#415A77] transition-all">
-            <option value="all">All Divisions (5 Verticals)</option>
-            <option value="AM Infotech">AM Infotech</option>
-            <option value="AM Consultancy">AM Consultancy</option>
-            <option value="AM Real Estate">AM Real Estate's</option>
-            <option value="A² Royal Events">A² Royal Events</option>
-            <option value="SB Food Production">SB Food Production</option>
-            <option value="Multi">Multi-Service Group</option>
-          </select>
-        </div>
-
-        <!-- Filter by Status -->
-        <div class="sm:col-span-3">
-          <select id="filterStatus" class="w-full px-3.5 py-2.5 rounded-xl bg-[#0D1B2A] border border-[#1B263B] text-xs text-[#FFFFFF] focus:outline-none focus:border-[#415A77] transition-all">
-            <option value="all">All Statuses</option>
-            <option value="Pending">Pending (New)</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Completed">Completed</option>
-          </select>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Leads Table Container -->
-    <div class="bg-[#0D1B2A] rounded-2xl border border-[#1B263B] shadow-2xl overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs">
-          <thead class="bg-[#0D1B2A] text-[#415A77]/80 uppercase tracking-wider font-semibold border-b border-[#1B263B] text-[11px]">
-            <tr>
-              <th class="py-4 px-4 sm:px-6">Lead ID & Date</th>
-              <th class="py-4 px-4">Client Details</th>
-              <th class="py-4 px-4">Subsidiary Vertical</th>
-              <th class="py-4 px-4">Requirement & Quote</th>
-              <th class="py-4 px-4">Status</th>
-              <th class="py-4 px-4 sm:px-6 text-right">Instant Actions</th>
-            </tr>
-          </thead>
-          <tbody id="inquiriesTableBody" class="divide-y divide-[#1B263B] text-[#415A77]">
-            <!-- Dynamic Rows Injected by JS -->
-            <tr>
-              <td colspan="6" class="py-12 text-center text-[#415A77]/60">
-                <i class="fa-solid fa-spinner animate-spin text-xl text-[#415A77] mb-2 block"></i>
-                Loading client leads from backend database...
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Table Footer / Count -->
-      <div class="bg-[#0D1B2A] px-6 py-3.5 border-t border-[#1B263B] flex items-center justify-between text-xs text-[#415A77]/70">
-        <span id="showingCount">Showing 0 of 0 inquiries</span>
-        <span class="text-[11px] text-[#415A77]">AM Global Groups Enterprise Management</span>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Lead Detail Modal -->
-  <div id="leadModal" class="fixed inset-0 z-50 bg-[#0D1B2A]/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0D1B2A] rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative border border-[#415A77]/30 max-h-[90vh] overflow-y-auto">
-      <button id="closeLeadModalBtn" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#0D1B2A] hover:bg-[#1B263B] text-[#415A77] hover:text-[#FFFFFF] flex items-center justify-center text-base transition-colors border border-[#1B263B]">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-4">
-        <span id="modalLeadId" class="px-2.5 py-1 rounded-lg bg-[#415A77]/20 text-[#415A77] font-mono font-bold text-xs border border-[#415A77]/30">INQ-2026-000</span>
-        <span id="modalLeadDate" class="text-xs text-[#415A77]/60">Date</span>
-      </div>
-
-      <h3 id="modalLeadName" class="text-xl font-bold text-[#FFFFFF] font-heading mb-1">Client Name</h3>
-      <div id="modalLeadDivision" class="text-xs font-semibold text-[#415A77] mb-4">Division</div>
-
-      <div class="space-y-3 text-xs bg-[#0D1B2A] p-4 rounded-2xl border border-[#1B263B] mb-5">
-        <div class="flex justify-between">
-          <span class="text-[#415A77]/60">Phone / WhatsApp:</span>
-          <span id="modalLeadPhone" class="text-[#FFFFFF] font-mono font-bold"></span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-[#415A77]/60">Email Address:</span>
-          <span id="modalLeadEmail" class="text-[#FFFFFF]"></span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-[#415A77]/60">Submission Channel:</span>
-          <span id="modalLeadSource" class="text-[#415A77]"></span>
-        </div>
-        <div id="modalLeadQuoteRow" class="pt-2 border-t border-[#1B263B] flex flex-col gap-1">
-          <span class="text-[#415A77]/70 font-semibold">Calculator Estimation Details:</span>
-          <p id="modalLeadQuote" class="text-[#FFFFFF] bg-[#1B263B] p-2.5 rounded-xl border border-[#0D1B2A]/30 font-mono text-[11px]"></p>
-        </div>
-      </div>
-
-      <div class="mb-5">
-        <span class="text-xs uppercase tracking-wider text-[#415A77]/70 font-bold block mb-1.5">Project Message / Specifications:</span>
-        <p id="modalLeadMessage" class="text-xs text-[#415A77] leading-relaxed bg-[#0D1B2A] p-4 rounded-2xl border border-[#1B263B] whitespace-pre-line"></p>
-      </div>
-
-      <div class="flex items-center justify-between gap-3 pt-4 border-t border-[#1B263B]">
-        <a id="modalCallBtn" href="#" class="flex-1 py-3 rounded-xl bg-[#1B263B] hover:bg-[#0D1B2A] text-[#FFFFFF] font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors border border-[#415A77]/20">
-          <i class="fa-solid fa-phone text-[#415A77]"></i>
-          <span>Call Client</span>
-        </a>
-        <a id="modalWhatsAppBtn" href="#" target="_blank" class="flex-1 py-3 rounded-xl bg-[#0D1B2A] hover:bg-[#0D1B2A] text-[#FFFFFF] font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors shadow-md">
-          <i class="fa-brands fa-whatsapp text-sm text-[#FFFFFF]"></i>
-          <span>Chat on WhatsApp</span>
-        </a>
       </div>
     </div>
   </div>
 
-  <!-- MODAL: Database Diagnostics & Health Inspector -->
-  <div id="dbDiagnosticsModal" class="fixed inset-0 z-50 bg-[#0D1B2A]/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0D1B2A] border border-[#415A77]/30 rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-      
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between pb-4 border-b border-[#1B263B] mb-5">
+  <!-- ========================================================================= -->
+  <!-- 2. MAIN EXECUTIVE OWNER DASHBOARD (VISIBLE ONCE UNLOCKED) -->
+  <!-- ========================================================================= -->
+  <div id="mainDashboard" class="hidden flex-1 flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-[#415A77]/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Brand Logo & Portal Title -->
+          <div class="flex items-center gap-3.5">
+            <img src="assets/images/new_unified/am-global-logo.jpg" alt="AM Global Groups" class="w-12 h-12 rounded-xl object-contain bg-white p-1 shadow border border-slate-300" />
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white font-heading">
+                  AM GLOBAL <span class="text-blue-400">GROUPS</span>
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-bold uppercase tracking-wider">
+                  Owner Portal
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium">
+                MSME: <strong class="text-slate-300 font-mono">UDYAM-TN-18-0102459</strong> • Tirunelveli & Ambasamudram
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex items-center gap-2.5 sm:gap-3">
+            <!-- Back to Site -->
+            <a href="index.html" class="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold border border-slate-700 transition-colors shadow-sm">
+              <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
+              <span>Live Website</span>
+            </a>
+
+            <!-- Add Offline Lead Modal Trigger -->
+            <button id="openAddLeadBtn" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-600 transition-colors shadow-sm">
+              <i class="fa-solid fa-plus text-emerald-400 text-xs"></i>
+              <span class="hidden sm:inline">Add Lead</span>
+            </button>
+
+            <!-- 1-Click Export to PDF -->
+            <button id="exportPdfBtn" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold shadow-lg shadow-red-600/25 transition-all hover:scale-105">
+              <i class="fa-solid fa-file-pdf text-sm"></i>
+              <span>Export PDF Report</span>
+            </button>
+
+            <!-- Lock / Logout Button -->
+            <button id="logoutBtn" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-rose-900/50 text-slate-400 hover:text-rose-300 border border-slate-700 transition-colors" title="Lock Dashboard">
+              <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Sub-header: Live Status & Quick Refresh -->
+    <div class="bg-[#0D1B2A]/90 border-b border-[#415A77]/20 py-2.5 px-4">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-[#415A77]/20 text-[#415A77] flex items-center justify-center border border-[#415A77]/40">
-            <i class="fa-solid fa-database text-lg"></i>
-          </div>
-          <div>
-            <h3 class="text-lg font-extrabold text-[#FFFFFF] font-heading">SQL Database Diagnostics</h3>
-            <p class="text-xs text-[#415A77]/70">Persistent Relational Storage Engine</p>
-          </div>
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            System Live & Syncing
+          </span>
+          <span>•</span>
+          <span id="liveClock" class="font-mono text-slate-300">Loading timestamp...</span>
         </div>
-        <button id="closeDbModalBtn" class="w-8 h-8 rounded-full bg-[#0D1B2A] hover:bg-[#1B263B] text-[#415A77] hover:text-[#FFFFFF] flex items-center justify-center transition-colors border border-[#1B263B]">
-          <i class="fa-solid fa-xmark text-sm"></i>
-        </button>
-      </div>
-
-      <!-- Live Connection Status Pill -->
-      <div class="p-4 rounded-2xl bg-[#0D1B2A] border border-[#415A77]/40 mb-5 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <span class="w-3 h-3 rounded-full bg-[#415A77] animate-ping"></span>
-          <div>
-            <div class="text-xs font-bold text-[#415A77] uppercase tracking-wider">Storage Engine Active</div>
-            <div id="diagDbEngine" class="text-[11px] text-[#415A77] font-mono mt-0.5">SQLite 3.x (WAL Enabled)</div>
+          <button id="refreshDataBtn" class="hover:text-blue-400 transition-colors flex items-center gap-1 text-[11px]">
+            <i class="fa-solid fa-arrows-rotate text-[10px]"></i> Refresh Data
+          </button>
+          <span>•</span>
+          <button id="seedDataBtn" class="hover:text-amber-400 transition-colors flex items-center gap-1 text-[11px]" title="Reset to comprehensive demo historical dataset">
+            <i class="fa-solid fa-database text-[10px]"></i> Reload Demo Data
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 space-y-8">
+
+      <!-- ===================================================================== -->
+      <!-- 3. TOP KPI CARDS (OVERVIEW METRICS) -->
+      <!-- ===================================================================== -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Total Inquiries -->
+        <div class="glass-card p-6 rounded-3xl relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Customer Inquiries</span>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-users"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-baseline gap-2">
+            <span id="kpiTotalLeads" class="text-3xl sm:text-4xl font-extrabold text-white font-heading">0</span>
+            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-0.5">
+              <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> +24% MoM
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Across all 5 operating divisions</p>
+        </div>
+
+        <!-- Estimated Pipeline Value -->
+        <div class="glass-card p-6 rounded-3xl relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Pipeline Value</span>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-baseline gap-2">
+            <span id="kpiPipelineValue" class="text-3xl sm:text-4xl font-extrabold text-white font-heading">₹0</span>
+            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-0.5">
+              <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> +32% MoM
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Active quote & project estimates</p>
+        </div>
+
+        <!-- Conversion Rate -->
+        <div class="glass-card p-6 rounded-3xl relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Avg Conversion Rate</span>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-baseline gap-2">
+            <span id="kpiConversionRate" class="text-3xl sm:text-4xl font-extrabold text-white font-heading">0%</span>
+            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-0.5">
+              <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> +5.4%
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Quoted to Converted ratio</p>
+        </div>
+
+        <!-- Top Performing Division -->
+        <div class="glass-card p-6 rounded-3xl relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Top Growth Vertical</span>
+            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-crown"></i>
+            </div>
+          </div>
+          <div class="mt-4">
+            <span id="kpiTopDivision" class="text-xl sm:text-2xl font-extrabold text-amber-300 font-heading block truncate">
+              A² Royal Events
+            </span>
+            <span class="text-xs text-slate-300 mt-1 block">Highest inquiry & deal volume</span>
           </div>
         </div>
-        <span id="diagDbSize" class="px-2.5 py-1 rounded-lg bg-[#0D1B2A] border border-[#415A77]/30 text-[#FFFFFF] font-mono text-xs font-bold">-- KB</span>
-      </div>
 
-      <!-- Database Details Grid -->
-      <div class="space-y-3 text-xs mb-5">
-        <div class="bg-[#0D1B2A] p-3 rounded-xl border border-[#1B263B]">
-          <span class="text-[#415A77]/60 block text-[10px] uppercase font-bold tracking-wider mb-1">Database File Location</span>
-          <code id="diagDbPath" class="text-[#415A77] font-mono text-[11px] break-all">data/am_global_groups.sqlite</code>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- 4. VISUAL GROWTH & COMPARISON CHARTS (5 DIVISIONS) -->
+      <!-- ===================================================================== -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left 8 Cols: Division Comparison & Share -->
+        <div class="lg:col-span-8 glass-card p-6 rounded-3xl flex flex-col justify-between">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-700/50">
+            <div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-chart-simple text-blue-400"></i>
+                <h3 class="font-bold text-lg text-white font-heading">5 Divisions Performance Comparison</h3>
+              </div>
+              <p class="text-xs text-slate-400 mt-0.5">
+                Side-by-side volume and revenue comparison across all subsidiaries
+              </p>
+            </div>
+            <!-- Toggle Metric View -->
+            <div class="flex items-center gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-700 text-xs">
+              <button id="chartViewLeadsBtn" class="px-3 py-1.5 rounded-lg font-bold bg-blue-600 text-white transition-all">
+                Leads Count
+              </button>
+              <button id="chartViewValueBtn" class="px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition-all">
+                Revenue (₹ Lakhs)
+              </button>
+            </div>
+          </div>
+
+          <div class="h-72 sm:h-80 w-full pt-4">
+            <canvas id="divisionComparisonChart"></canvas>
+          </div>
         </div>
 
-        <div class="bg-[#0D1B2A] p-3 rounded-xl border border-[#1B263B]">
-          <span class="text-[#415A77]/60 block text-[10px] uppercase font-bold tracking-wider mb-1">Government Compliance Registration</span>
-          <span class="text-[#FFFFFF] font-bold font-mono">UDYAM-TN-18-0102459 (Ministry of MSME)</span>
-        </div>
-      </div>
+        <!-- Right 4 Cols: Status Breakdown (Doughnut) -->
+        <div class="lg:col-span-4 glass-card p-6 rounded-3xl flex flex-col justify-between">
+          <div class="pb-4 border-b border-slate-700/50">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-filter-circle-dollar text-emerald-400"></i>
+              <h3 class="font-bold text-lg text-white font-heading">Inquiry Pipeline Status</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">Lead stage progression</p>
+          </div>
 
-      <!-- SQL Tables Breakdown -->
-      <div class="mb-5">
-        <span class="text-xs uppercase tracking-wider text-[#415A77]/80 font-bold block mb-2.5">Active SQL Relational Tables:</span>
-        <div class="rounded-2xl border border-[#1B263B] overflow-hidden bg-[#0D1B2A]">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-[#0D1B2A] text-[#415A77]/80 uppercase text-[10px] tracking-wider border-b border-[#1B263B]">
-              <tr>
-                <th class="py-2.5 px-3">Table Name</th>
-                <th class="py-2.5 px-3 text-center">Row Count</th>
-                <th class="py-2.5 px-3">Purpose</th>
+          <div class="h-64 sm:h-72 w-full pt-4 flex items-center justify-center relative">
+            <canvas id="statusDoughnutChart"></canvas>
+          </div>
+
+          <div class="pt-3 border-t border-slate-700/50 grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="p-2 rounded-xl bg-slate-900/50">
+              <span class="text-slate-400 block text-[10px]">Won / Converted</span>
+              <strong id="kpiWonCount" class="text-emerald-400 font-bold text-sm">0</strong>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-900/50">
+              <span class="text-slate-400 block text-[10px]">In Progress / Quoted</span>
+              <strong id="kpiActiveCount" class="text-blue-400 font-bold text-sm">0</strong>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- 5. MONTH-OVER-MONTH GROWTH TRAJECTORY -->
+      <!-- ===================================================================== -->
+      <section class="glass-card p-6 rounded-3xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-700/50">
+          <div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-arrow-trend-up text-emerald-400"></i>
+              <h3 class="font-bold text-lg text-white font-heading">Monthly Growth & Inquiries Trajectory</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Historical performance from June 2026 to September 2026
+            </p>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+            🚀 Sustained Upward Growth
+          </span>
+        </div>
+
+        <div class="h-64 sm:h-72 w-full pt-4">
+          <canvas id="monthlyGrowthChart"></canvas>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- 6. DIVISION COMPARISON SCORECARD TABLE -->
+      <!-- ===================================================================== -->
+      <section class="glass-card p-6 rounded-3xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-700/50">
+          <div>
+            <h3 class="font-bold text-lg text-white font-heading">Executive Division Scorecard</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Detailed metrics and growth indicators for each operating unit</p>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">Live Computed Metrics</span>
+        </div>
+
+        <div class="overflow-x-auto pt-4">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-700 text-slate-400 uppercase tracking-wider text-[11px]">
+                <th class="py-3 px-4">Division Name</th>
+                <th class="py-3 px-4">Focus Area</th>
+                <th class="py-3 px-4 text-center">Total Leads</th>
+                <th class="py-3 px-4 text-center">Est. Pipeline</th>
+                <th class="py-3 px-4 text-center">Conversion %</th>
+                <th class="py-3 px-4 text-center">MoM Growth</th>
+                <th class="py-3 px-4 text-right">Status</th>
               </tr>
             </thead>
-            <tbody id="diagTablesBody" class="divide-y divide-[#1B263B] text-[#415A77] font-mono text-[11px]">
-              <tr>
-                <td class="py-2.5 px-3 text-[#415A77] font-bold">inquiries</td>
-                <td class="py-2.5 px-3 text-center font-bold text-[#FFFFFF]">--</td>
-                <td class="py-2.5 px-3 text-[10px] text-[#415A77]/60 font-sans">Client leads & quotations</td>
-              </tr>
+            <tbody id="scorecardTableBody" class="divide-y divide-slate-800 text-slate-200">
+              <!-- Dynamically rendered -->
             </tbody>
           </table>
         </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- 7. CUSTOMER INQUIRIES & LEADS MANAGEMENT TABLE -->
+      <!-- ===================================================================== -->
+      <section class="glass-card p-6 rounded-3xl space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-700/50">
+          <div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-address-book text-blue-400"></i>
+              <h3 class="font-bold text-lg text-white font-heading">Customer Leads & Inquiries</h3>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Live inquiries received from the website contact forms and quote calculator
+            </p>
+          </div>
+
+          <!-- Filters & Search Controls -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <!-- Search Input -->
+            <div class="relative">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input 
+                type="text" 
+                id="leadSearchInput" 
+                placeholder="Search name, phone, email..." 
+                class="pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-500 focus:border-blue-500 outline-none w-48 sm:w-56" 
+              />
+            </div>
+
+            <!-- Division Filter -->
+            <select id="divisionFilterSelect" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:border-blue-500 outline-none">
+              <option value="all">All Divisions</option>
+              <option value="AM Infotech">AM Infotech</option>
+              <option value="AM Consultancy">AM Consultancy</option>
+              <option value="AM Real Estate's">AM Real Estate's</option>
+              <option value="A² Royal Events">A² Royal Events</option>
+              <option value="SB Food Production">SB Food Production</option>
+            </select>
+
+            <!-- Status Filter -->
+            <select id="statusFilterSelect" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:border-blue-500 outline-none">
+              <option value="all">All Statuses</option>
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Quoted">Quoted</option>
+              <option value="Converted">Converted</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Leads Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-700 text-slate-400 uppercase tracking-wider text-[11px]">
+                <th class="py-3 px-3">Lead ID & Date</th>
+                <th class="py-3 px-3">Customer Details</th>
+                <th class="py-3 px-3">Division</th>
+                <th class="py-3 px-3">Est. Value</th>
+                <th class="py-3 px-3">Requirement</th>
+                <th class="py-3 px-3">Status</th>
+                <th class="py-3 px-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody" class="divide-y divide-slate-800 text-slate-200">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination / Count Footer -->
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+          <span id="leadsCounterText">Showing 0 of 0 leads</span>
+          <span class="text-[11px] text-slate-500">Auto-saved to client local storage</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-nav border-t border-[#415A77]/30 py-6 px-4 text-center text-xs text-slate-400 mt-auto">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          &copy; 2020 - 2026 <strong class="text-white">AM Global Groups</strong>. Proprietary Executive Management Portal.
+        </div>
+        <div class="flex items-center gap-4 text-slate-400">
+          <span>Udyam: UDYAM-TN-18-0102459</span>
+          <span>•</span>
+          <a href="index.html" class="hover:text-blue-400 transition-colors">Return to Main Website</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 8. MODAL: ADD OFFLINE LEAD -->
+  <!-- ========================================================================= -->
+  <div id="addLeadModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="max-w-md w-full glass-card p-6 sm:p-8 rounded-3xl border border-blue-500/30 shadow-2xl relative">
+      <button id="closeAddLeadModal" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <div>
+          <h3 class="font-extrabold text-lg text-white font-heading">Add New Lead</h3>
+          <p class="text-xs text-slate-400">Direct walk-in, phone call or offline inquiry</p>
+        </div>
       </div>
 
-      <!-- Actions -->
-      <div class="flex items-center gap-3 pt-4 border-t border-[#1B263B]">
-        <button id="pingDbBtn" class="flex-1 py-2.5 rounded-xl bg-[#0D1B2A] hover:bg-[#0D1B2A] text-[#FFFFFF] font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-md">
-          <i class="fa-solid fa-bolt text-[#FFFFFF]"></i>
-          <span>Run Live DB Ping Test</span>
+      <form id="addLeadForm" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Customer Full Name *</label>
+          <input type="text" id="newLeadName" required placeholder="e.g. Balaji / Rajesh" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-blue-500" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Phone Number *</label>
+            <input type="tel" id="newLeadPhone" required placeholder="+91 98765 43210" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-blue-500" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Email Address</label>
+            <input type="email" id="newLeadEmail" placeholder="client@domain.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-blue-500" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Target Division *</label>
+            <select id="newLeadDivision" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-blue-500">
+              <option value="AM Infotech">AM Infotech</option>
+              <option value="AM Consultancy">AM Consultancy</option>
+              <option value="AM Real Estate's">AM Real Estate's</option>
+              <option value="A² Royal Events" selected>A² Royal Events</option>
+              <option value="SB Food Production">SB Food Production</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Estimated Value (₹) *</label>
+            <input type="number" id="newLeadValue" placeholder="e.g. 50000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-blue-500" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Inquiry / Project Details</label>
+          <textarea id="newLeadMessage" rows="3" placeholder="Brief requirement notes..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-blue-500"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg transition-all flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check"></i>
+          <span>Save Lead to Dashboard</span>
         </button>
-        <button id="closeDbModalBtn2" class="px-5 py-2.5 rounded-xl bg-[#1B263B] hover:bg-[#0D1B2A] text-[#415A77] font-semibold text-xs transition-colors border border-[#1B263B]">
-          Close
-        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 9. MODAL: VIEW FULL LEAD DETAILS -->
+  <!-- ========================================================================= -->
+  <div id="leadDetailModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="max-w-lg w-full glass-card p-6 sm:p-8 rounded-3xl border border-slate-700 shadow-2xl relative">
+      <button id="closeLeadDetailModal" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700">
+        <div id="detailDivisionIcon" class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl">
+          <i class="fa-solid fa-file-lines"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 id="detailCustomerName" class="font-extrabold text-xl text-white font-heading">Customer Name</h3>
+            <span id="detailStatusBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold">New</span>
+          </div>
+          <p id="detailLeadMeta" class="text-xs text-slate-400 mt-0.5">Lead ID: AM-L-000 • 2026-09-18</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div class="grid grid-cols-2 gap-3 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800">
+          <div>
+            <span class="text-slate-400 block text-[10px]">Division:</span>
+            <strong id="detailDivision" class="text-white text-sm">AM Infotech</strong>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">Estimated Value:</span>
+            <strong id="detailValue" class="text-emerald-400 text-sm">₹0</strong>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">Phone Number:</span>
+            <strong id="detailPhone" class="text-slate-200">Not Provided</strong>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">Email:</span>
+            <strong id="detailEmail" class="text-slate-200">Not Provided</strong>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-slate-400 uppercase tracking-wider text-[10px] font-bold block mb-1.5">Requirement / Message:</span>
+          <div id="detailMessage" class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-200 leading-relaxed max-h-36 overflow-y-auto">
+            No message provided.
+          </div>
+        </div>
+
+        <!-- Direct Contact Actions -->
+        <div class="pt-2 flex items-center gap-3">
+          <a id="detailWhatsAppBtn" href="#" target="_blank" class="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center flex items-center justify-center gap-2 transition-all">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>Chat on WhatsApp</span>
+          </a>
+          <a id="detailCallBtn" href="#" class="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-center flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-phone text-xs"></i>
+            <span>Call Customer</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 10. HIDDEN PRINTABLE PDF EXECUTIVE REPORT TEMPLATE -->
+  <!-- (Used exclusively by html2pdf to generate high-resolution PDF document) -->
+  <!-- ========================================================================= -->
+  <div style="display: none;">
+    <div id="pdfReportTemplate" style="width: 800px; padding: 36px; background-color: #ffffff; color: #111827; font-family: 'Plus Jakarta Sans', sans-serif;">
+      
+      <!-- Report Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0D1B2A; padding-bottom: 16px; margin-bottom: 24px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img src="assets/images/new_unified/am-global-logo.jpg" style="width: 64px; height: 64px; object-fit: contain; border-radius: 50%; border: 1px solid #E5E7EB;" />
+          <div>
+            <h1 style="font-size: 22px; font-weight: 800; color: #0D1B2A; margin: 0; line-height: 1.2;">AM GLOBAL GROUPS</h1>
+            <p style="font-size: 11px; color: #2563EB; font-weight: 700; margin: 2px 0 0; text-transform: uppercase; letter-spacing: 1px;">
+              Executive Performance & Growth Comparison Report
+            </p>
+            <p style="font-size: 10px; color: #6B7280; margin: 2px 0 0;">
+              Govt Udyam Reg: <strong style="color: #111827;">UDYAM-TN-18-0102459</strong> • Est. 09/05/2020
+            </p>
+          </div>
+        </div>
+        <div style="text-align: right; font-size: 10px; color: #4B5563;">
+          <p style="margin: 0;"><strong>Date:</strong> <span id="pdfReportDate">2026-09-18</span></p>
+          <p style="margin: 3px 0 0;"><strong>Generated For:</strong> Proprietary Management</p>
+          <p style="margin: 3px 0 0;"><strong>Status:</strong> Confidential Official Record</p>
+        </div>
+      </div>
+
+      <!-- Executive KPI Summary Cards -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 10px;">
+          <span style="font-size: 9px; text-transform: uppercase; color: #64748B; font-weight: 700;">Total Inquiries</span>
+          <div style="font-size: 20px; font-weight: 800; color: #1E293B; margin-top: 4px;" id="pdfKpiTotal">0</div>
+          <span style="font-size: 9px; color: #16A34A; font-weight: 600;">+24% Growth</span>
+        </div>
+        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 10px;">
+          <span style="font-size: 9px; text-transform: uppercase; color: #64748B; font-weight: 700;">Pipeline Value</span>
+          <div style="font-size: 20px; font-weight: 800; color: #1E293B; margin-top: 4px;" id="pdfKpiValue">₹0</div>
+          <span style="font-size: 9px; color: #16A34A; font-weight: 600;">Active Quotes</span>
+        </div>
+        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 10px;">
+          <span style="font-size: 9px; text-transform: uppercase; color: #64748B; font-weight: 700;">Conversion Rate</span>
+          <div style="font-size: 20px; font-weight: 800; color: #1E293B; margin-top: 4px;" id="pdfKpiConv">0%</div>
+          <span style="font-size: 9px; color: #16A34A; font-weight: 600;">High Efficiency</span>
+        </div>
+        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 10px;">
+          <span style="font-size: 9px; text-transform: uppercase; color: #64748B; font-weight: 700;">Top Performing</span>
+          <div style="font-size: 14px; font-weight: 800; color: #B45309; margin-top: 6px;" id="pdfKpiTop">A² Royal Events</div>
+          <span style="font-size: 9px; color: #64748B;">Highest Demand</span>
+        </div>
+      </div>
+
+      <!-- Division Growth & Comparison Matrix -->
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 13px; font-weight: 800; color: #0D1B2A; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+          1. Five Divisions Comparative Performance Matrix
+        </h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+          <thead>
+            <tr style="background-color: #0D1B2A; color: #ffffff;">
+              <th style="padding: 8px 10px; text-align: left;">Division Name</th>
+              <th style="padding: 8px 10px; text-align: left;">Focus Area</th>
+              <th style="padding: 8px 10px; text-align: center;">Inquiries</th>
+              <th style="padding: 8px 10px; text-align: center;">Est. Pipeline</th>
+              <th style="padding: 8px 10px; text-align: center;">Conversion %</th>
+              <th style="padding: 8px 10px; text-align: center;">MoM Growth</th>
+            </tr>
+          </thead>
+          <tbody id="pdfScorecardBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Recent Customer Inquiries Table -->
+      <div style="margin-bottom: 28px;">
+        <h3 style="font-size: 13px; font-weight: 800; color: #0D1B2A; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+          2. Customer Inquiries & Pipeline Roster
+        </h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 9.5px;">
+          <thead>
+            <tr style="background-color: #F1F5F9; color: #374151; border-bottom: 1px solid #CBD5E1;">
+              <th style="padding: 6px 8px; text-align: left;">ID / Date</th>
+              <th style="padding: 6px 8px; text-align: left;">Customer Name</th>
+              <th style="padding: 6px 8px; text-align: left;">Phone</th>
+              <th style="padding: 6px 8px; text-align: left;">Division</th>
+              <th style="padding: 6px 8px; text-align: left;">Value (₹)</th>
+              <th style="padding: 6px 8px; text-align: center;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="pdfLeadsBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Official Sign-off & Corporate Footnote -->
+      <div style="border-top: 1px solid #E5E7EB; padding-top: 16px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 9px; color: #6B7280;">
+        <div>
+          <p style="margin: 0;"><strong>AM Global Groups Official Headquarters:</strong></p>
+          <p style="margin: 2px 0 0;">Flat 1a, AM Global Groups, Senaiar Street, Urkad, Ambasamudram – 627401</p>
+          <p style="margin: 2px 0 0;">Branch: Door 19, Ambai Vrukshaa Complex, High School Road, Ambasamudram</p>
+          <p style="margin: 2px 0 0;">Official Email: aariyabalaji913@gmail.com</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="border-bottom: 1px solid #9CA3AF; width: 140px; margin-bottom: 6px;"></div>
+          <p style="margin: 0; font-weight: 700; color: #111827;">Authorized Signatory</p>
+          <p style="margin: 2px 0 0; color: #4B5563;">AM Global Groups Management</p>
+        </div>
       </div>
 
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 hidden">
-    <i class="fa-solid fa-circle-check text-xl text-[#415A77]"></i>
-    <span id="toastMessage" class="text-xs font-bold text-[#FFFFFF]"></span>
+  <div id="adminToast" class="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 bg-emerald-600 text-white text-xs font-semibold transform translate-y-20 opacity-0 transition-all duration-300 hidden">
+    <i class="fa-solid fa-circle-check text-base"></i>
+    <span id="adminToastMessage">Action completed successfully!</span>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-[#0D1B2A] text-[#415A77]/80 text-xs py-5 border-t border-[#1B263B] text-center">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px]">
-      <div>
-        &copy; 2026 <strong class="text-[#FFFFFF]">AM Global Groups</strong> • Confidential Corporate Governance System
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="https://www.instagram.com/am_global_groups/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#415A77] flex items-center gap-1">
-          <i class="fa-brands fa-instagram text-pink-500"></i> @am_global_groups
-        </a>
-        <span>•</span>
-        <a href="https://www.instagram.com/a_square_royalevents_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#415A77] flex items-center gap-1 font-royal">
-          <i class="fa-brands fa-instagram text-pink-500"></i> @a_square_royalevents_
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Admin CRM Interactive Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      let currentInquiries = [];
-
-      const inquiriesTableBody = document.getElementById('inquiriesTableBody');
-      const searchInput = document.getElementById('searchInput');
-      const filterDivision = document.getElementById('filterDivision');
-      const filterStatus = document.getElementById('filterStatus');
-      const refreshBtn = document.getElementById('refreshBtn');
-      const exportCsvBtn = document.getElementById('exportCsvBtn');
-      const showingCount = document.getElementById('showingCount');
-      const dbStatusLabel = document.getElementById('dbStatusLabel');
-      const openDbModalBtn = document.getElementById('openDbModalBtn');
-      const closeDbModalBtn = document.getElementById('closeDbModalBtn');
-      const closeDbModalBtn2 = document.getElementById('closeDbModalBtn2');
-      const dbDiagnosticsModal = document.getElementById('dbDiagnosticsModal');
-      const pingDbBtn = document.getElementById('pingDbBtn');
-
-      // Stat elements
-      const statTotal = document.getElementById('statTotal');
-      const statNew24h = document.getElementById('statNew24h');
-      const statInProgress = document.getElementById('statInProgress');
-      const statCompleted = document.getElementById('statCompleted');
-
-      // Toast elements
-      const toastNotification = document.getElementById('toastNotification');
-      const toastMessage = document.getElementById('toastMessage');
-
-      const showToast = (msg, isSuccess = true) => {
-        if (!toastNotification || !toastMessage) return;
-        toastMessage.textContent = msg;
-        toastNotification.className = `fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-0 opacity-100 ${
-          isSuccess ? 'bg-[#0D1B2A] border border-[#415A77] text-[#415A77]' : 'bg-[#0D1B2A] border border-rose-400 text-white'
-        }`;
-        toastNotification.classList.remove('hidden');
-        setTimeout(() => {
-          toastNotification.classList.add('translate-y-20', 'opacity-0');
-          setTimeout(() => toastNotification.classList.add('hidden'), 300);
-        }, 4000);
-      };
-
-      // Fetch Database Status
-      const fetchDatabaseStatus = async () => {
-        try {
-          const res = await fetch('/api/db/status');
-          const data = await res.json();
-          if (data.success && data.connected) {
-            if (dbStatusLabel) {
-              dbStatusLabel.textContent = `🟢 SQLite: Connected (${data.fileSizeFormatted})`;
-            }
-            const diagEngine = document.getElementById('diagDbEngine');
-            const diagSize = document.getElementById('diagDbSize');
-            const diagPath = document.getElementById('diagDbPath');
-            const diagBody = document.getElementById('diagTablesBody');
-
-            if (diagEngine) diagEngine.textContent = `${data.engine} • ${data.dbType}`;
-            if (diagSize) diagSize.textContent = data.fileSizeFormatted;
-            if (diagPath) diagPath.textContent = data.dbAbsolutePath || data.dbFile;
-
-            if (diagBody && data.tables) {
-              diagBody.innerHTML = data.tables.map(t => `
-                <tr class="hover:bg-[#0D1B2A] transition-colors">
-                  <td class="py-2.5 px-3 text-[#415A77] font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-table text-[10px] text-[#415A77]/50"></i> ${t.name}
-                  </td>
-                  <td class="py-2.5 px-3 text-center font-bold text-[#FFFFFF]">${t.rowCount}</td>
-                  <td class="py-2.5 px-3 text-[10px] text-[#415A77]/70 font-sans">${t.description}</td>
-                </tr>
-              `).join('');
-            }
-          }
-        } catch (err) {
-          console.warn('Database health check warning:', err);
-          if (dbStatusLabel) dbStatusLabel.textContent = '🟡 SQLite: Connecting...';
-        }
-      };
-
-      // Fetch Stats
-      const fetchStats = async () => {
-        try {
-          const res = await fetch('/api/stats');
-          const data = await res.json();
-          if (data.success) {
-            if (statTotal) statTotal.textContent = data.totalInquiries;
-            if (statNew24h) statNew24h.textContent = data.newLast24h;
-            if (statInProgress) statInProgress.textContent = data.byStatus['In Progress'] || 0;
-            if (statCompleted) statCompleted.textContent = data.byStatus['Completed'] || 0;
-          }
-        } catch (err) {
-          console.error('Failed to fetch stats:', err);
-        }
-      };
-
-      // Fetch Inquiries
-      const fetchInquiries = async () => {
-        try {
-          const divVal = filterDivision ? filterDivision.value : 'all';
-          const statVal = filterStatus ? filterStatus.value : 'all';
-          const searchVal = searchInput ? searchInput.value.trim() : '';
-
-          const params = new URLSearchParams();
-          if (divVal !== 'all') params.append('division', divVal);
-          if (statVal !== 'all') params.append('status', statVal);
-          if (searchVal) params.append('search', searchVal);
-
-          const res = await fetch(`/api/inquiries?${params.toString()}`);
-          const result = await res.json();
-
-          if (result.success) {
-            currentInquiries = result.data;
-            renderTable(currentInquiries);
-            fetchStats();
-            fetchDatabaseStatus();
-          } else {
-            renderError('Failed to load inquiries.');
-          }
-        } catch (err) {
-          console.error('Error fetching inquiries:', err);
-          renderError('Unable to connect to backend server. Please verify server is running.');
-        }
-      };
-
-      const getDivisionBadge = (division) => {
-        if (division.includes('Infotech')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#415A77]/20 text-[#415A77] border border-[#415A77]/40">AM Infotech</span>';
-        } else if (division.includes('Events')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#0D1B2A]/20 text-[#0D1B2A] border border-[#0D1B2A]/40">A² Royal Events</span>';
-        } else if (division.includes('Food')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#415A77]/20 text-[#415A77] border border-[#415A77]/40">SB Food</span>';
-        } else if (division.includes('Real Estate')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#FFFFFF]/20 text-[#FFFFFF] border border-[#FFFFFF]/40">AM Real Estate</span>';
-        } else if (division.includes('Consultancy')) {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#0D1B2A]/40 text-[#415A77] border border-[#0D1B2A]">AM Consultancy</span>';
-        } else {
-          return '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#1B263B] text-[#415A77]">AM Global Groups</span>';
-        }
-      };
-
-      const renderTable = (items) => {
-        if (!inquiriesTableBody) return;
-
-        if (items.length === 0) {
-          inquiriesTableBody.innerHTML = `
-            <tr>
-              <td colspan="6" class="py-12 text-center text-[#415A77]/60">
-                <i class="fa-solid fa-inbox text-2xl text-[#1B263B] mb-2 block"></i>
-                No inquiries found matching your filters.
-              </td>
-            </tr>
-          `;
-          if (showingCount) showingCount.textContent = 'Showing 0 of 0 inquiries';
-          return;
-        }
-
-        if (showingCount) showingCount.textContent = `Showing ${items.length} inquiries`;
-
-        inquiriesTableBody.innerHTML = items.map((item) => {
-          const dateStr = new Date(item.createdAt).toLocaleDateString('en-IN', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          });
-
-          const cleanPhone = item.phone.replace(/[^0-9]/g, '');
-          const waMsg = encodeURIComponent(`Hello ${item.name}, thank you for contacting AM Global Groups regarding ${item.division}.`);
-
-          return `
-            <tr class="hover:bg-[#1B263B]/60 transition-colors">
-              <td class="py-4 px-4 sm:px-6">
-                <div class="font-mono font-bold text-[#415A77] text-xs">${item.id}</div>
-                <div class="text-[10px] text-[#415A77]/60 mt-0.5">${dateStr}</div>
-                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[9px] bg-[#0D1B2A] text-[#415A77]/70 border border-[#1B263B]">${item.source || 'Portal'}</span>
-              </td>
-
-              <td class="py-4 px-4">
-                <div class="font-bold text-[#FFFFFF] text-xs">${item.name}</div>
-                <div class="font-mono text-[#415A77]/70 text-[11px] mt-0.5 flex items-center gap-1">
-                  <i class="fa-solid fa-phone text-[9px] text-[#415A77]"></i> ${item.phone}
-                </div>
-                ${item.email ? `<div class="text-[#415A77]/60 text-[10px] truncate max-w-[150px]">${item.email}</div>` : ''}
-              </td>
-
-              <td class="py-4 px-4">
-                ${getDivisionBadge(item.division)}
-              </td>
-
-              <td class="py-4 px-4 max-w-xs">
-                <p class="text-xs text-[#415A77] line-clamp-2">${item.message || 'No description provided.'}</p>
-                ${item.quoteDetails ? `<span class="inline-block mt-1 text-[10px] text-[#FFFFFF] bg-[#0D1B2A] px-2 py-0.5 rounded border border-[#0D1B2A]/30 font-mono truncate max-w-xs block">Quote: ${item.quoteDetails}</span>` : ''}
-                <button onclick="viewLeadDetail('${item.id}')" class="text-[10px] text-[#415A77] hover:text-[#FFFFFF] underline mt-1 font-semibold">View Full Details</button>
-              </td>
-
-              <td class="py-4 px-4">
-                <select onchange="updateLeadStatus('${item.id}', this.value)" class="px-2.5 py-1.5 rounded-lg bg-[#0D1B2A] border border-[#1B263B] text-xs font-semibold ${
-                  item.status === 'Completed' ? 'text-[#FFFFFF] border-[#415A77]/40' :
-                  item.status === 'In Progress' ? 'text-[#0D1B2A] border-[#0D1B2A]/40' :
-                  item.status === 'Contacted' ? 'text-[#415A77] border-[#415A77]/40' :
-                  'text-[#415A77] border-[#415A77]/40'
-                } focus:outline-none cursor-pointer">
-                  <option value="Pending" ${item.status === 'Pending' ? 'selected' : ''}>Pending</option>
-                  <option value="In Progress" ${item.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
-                  <option value="Contacted" ${item.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
-                  <option value="Completed" ${item.status === 'Completed' ? 'selected' : ''}>Completed</option>
-                </select>
-              </td>
-
-              <td class="py-4 px-4 sm:px-6 text-right">
-                <div class="flex items-center justify-end gap-1.5">
-                  <a href="tel:${item.phone}" class="p-2 rounded-lg bg-[#0D1B2A] hover:bg-[#0D1B2A] text-[#415A77] hover:text-[#FFFFFF] transition-all shadow-sm border border-[#1B263B]" title="Call Client">
-                    <i class="fa-solid fa-phone text-xs text-[#415A77]"></i>
-                  </a>
-                  <a href="https://wa.me/${cleanPhone}?text=${waMsg}" target="_blank" class="p-2 rounded-lg bg-[#0D1B2A] hover:bg-[#0D1B2A] text-[#FFFFFF] transition-all shadow-sm border border-[#415A77]/20" title="WhatsApp Chat">
-                    <i class="fa-brands fa-whatsapp text-xs text-[#FFFFFF]"></i>
-                  </a>
-                  <button onclick="deleteLead('${item.id}')" class="p-2 rounded-lg bg-[#0D1B2A] hover:bg-rose-900 text-[#415A77]/60 hover:text-rose-200 transition-all border border-[#1B263B]" title="Delete Lead">
-                    <i class="fa-solid fa-trash text-xs"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          `;
-        }).join('');
-      };
-
-      const renderError = (msg) => {
-        if (!inquiriesTableBody) return;
-        inquiriesTableBody.innerHTML = `
-          <tr>
-            <td colspan="6" class="py-12 text-center text-rose-400">
-              <i class="fa-solid fa-triangle-exclamation text-2xl mb-2 block"></i>
-              ${msg}
-            </td>
-          </tr>
-        `;
-      };
-
-      // Global window functions for table row triggers
-      window.updateLeadStatus = async (id, newStatus) => {
-        try {
-          const res = await fetch(`/api/inquiries/${id}/status`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: newStatus })
-          });
-          const data = await res.json();
-          if (data.success) {
-            showToast(`Status updated to "${newStatus}" for ${id}.`);
-            fetchStats();
-            fetchDatabaseStatus();
-          } else {
-            showToast(data.error || 'Failed to update status.', false);
-          }
-        } catch (err) {
-          console.error(err);
-          showToast('Failed to update status.', false);
-        }
-      };
-
-      window.deleteLead = async (id) => {
-        if (!confirm(`Are you sure you want to delete inquiry ${id}?`)) return;
-        try {
-          const res = await fetch(`/api/inquiries/${id}`, { method: 'DELETE' });
-          const data = await res.json();
-          if (data.success) {
-            showToast(`Inquiry ${id} deleted.`);
-            fetchInquiries();
-          } else {
-            showToast(data.error || 'Failed to delete inquiry.', false);
-          }
-        } catch (err) {
-          console.error(err);
-          showToast('Failed to delete inquiry.', false);
-        }
-      };
-
-      window.viewLeadDetail = (id) => {
-        const item = currentInquiries.find(i => i.id === id);
-        if (!item) return;
-
-        const modal = document.getElementById('leadModal');
-        document.getElementById('modalLeadId').textContent = item.id;
-        document.getElementById('modalLeadDate').textContent = new Date(item.createdAt).toLocaleString('en-IN');
-        document.getElementById('modalLeadName').textContent = item.name;
-        document.getElementById('modalLeadDivision').textContent = item.division;
-        document.getElementById('modalLeadPhone').textContent = item.phone;
-        document.getElementById('modalLeadEmail').textContent = item.email || 'None';
-        document.getElementById('modalLeadSource').textContent = item.source || 'Website Portal';
-        document.getElementById('modalLeadMessage').textContent = item.message || 'No additional details.';
-
-        const quoteRow = document.getElementById('modalLeadQuoteRow');
-        const quoteText = document.getElementById('modalLeadQuote');
-        if (item.quoteDetails) {
-          quoteRow.classList.remove('hidden');
-          quoteText.textContent = item.quoteDetails;
-        } else {
-          quoteRow.classList.add('hidden');
-        }
-
-        const cleanPhone = item.phone.replace(/[^0-9]/g, '');
-        const waMsg = encodeURIComponent(`Hello ${item.name}, regarding your inquiry with AM Global Groups.`);
-        document.getElementById('modalCallBtn').href = `tel:${item.phone}`;
-        document.getElementById('modalWhatsAppBtn').href = `https://wa.me/${cleanPhone}?text=${waMsg}`;
-
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      };
-
-      const closeLeadModalBtn = document.getElementById('closeLeadModalBtn');
-      const leadModal = document.getElementById('leadModal');
-      if (closeLeadModalBtn && leadModal) {
-        closeLeadModalBtn.addEventListener('click', () => {
-          leadModal.classList.add('hidden');
-          document.body.style.overflow = '';
-        });
-        leadModal.addEventListener('click', (e) => {
-          if (e.target === leadModal) {
-            leadModal.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-      }
-
-      // DB Modal Controls
-      if (openDbModalBtn && dbDiagnosticsModal) {
-        openDbModalBtn.addEventListener('click', () => {
-          fetchDatabaseStatus();
-          dbDiagnosticsModal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-        });
-      }
-
-      const closeDbModal = () => {
-        if (dbDiagnosticsModal) {
-          dbDiagnosticsModal.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      };
-
-      if (closeDbModalBtn) closeDbModalBtn.addEventListener('click', closeDbModal);
-      if (closeDbModalBtn2) closeDbModalBtn2.addEventListener('click', closeDbModal);
-      if (dbDiagnosticsModal) {
-        dbDiagnosticsModal.addEventListener('click', (e) => {
-          if (e.target === dbDiagnosticsModal) closeDbModal();
-        });
-      }
-
-      if (pingDbBtn) {
-        pingDbBtn.addEventListener('click', async () => {
-          pingDbBtn.disabled = true;
-          const orig = pingDbBtn.innerHTML;
-          pingDbBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Testing SQL Latency...';
-          const t0 = performance.now();
-          try {
-            const res = await fetch('/api/db/status');
-            const data = await res.json();
-            const latency = Math.round(performance.now() - t0);
-            if (data.success) {
-              showToast(`SQLite Ping Success! Latency: ${latency}ms • Engine: Active`);
-              fetchDatabaseStatus();
-            }
-          } catch (e) {
-            showToast('Database Ping Failed', false);
-          } finally {
-            pingDbBtn.disabled = false;
-            pingDbBtn.innerHTML = orig;
-          }
-        });
-      }
-
-      // Event listeners
-      if (searchInput) searchInput.addEventListener('input', fetchInquiries);
-      if (filterDivision) filterDivision.addEventListener('change', fetchInquiries);
-      if (filterStatus) filterStatus.addEventListener('change', fetchInquiries);
-      if (refreshBtn) refreshBtn.addEventListener('click', fetchInquiries);
-      if (exportCsvBtn) {
-        exportCsvBtn.addEventListener('click', () => {
-          window.location.href = '/api/export/csv';
-        });
-      }
-
-      // Initial Fetch
-      fetchInquiries();
-      fetchDatabaseStatus();
-    });
-  </script>
+  <!-- Main JavaScript Logic -->
+  <script src="js/admin.js"></script>
 </body>
 </html>

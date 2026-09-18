@@ -786,11 +786,11 @@ document.addEventListener('DOMContentLoaded', () => {
   feedbackFilterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       feedbackFilterBtns.forEach(b => {
-        b.classList.remove('bg-[#415A77]', 'text-white', 'font-bold', 'active');
-        b.classList.add('bg-[#0D1B2A]/60', 'text-[#E0E1DD]', 'font-semibold');
+        b.classList.remove('bg-[#0D1B2A]', 'text-white', 'font-bold', 'active');
+        b.classList.add('bg-white', 'text-[#0D1B2A]', 'font-semibold');
       });
-      btn.classList.add('bg-[#415A77]', 'text-white', 'font-bold', 'active');
-      btn.classList.remove('bg-[#0D1B2A]/60', 'text-[#E0E1DD]');
+      btn.classList.add('bg-[#0D1B2A]', 'text-white', 'font-bold', 'active');
+      btn.classList.remove('bg-white', 'text-[#0D1B2A]');
       
       activeDivisionFilter = btn.getAttribute('data-division') || 'All';
       applyDivisionFilter();
@@ -972,11 +972,11 @@ document.addEventListener('DOMContentLoaded', () => {
           // Reset filter button highlight to All
           feedbackFilterBtns.forEach(b => {
             if (b.getAttribute('data-division') === 'All') {
-              b.classList.add('bg-[#415A77]', 'text-white', 'font-bold', 'active');
-              b.classList.remove('bg-[#0D1B2A]/60', 'text-[#E0E1DD]');
+              b.classList.add('bg-[#0D1B2A]', 'text-white', 'font-bold', 'active');
+              b.classList.remove('bg-white', 'text-[#0D1B2A]');
             } else {
-              b.classList.remove('bg-[#415A77]', 'text-white', 'font-bold', 'active');
-              b.classList.add('bg-[#0D1B2A]/60', 'text-[#E0E1DD]', 'font-semibold');
+              b.classList.remove('bg-[#0D1B2A]', 'text-white', 'font-bold', 'active');
+              b.classList.add('bg-white', 'text-[#0D1B2A]', 'font-semibold');
             }
           });
 

@@ -2519,67 +2519,28 @@
         </div>
 
         <!-- Right Column (7 cols): Customer Reviews Stream with Photos & Ratings -->
-        <div class="lg:col-span-7 flex flex-col gap-6">
+        <div class="lg:col-span-7 flex flex-col gap-4">
           
-          <!-- Rating Summary Metric Card -->
-          <div class="p-6 rounded-2xl bg-[#1B263B] border border-[#415A77]/40 shadow-xl text-white">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-              
-              <!-- Big Rating Display -->
-              <div class="flex items-center gap-4 text-center sm:text-left">
-                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#415A77] to-[#0D1B2A] border border-[#B3AF8F]/40 flex flex-col items-center justify-center shadow-lg">
-                  <span class="text-3xl font-black text-white" id="avgRatingDisplay">5.0</span>
-                  <div class="flex text-[10px] text-[#B3AF8F] mt-0.5">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-base font-bold text-white">Customer Reviews & Ratings</h3>
-                  <p class="text-xs text-[#E0E1DD]/80 mt-0.5">Based on <span id="totalReviewsDisplay" class="font-bold text-white">500+</span> verified client engagements</p>
-                  <div class="flex items-center gap-2 mt-2">
-                    <span class="px-2.5 py-0.5 rounded-full bg-[#B3AF8F]/20 text-[#B3AF8F] border border-[#B3AF8F]/40 text-[10px] font-bold">
-                      <i class="fa-solid fa-circle-check text-emerald-400"></i> 99.4% Recommended
-                    </span>
-                    <span class="px-2.5 py-0.5 rounded-full bg-[#415A77]/40 text-[#E0E1DD] text-[10px] font-medium">
-                      With Real Photos
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Write Review Shortcut -->
-              <a href="#feedbackFormCard" class="px-4 py-2.5 rounded-xl bg-[#415A77] hover:bg-[#2F445B] text-white text-xs font-bold transition-all shadow-md flex items-center gap-2 shrink-0 border border-[#B3AF8F]/30 hover:scale-[1.02]">
-                <i class="fa-solid fa-pen-to-square text-[#B3AF8F]"></i>
-                <span>Write a Review</span>
-              </a>
-
-            </div>
-
-            <!-- Division Filter Pills -->
-            <div class="mt-6 pt-5 border-t border-[#415A77]/40 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
-              <button class="feedback-filter-btn active px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#415A77] text-white shadow-sm" data-division="All">
-                All Reviews
-              </button>
-              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="A2 Royal Events">
-                A² Royal Events
-              </button>
-              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="AM Infotech">
-                AM Infotech
-              </button>
-              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="SB Food Production">
-                SB Food
-              </button>
-              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="AM Consultancy">
-                Consultancy
-              </button>
-              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="AM Real Estate">
-                Real Estate
-              </button>
-            </div>
+          <!-- Clean Division Filter Bar -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+            <button class="feedback-filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-[#0D1B2A] text-white shadow-sm border border-[#415A77]/40" data-division="All">
+              All Reviews
+            </button>
+            <button class="feedback-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white border border-[#415A77]/30 shadow-sm" data-division="A2 Royal Events">
+              A² Royal Events
+            </button>
+            <button class="feedback-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white border border-[#415A77]/30 shadow-sm" data-division="AM Infotech">
+              AM Infotech
+            </button>
+            <button class="feedback-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white border border-[#415A77]/30 shadow-sm" data-division="SB Food Production">
+              SB Food
+            </button>
+            <button class="feedback-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white border border-[#415A77]/30 shadow-sm" data-division="AM Consultancy">
+              Consultancy
+            </button>
+            <button class="feedback-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white border border-[#415A77]/30 shadow-sm" data-division="AM Real Estate">
+              Real Estate
+            </button>
           </div>
 
           <!-- Dynamic Feedback Feed Container (Pre-populated with rich verified reviews & photos) -->

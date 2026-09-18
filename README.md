@@ -61,11 +61,29 @@ python3 -m http.server 8000
 
 ---
 
+## 📊 Owner Executive Dashboard (`admin.html`)
+
+A dedicated management portal built exclusively for the business owner to monitor live customer leads, analyze growth trends, compare performance across the 5 divisions, and generate professional PDF reports.
+
+### Key Capabilities:
+- **Security Lock Screen**: Secured with PIN authentication (Default Demo PIN: `1234`).
+- **Live Lead Sync**: Inquiries submitted on `index.html` immediately appear in the Owner Dashboard.
+- **5 Divisions Comparison Charts (Chart.js)**:
+  - Toggle between **Inquiry Volume** and **Revenue Value (₹ Lakhs)** across AM Infotech, AM Consultancy, AM Real Estate's, A² Royal Events, and SB Food Production.
+  - Interactive pipeline stage breakdown (New, Contacted, Quoted, Converted, Closed).
+  - Month-over-Month growth progression chart.
+- **Executive Division Scorecard**: Real-time conversion percentages, deal volumes, and MoM growth rates for each subsidiary.
+- **Leads & Inquiries Manager**: Real-time search, division filter, inline status changer, and 1-click WhatsApp customer follow-up.
+- **1-Click Branded PDF Export (`html2pdf.js`)**: Downloads high-resolution executive report formatted with company letterhead, official MSME credentials (`UDYAM-TN-18-0102459`), division comparison matrix, and full leads roster.
+
+---
+
 ## 🌐 Deployment Options
 
-This website is built with vanilla modern HTML5, Tailwind CSS, FontAwesome, and lightweight vanilla JavaScript. It requires zero server runtimes and can be deployed in 1-click to:
+This website is built with vanilla modern HTML5, Tailwind CSS, FontAwesome, Chart.js, html2pdf.js, and lightweight vanilla JavaScript. It requires zero server runtimes and can be deployed in 1-click to:
 - **GitHub Pages**
 - **Netlify**
 - **Vercel**
 - **Cloudflare Pages**
 - Any cPanel / Apache / Nginx web hosting
+
