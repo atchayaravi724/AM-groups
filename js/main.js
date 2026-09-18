@@ -529,30 +529,57 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackStatusAlert = document.getElementById('feedbackStatusAlert');
   const avgRatingDisplay = document.getElementById('avgRatingDisplay');
   const totalReviewsDisplay = document.getElementById('totalReviewsDisplay');
+  const feedbackPhotoInput = document.getElementById('feedbackPhotoInput');
+  const feedbackDropzone = document.getElementById('feedbackDropzone');
+  const photoPreviewGrid = document.getElementById('photoPreviewGrid');
+
+  // Array to hold base64 photos uploaded for the current review form
+  let uploadedPhotos = [];
+
+  // Global helper for opening review photos in lightbox
+  window.openLightboxImage = function(src, title) {
+    const modal = document.getElementById('galleryLightboxModal');
+    const img = document.getElementById('lightboxImg');
+    const t = document.getElementById('lightboxTitle');
+    const cat = document.getElementById('lightboxCategory');
+    const desc = document.getElementById('lightboxDesc');
+    if (img) img.src = src;
+    if (t) t.textContent = title || 'Customer Review Attachment';
+    if (cat) cat.textContent = 'Verified Customer Experience';
+    if (desc) desc.textContent = 'Real project setup and service capture submitted by verified AM Global Groups client.';
+    if (modal) modal.classList.remove('hidden');
+  };
 
   // Fallback initial dataset in case API is loading or offline
   const fallbackFeedback = [
     {
       id: 'REV-2026-001',
-      name: 'K. Ramanathan',
-      location: 'Tirunelveli, TN',
-      division: 'AM Infotech',
-      rating: 5,
-      serviceAvailed: 'Enterprise Cloud Portal & Web App',
-      comment: 'AM Infotech engineered our corporate web portal with extreme precision, modern Nordic design aesthetics, and fast load speeds. Top-notch technical advisory and dependable ongoing maintenance.',
-      avatarInitials: 'KR',
-      createdAt: new Date(Date.now() - 3 * 86400000).toISOString()
-    },
-    {
-      id: 'REV-2026-002',
       name: 'S. Murugan & Family',
       location: 'Ambasamudram, TN',
       division: 'A2 Royal Events',
       rating: 5,
       serviceAvailed: 'Grand Wedding & Stage Architecture',
       comment: 'A² Royal Events transformed our family wedding into a regal fairytale! The stage architecture, custom LED lighting, and luxury VIP car convoy exceeded all our expectations. Exceptional team!',
+      photos: [
+        'assets/images/portfolio_drive_clean/drive_photo_01.jpg',
+        'assets/images/portfolio_drive_clean/drive_photo_02.jpg'
+      ],
       avatarInitials: 'SM',
-      createdAt: new Date(Date.now() - 5 * 86400000).toISOString()
+      createdAt: new Date(Date.now() - 2 * 86400000).toISOString()
+    },
+    {
+      id: 'REV-2026-002',
+      name: 'K. Ramanathan',
+      location: 'Tirunelveli, TN',
+      division: 'AM Infotech',
+      rating: 5,
+      serviceAvailed: 'Enterprise Cloud Portal & Web Application',
+      comment: 'AM Infotech engineered our corporate web portal with extreme precision, modern Nordic design aesthetics, and fast load speeds. Top-notch technical advisory and dependable ongoing maintenance.',
+      photos: [
+        'assets/images/gallery_tech_software.jpg'
+      ],
+      avatarInitials: 'KR',
+      createdAt: new Date(Date.now() - 4 * 86400000).toISOString()
     },
     {
       id: 'REV-2026-003',
@@ -562,8 +589,11 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: 5,
       serviceAvailed: 'Bulk Pure Masalas & Traditional Spices',
       comment: 'We procure SB Food authentic sambar and chili powders for our commercial catering operations in bulk. The aroma, color purity, and flavor consistency are truly unparalleled across Tamil Nadu.',
+      photos: [
+        'assets/images/gallery_spices_foods.jpg'
+      ],
       avatarInitials: 'AP',
-      createdAt: new Date(Date.now() - 8 * 86400000).toISOString()
+      createdAt: new Date(Date.now() - 7 * 86400000).toISOString()
     },
     {
       id: 'REV-2026-004',
@@ -573,8 +603,11 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: 5,
       serviceAvailed: 'MSME Business Advisory & GST Auditing',
       comment: 'AM Consultancy streamlined our clinic company registration, GST compliance, and government subsidy filings seamlessly without any hassle. Highly professional and transparent documentation.',
+      photos: [
+        'assets/images/gallery_consultancy.jpg'
+      ],
       avatarInitials: 'VR',
-      createdAt: new Date(Date.now() - 12 * 86400000).toISOString()
+      createdAt: new Date(Date.now() - 10 * 86400000).toISOString()
     },
     {
       id: 'REV-2026-005',
@@ -584,8 +617,11 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: 5,
       serviceAvailed: 'DTCP Approved Villa Plot Purchase',
       comment: 'Transparent documentation and 100% clear DTCP titles. AM Real Estate guided us through site visits, legal verification, and registration smoothly. Excellent investment value!',
+      photos: [
+        'assets/images/gallery_real_estate.jpg'
+      ],
       avatarInitials: 'CV',
-      createdAt: new Date(Date.now() - 15 * 86400000).toISOString()
+      createdAt: new Date(Date.now() - 14 * 86400000).toISOString()
     },
     {
       id: 'REV-2026-006',
@@ -595,6 +631,10 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: 5,
       serviceAvailed: 'Corporate Gala & Luxury Car Rentals',
       comment: 'Flawless corporate event coordination with top-of-the-line audio-visual setup and prompt Mercedes executive rental service. Will definitely partner again for our annual summit.',
+      photos: [
+        'assets/images/portfolio_drive_clean/drive_photo_04.jpg',
+        'assets/images/portfolio_drive_clean/drive_photo_05.jpg'
+      ],
       avatarInitials: 'PM',
       createdAt: new Date(Date.now() - 18 * 86400000).toISOString()
     }
@@ -628,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<div class="flex items-center gap-0.5 text-xs">${stars} <span class="font-bold text-[#0D1B2A] ml-1 text-[11px]">${r}.0</span></div>`;
   };
 
-  // Render Feedback List
+  // Render Feedback List with Photos
   const renderFeedbackCards = (items) => {
     if (!feedbackListContainer) return;
 
@@ -637,7 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="p-8 text-center bg-white rounded-2xl border border-[#415A77]/40">
           <i class="fa-regular fa-comment-dots text-3xl text-[#415A77] mb-2"></i>
           <p class="text-sm font-bold text-[#0D1B2A]">No reviews found for this vertical yet.</p>
-          <p class="text-xs text-[#415A77] mt-1">Be the first to share your experience using the form on the right!</p>
+          <p class="text-xs text-[#415A77] mt-1">Be the first to share your experience using the form on the left!</p>
         </div>
       `;
       return;
@@ -646,6 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
     feedbackListContainer.innerHTML = items.map(item => {
       const badgeClass = getDivisionBadgeClass(item.division);
       const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent';
+      const photosArray = Array.isArray(item.photos) ? item.photos : [];
       
       return `
         <div class="p-5 sm:p-6 rounded-2xl bg-white border border-[#415A77]/40 shadow-md hover:shadow-lg hover:border-[#415A77] transition-all duration-300 group">
@@ -684,6 +725,18 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="text-[#1B263B] text-xs sm:text-sm leading-relaxed italic bg-[#E0E1DD]/20 p-3 rounded-xl border-l-2 border-[#415A77]">
             "${item.comment || ''}"
           </p>
+
+          ${photosArray.length > 0 ? `
+            <div class="mt-3.5 pt-3 border-t border-[#415A77]/20 flex items-center gap-2.5 overflow-x-auto pb-1">
+              <span class="text-[10px] font-bold text-[#415A77] uppercase tracking-wider shrink-0 flex items-center gap-1">
+                <i class="fa-solid fa-image text-[10px]"></i> Photos:
+              </span>
+              ${photosArray.map(p => `
+                <img src="${p}" alt="Review Photo" class="w-16 h-14 object-cover rounded-lg border border-[#415A77]/40 shadow-sm hover:scale-105 transition-transform cursor-pointer" onclick="openLightboxImage(this.src, '${(item.name || 'Client').replace(/'/g, "\\'")} - Review Photo')" />
+              `).join('')}
+            </div>
+          ` : ''}
+
         </div>
       `;
     }).join('');
@@ -787,6 +840,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Photo Upload Handler for Customer Reviews
+  const renderPhotoPreviews = () => {
+    if (!photoPreviewGrid) return;
+    photoPreviewGrid.innerHTML = uploadedPhotos.map((photo, idx) => `
+      <div class="relative group rounded-lg overflow-hidden border border-[#415A77]/40 bg-slate-100 aspect-video">
+        <img src="${photo}" class="w-full h-full object-cover" alt="Uploaded Thumbnail" />
+        <button type="button" class="remove-photo-btn absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] shadow-md hover:bg-rose-700 transition-colors" data-index="${idx}">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    `).join('');
+
+    // Attach remove listeners
+    photoPreviewGrid.querySelectorAll('.remove-photo-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const index = parseInt(btn.getAttribute('data-index') || '0', 10);
+        uploadedPhotos.splice(index, 1);
+        renderPhotoPreviews();
+      });
+    });
+  };
+
+  const handleFiles = (files) => {
+    if (!files || files.length === 0) return;
+    const remainingSlots = 4 - uploadedPhotos.length;
+    if (remainingSlots <= 0) {
+      alert('Maximum 4 photos allowed per review.');
+      return;
+    }
+
+    const filesToRead = Array.from(files).slice(0, remainingSlots);
+    filesToRead.forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadedPhotos.push(e.target.result);
+        renderPhotoPreviews();
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  if (feedbackDropzone && feedbackPhotoInput) {
+    feedbackDropzone.addEventListener('click', () => {
+      feedbackPhotoInput.click();
+    });
+
+    feedbackPhotoInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+      feedbackPhotoInput.value = '';
+    });
+
+    feedbackDropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      feedbackDropzone.classList.add('border-[#0D1B2A]', 'bg-[#E0E1DD]/80');
+    });
+
+    feedbackDropzone.addEventListener('dragleave', () => {
+      feedbackDropzone.classList.remove('border-[#0D1B2A]', 'bg-[#E0E1DD]/80');
+    });
+
+    feedbackDropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      feedbackDropzone.classList.remove('border-[#0D1B2A]', 'bg-[#E0E1DD]/80');
+      if (e.dataTransfer && e.dataTransfer.files) {
+        handleFiles(e.dataTransfer.files);
+      }
+    });
+  }
+
   // Handle Customer Feedback Submission Form
   if (customerFeedbackForm) {
     customerFeedbackForm.addEventListener('submit', async (e) => {
@@ -806,7 +930,8 @@ document.addEventListener('DOMContentLoaded', () => {
         division: divisionInput ? divisionInput.value : 'AM Global Groups',
         serviceAvailed: serviceInput ? serviceInput.value.trim() : 'Client Experience',
         comment: commentInput ? commentInput.value.trim() : '',
-        rating: parseInt(rating, 10) || 5
+        rating: parseInt(rating, 10) || 5,
+        photos: [...uploadedPhotos]
       };
 
       if (!payload.name || !payload.comment) {
@@ -820,7 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Publishing Review...</span>';
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Publishing Review & Photos...</span>';
       }
 
       try {
@@ -858,8 +983,11 @@ document.addEventListener('DOMContentLoaded', () => {
           applyDivisionFilter();
           updateRatingSummaryMetrics();
 
-          // Reset form
+          // Reset form & photos
           customerFeedbackForm.reset();
+          uploadedPhotos = [];
+          renderPhotoPreviews();
+
           if (feedbackRatingInput) feedbackRatingInput.value = '5';
           if (starRatingGroup) {
             const stars = starRatingGroup.querySelectorAll('.star-item');
@@ -873,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Success Notification
           if (feedbackStatusAlert) {
             feedbackStatusAlert.className = 'p-3.5 rounded-xl text-xs font-medium flex items-center gap-2 bg-emerald-100 text-emerald-900 border border-emerald-300';
-            feedbackStatusAlert.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600 text-base"></i> <span>Thank you! Your verified feedback has been published to our live client stream.</span>';
+            feedbackStatusAlert.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600 text-base"></i> <span>Thank you! Your verified feedback and photos have been published to our live stream.</span>';
             feedbackStatusAlert.classList.remove('hidden');
           }
 
@@ -884,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // Trigger portal toast notification
           if (typeof window.showPortalToast === 'function') {
-            window.showPortalToast('Feedback Published! Thank you for sharing your experience.', 'success');
+            window.showPortalToast('Feedback & Photos Published Successfully!', 'success');
           }
 
         } else {
@@ -899,7 +1027,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-[#B3AF8F]"></i> <span>Post Customer Feedback</span>';
+          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-[#B3AF8F]"></i> <span>Post Review with Photos</span>';
         }
       }
     });
@@ -907,6 +1035,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial load
   fetchFeedbackData();
+
 
 
   // ==========================================

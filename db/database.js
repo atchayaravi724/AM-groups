@@ -90,11 +90,19 @@ function initDatabase() {
         rating INTEGER NOT NULL DEFAULT 5,
         service_availed TEXT,
         comment TEXT NOT NULL,
+        photos TEXT,
         status TEXT DEFAULT 'Approved',
         avatar_initials TEXT,
         created_at TEXT NOT NULL
       );
     `);
+
+    // Migration for photos column if table existed previously
+    try {
+      dbInstance.exec('ALTER TABLE customer_feedback ADD COLUMN photos TEXT;');
+    } catch (colErr) {
+      // Column already exists
+    }
 
     dbInstance.exec(`
       CREATE INDEX IF NOT EXISTS idx_feedback_division ON customer_feedback(division);
@@ -461,32 +469,42 @@ function seedInitialFeedback() {
   try {
     const db = getDB();
     const count = db.prepare('SELECT COUNT(*) as c FROM customer_feedback').get().c;
-    if (count === 0) {
-      console.log('[DATABASE] Seeding initial verified client feedback records...');
+    // If empty or older schema without photos, refresh with rich photos
+    const hasPhotosCount = db.prepare('SELECT COUNT(*) as c FROM customer_feedback WHERE photos IS NOT NULL').get().c;
+    if (count === 0 || hasPhotosCount === 0) {
+      db.prepare('DELETE FROM customer_feedback').run();
+      console.log('[DATABASE] Seeding initial verified client feedback records with photo attachments...');
       const initialFeedback = [
         {
           id: 'REV-2026-001',
-          name: 'K. Ramanathan',
-          location: 'Tirunelveli, TN',
-          division: 'AM Infotech',
-          rating: 5,
-          service_availed: 'Enterprise Cloud Portal & Web Application',
-          comment: 'AM Infotech engineered our corporate web portal with extreme precision, modern Nordic design aesthetics, and fast load speeds. Top-notch technical advisory and dependable ongoing maintenance.',
-          status: 'Approved',
-          avatar_initials: 'KR',
-          created_at: new Date(Date.now() - 3 * 86400000).toISOString()
-        },
-        {
-          id: 'REV-2026-002',
           name: 'S. Murugan & Family',
           location: 'Ambasamudram, TN',
           division: 'A2 Royal Events',
           rating: 5,
           service_availed: 'Grand Wedding & Stage Architecture',
           comment: 'A² Royal Events transformed our family wedding into a regal fairytale! The stage architecture, custom LED lighting, and luxury VIP car convoy exceeded all our expectations. Exceptional team!',
+          photos: JSON.stringify([
+            'assets/images/portfolio_drive_clean/drive_photo_01.jpg',
+            'assets/images/portfolio_drive_clean/drive_photo_02.jpg'
+          ]),
           status: 'Approved',
           avatar_initials: 'SM',
-          created_at: new Date(Date.now() - 5 * 86400000).toISOString()
+          created_at: new Date(Date.now() - 2 * 86400000).toISOString()
+        },
+        {
+          id: 'REV-2026-002',
+          name: 'K. Ramanathan',
+          location: 'Tirunelveli, TN',
+          division: 'AM Infotech',
+          rating: 5,
+          service_availed: 'Enterprise Cloud Portal & Web Application',
+          comment: 'AM Infotech engineered our corporate web portal with extreme precision, modern Nordic design aesthetics, and fast load speeds. Top-notch technical advisory and dependable ongoing maintenance.',
+          photos: JSON.stringify([
+            'assets/images/gallery_tech_software.jpg'
+          ]),
+          status: 'Approved',
+          avatar_initials: 'KR',
+          created_at: new Date(Date.now() - 4 * 86400000).toISOString()
         },
         {
           id: 'REV-2026-003',
@@ -496,9 +514,12 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'Bulk Pure Masalas & Traditional Spices',
           comment: 'We procure SB Food authentic sambar and chili powders for our commercial catering operations in bulk. The aroma, color purity, and flavor consistency are truly unparalleled across Tamil Nadu.',
+          photos: JSON.stringify([
+            'assets/images/gallery_spices_foods.jpg'
+          ]),
           status: 'Approved',
           avatar_initials: 'AP',
-          created_at: new Date(Date.now() - 8 * 86400000).toISOString()
+          created_at: new Date(Date.now() - 7 * 86400000).toISOString()
         },
         {
           id: 'REV-2026-004',
@@ -508,9 +529,12 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'MSME Business Advisory & GST Auditing',
           comment: 'AM Consultancy streamlined our clinic company registration, GST compliance, and government subsidy filings seamlessly without any hassle. Highly professional and transparent documentation.',
+          photos: JSON.stringify([
+            'assets/images/gallery_consultancy.jpg'
+          ]),
           status: 'Approved',
           avatar_initials: 'VR',
-          created_at: new Date(Date.now() - 12 * 86400000).toISOString()
+          created_at: new Date(Date.now() - 10 * 86400000).toISOString()
         },
         {
           id: 'REV-2026-005',
@@ -520,9 +544,12 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'DTCP Approved Villa Plot Purchase',
           comment: 'Transparent documentation and 100% clear DTCP titles. AM Real Estate guided us through site visits, legal verification, and registration smoothly. Excellent investment value!',
+          photos: JSON.stringify([
+            'assets/images/gallery_real_estate.jpg'
+          ]),
           status: 'Approved',
           avatar_initials: 'CV',
-          created_at: new Date(Date.now() - 15 * 86400000).toISOString()
+          created_at: new Date(Date.now() - 14 * 86400000).toISOString()
         },
         {
           id: 'REV-2026-006',
@@ -532,6 +559,10 @@ function seedInitialFeedback() {
           rating: 5,
           service_availed: 'Corporate Gala & Luxury Car Rentals',
           comment: 'Flawless corporate event coordination with top-of-the-line audio-visual setup and prompt Mercedes executive rental service. Will definitely partner again for our annual summit.',
+          photos: JSON.stringify([
+            'assets/images/portfolio_drive_clean/drive_photo_04.jpg',
+            'assets/images/portfolio_drive_clean/drive_photo_05.jpg'
+          ]),
           status: 'Approved',
           avatar_initials: 'PM',
           created_at: new Date(Date.now() - 18 * 86400000).toISOString()
@@ -540,16 +571,16 @@ function seedInitialFeedback() {
 
       const stmt = db.prepare(`
         INSERT INTO customer_feedback (
-          id, name, location, division, rating, service_availed, comment, status, avatar_initials, created_at
+          id, name, location, division, rating, service_availed, comment, photos, status, avatar_initials, created_at
         ) VALUES (
-          @id, @name, @location, @division, @rating, @service_availed, @comment, @status, @avatar_initials, @created_at
+          @id, @name, @location, @division, @rating, @service_availed, @comment, @photos, @status, @avatar_initials, @created_at
         )
       `);
 
       for (const item of initialFeedback) {
         stmt.run(item);
       }
-      console.log(`[DATABASE] Seeded ${initialFeedback.length} verified customer feedback entries successfully.`);
+      console.log(`[DATABASE] Seeded ${initialFeedback.length} verified customer feedback entries with photos successfully.`);
     }
   } catch (err) {
     console.error('[DATABASE] Seed feedback error:', err.message);
@@ -557,7 +588,7 @@ function seedInitialFeedback() {
 }
 
 /**
- * Create a new Customer Feedback entry
+ * Create a new Customer Feedback entry (with optional photo attachments)
  */
 function createFeedback(data) {
   const db = getDB();
@@ -572,11 +603,19 @@ function createFeedback(data) {
 
   const rating = Math.min(5, Math.max(1, parseInt(data.rating, 10) || 5));
 
+  // Process photos array/string
+  let photosVal = null;
+  if (Array.isArray(data.photos) && data.photos.length > 0) {
+    photosVal = JSON.stringify(data.photos);
+  } else if (typeof data.photos === 'string' && data.photos.trim()) {
+    photosVal = data.photos.trim().startsWith('[') ? data.photos.trim() : JSON.stringify([data.photos.trim()]);
+  }
+
   const stmt = db.prepare(`
     INSERT INTO customer_feedback (
-      id, name, location, division, rating, service_availed, comment, status, avatar_initials, created_at
+      id, name, location, division, rating, service_availed, comment, photos, status, avatar_initials, created_at
     ) VALUES (
-      ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+      ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
     )
   `);
 
@@ -588,6 +627,7 @@ function createFeedback(data) {
     rating,
     data.serviceAvailed ? data.serviceAvailed.trim() : (data.service_availed ? data.service_availed.trim() : 'General Service'),
     data.comment.trim(),
+    photosVal,
     data.status || 'Approved',
     initials,
     now
@@ -685,10 +725,20 @@ function getFeedbackStats() {
 }
 
 /**
- * Format feedback row to camelCase
+ * Format feedback row to camelCase and parse photos array
  */
 function formatFeedback(row) {
   if (!row) return null;
+  let photos = [];
+  if (row.photos) {
+    try {
+      photos = JSON.parse(row.photos);
+      if (!Array.isArray(photos)) photos = [row.photos];
+    } catch (e) {
+      photos = [row.photos];
+    }
+  }
+
   return {
     id: row.id,
     name: row.name,
@@ -697,6 +747,7 @@ function formatFeedback(row) {
     rating: row.rating,
     serviceAvailed: row.service_availed,
     comment: row.comment,
+    photos: photos,
     status: row.status,
     avatarInitials: row.avatar_initials,
     createdAt: row.created_at

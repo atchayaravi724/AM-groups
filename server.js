@@ -25,8 +25,8 @@ try {
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Serve static frontend assets
 app.use(express.static(__dirname));
@@ -303,7 +303,7 @@ app.get('/api/feedback', (req, res) => {
 // 10. Submit New Customer Feedback
 app.post('/api/feedback', (req, res) => {
   try {
-    const { name, location, division, rating, serviceAvailed, comment } = req.body;
+    const { name, location, division, rating, serviceAvailed, comment, photos } = req.body;
 
     if (!name || !name.trim()) {
       return res.status(400).json({
@@ -326,10 +326,11 @@ app.post('/api/feedback', (req, res) => {
       rating: rating ? parseInt(rating, 10) : 5,
       serviceAvailed: serviceAvailed || 'Client Experience',
       comment: comment.trim(),
+      photos: photos || null,
       status: 'Approved'
     });
 
-    console.log(`[FEEDBACK INSERT] ${created.id} - ${created.name} (${created.rating}★, ${created.division})`);
+    console.log(`[FEEDBACK INSERT] ${created.id} - ${created.name} (${created.rating}★, ${created.division}, ${created.photos ? created.photos.length : 0} photos)`);
 
     return res.status(201).json({
       success: true,
