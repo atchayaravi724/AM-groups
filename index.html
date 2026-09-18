@@ -118,6 +118,10 @@
         <a href="mailto:aariyabalaji913@gmail.com" class="hover:text-[#FFFFFF] transition-colors hidden lg:flex items-center gap-1.5 font-medium text-[#415A77]">
           <i class="fa-solid fa-envelope text-[#415A77]"></i> aariyabalaji913@gmail.com
         </a>
+        <a href="admin.html" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] shadow transition-all hover:scale-105" title="Access Owner / Management Dashboard">
+          <i class="fa-solid fa-chart-line text-[10px]"></i>
+          <span>Owner Portal</span>
+        </a>
       </div>
     </div>
   </div>
@@ -151,6 +155,7 @@
           <a href="#about" class="nav-link hover:text-[#0D1B2A] transition-colors">About Us</a>
           <a href="#what-we-do" class="nav-link hover:text-[#0D1B2A] transition-colors">What We Do</a>
           <a href="#gallery" class="nav-link hover:text-[#0D1B2A] transition-colors">Gallery</a>
+          <a href="#reviews" class="nav-link hover:text-[#0D1B2A] transition-colors">Reviews</a>
           <a href="#faq" class="nav-link hover:text-[#0D1B2A] transition-colors">FAQ</a>
           <a href="#contact" class="nav-link hover:text-[#0D1B2A] transition-colors">Contact Us</a>
         </nav>
@@ -200,6 +205,10 @@
           <span class="flex items-center gap-2.5"><i class="fa-solid fa-calculator text-[#0D1B2A] text-xs"></i> Quote Tool (Cost Estimator)</span>
           <span class="px-2 py-0.5 text-[10px] bg-[#FFFFFF] text-[#0D1B2A] rounded-full font-bold border border-[#415A77]">Interactive</span>
         </a>
+        <a href="#reviews" class="mobile-nav-link hover:text-[#0D1B2A] py-2 border-b border-[#415A77]/30 flex items-center justify-between">
+          <span class="flex items-center gap-2.5"><i class="fa-solid fa-comments text-[#0D1B2A] text-xs"></i> Customer Feedback & Reviews</span>
+          <i class="fa-solid fa-chevron-right text-xs text-[#0D1B2A]"></i>
+        </a>
         <a href="#faq" class="mobile-nav-link hover:text-[#0D1B2A] py-2 border-b border-[#415A77]/30 flex items-center justify-between">
           <span class="flex items-center gap-2.5"><i class="fa-solid fa-circle-question text-[#0D1B2A] text-xs"></i> FAQ</span>
           <i class="fa-solid fa-chevron-right text-xs text-[#0D1B2A]"></i>
@@ -214,6 +223,10 @@
             <i class="fa-regular fa-paper-plane text-[#FFFFFF]"></i>
             <span>Submit Enquiry</span>
           </button>
+          <a href="admin.html" class="w-full py-3 rounded-xl bg-blue-600 text-white font-bold text-center text-sm flex items-center justify-center gap-2 shadow">
+            <i class="fa-solid fa-chart-line text-blue-200"></i>
+            <span>Owner Executive Portal</span>
+          </a>
           <a href="tel:+918870388692" class="w-full py-3 rounded-xl bg-[#0D1B2A] text-white font-bold text-center text-sm flex items-center justify-center gap-2">
             <i class="fa-solid fa-phone text-[#415A77]"></i>
             <span>Call: +91 88703 88692</span>
@@ -2364,156 +2377,201 @@
     </div>
   </section>
 
-  <section id="reviews" class="py-12 md:py-16 bg-[#E0E1DD] relative border-t border-[#415A77]/50">
+  <!-- ========================================== -->
+  <!-- CUSTOMER FEEDBACK COLUMN & REVIEWS HUB -->
+  <!-- ========================================== -->
+  <section id="reviews" class="py-14 md:py-20 bg-[#E0E1DD] relative border-t border-[#415A77]/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-8">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#415A77]/20 text-[#0D1B2A] border border-[#415A77]/40 text-[11px] font-bold uppercase tracking-wider mb-2">
-          <i class="fa-solid fa-star text-[#0D1B2A]"></i> Client Satisfaction
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1B263B] text-[#FFFFFF] border border-[#415A77]/60 text-[11px] font-bold uppercase tracking-wider mb-3 shadow-sm">
+          <i class="fa-solid fa-comments text-[#B3AF8F]"></i> Customer Feedback & Reviews
         </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0D1B2A] tracking-tight font-heading">
-          Trusted by Businesses, Families & Communities
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-[#0D1B2A] tracking-tight font-heading">
+          Trusted by Clients, Families & Enterprises
         </h2>
-        <p class="text-[#0D1B2A] mt-2 text-xs sm:text-sm">
-          Verified feedback from our clients across all 5 specialized subsidiaries.
+        <p class="text-[#1B263B] mt-2.5 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+          Read verified client reviews across our 5 specialized divisions, or share your own experience with AM Global Groups.
         </p>
       </div>
 
-      <!-- Testimonials Carousel Container -->
-      <div class="relative max-w-3xl mx-auto">
+      <!-- Main Feedback Layout: 2-Column Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <div id="testimonialSlider" class="overflow-hidden relative min-h-[220px]">
+        <!-- Left Column (7 cols): Customer Feedback Stream & Rating Metrics -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
           
-          <!-- Review 1: AM Infotech -->
-          <div class="testimonial-slide absolute inset-0 opacity-100 transition-all duration-500 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white border border-[#415A77] shadow-lg">
-            <div>
-              <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-                <div class="flex items-center gap-1 text-[#0D1B2A] text-xs">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span class="text-[#0D1B2A] font-bold ml-1 text-xs">5.0</span>
-                </div>
-                <span class="badge-infotech px-2.5 py-0.5 rounded-full text-[10px] font-bold">
-                  AM Infotech • Web Platform
-                </span>
-              </div>
-              <p class="text-[#0D1B2A] text-xs sm:text-sm leading-relaxed italic mb-4">
-                "AM Infotech engineered our corporate web application with extreme precision, modern design aesthetics, and fast load speeds. Top-notch technical advisory."
-              </p>
-            </div>
-            <div class="flex items-center justify-between border-t border-[#415A77]/50 pt-3">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-[#415A77]/25 text-[#0D1B2A] flex items-center justify-center font-bold text-xs border border-[#415A77]/40">
-                  KR
+          <!-- Rating Summary Metric Card -->
+          <div class="p-6 rounded-2xl bg-[#1B263B] border border-[#415A77]/40 shadow-xl text-white">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+              
+              <!-- Big Rating Display -->
+              <div class="flex items-center gap-4 text-center sm:text-left">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#415A77] to-[#0D1B2A] border border-[#B3AF8F]/40 flex flex-col items-center justify-center shadow-lg">
+                  <span class="text-3xl font-black text-white" id="avgRatingDisplay">5.0</span>
+                  <div class="flex text-[10px] text-[#B3AF8F] mt-0.5">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
                 </div>
                 <div>
-                  <h4 class="font-bold text-[#0D1B2A] text-xs">K. Ramanathan</h4>
-                  <span class="text-[10px] text-[#0D1B2A]">Managing Director, Tirunelveli</span>
+                  <h3 class="text-base font-bold text-white">Overall Client Satisfaction</h3>
+                  <p class="text-xs text-[#E0E1DD]/80 mt-0.5">Based on <span id="totalReviewsDisplay" class="font-bold text-white">500+</span> verified client engagements</p>
+                  <div class="flex items-center gap-2 mt-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-[#B3AF8F]/20 text-[#B3AF8F] border border-[#B3AF8F]/40 text-[10px] font-bold">
+                      <i class="fa-solid fa-circle-check text-emerald-400"></i> 99.4% Recommended
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-[#415A77]/40 text-[#E0E1DD] text-[10px] font-medium">
+                      5 Business Verticals
+                    </span>
+                  </div>
                 </div>
               </div>
-              <span class="text-[10px] text-[#0D1B2A] font-semibold flex items-center gap-1">
-                <i class="fa-solid fa-circle-check text-[#0D1B2A]"></i> Verified
-              </span>
+
+              <!-- Quick Action / Write Review Trigger -->
+              <a href="#feedbackFormCard" class="px-4 py-2.5 rounded-xl bg-[#415A77] hover:bg-[#2F445B] text-white text-xs font-bold transition-all shadow-md flex items-center gap-2 shrink-0 border border-[#B3AF8F]/30 hover:scale-[1.02]">
+                <i class="fa-solid fa-pen-to-square text-[#B3AF8F]"></i>
+                <span>Write Feedback</span>
+              </a>
+
+            </div>
+
+            <!-- Division Filter Pills -->
+            <div class="mt-6 pt-5 border-t border-[#415A77]/40 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+              <button class="feedback-filter-btn active px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#415A77] text-white shadow-sm" data-division="All">
+                All Reviews
+              </button>
+              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="A2 Royal Events">
+                A² Royal Events
+              </button>
+              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="AM Infotech">
+                AM Infotech
+              </button>
+              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="SB Food Production">
+                SB Food
+              </button>
+              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="AM Consultancy">
+                Consultancy
+              </button>
+              <button class="feedback-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[#0D1B2A]/60 text-[#E0E1DD] hover:bg-[#415A77] hover:text-white" data-division="AM Real Estate">
+                Real Estate
+              </button>
             </div>
           </div>
 
-          <!-- Review 2: A2 Royal Events -->
-          <div class="testimonial-slide absolute inset-0 opacity-0 pointer-events-none transition-all duration-500 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white border border-[#415A77] shadow-lg">
-            <div>
-              <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-                <div class="flex items-center gap-1 text-[#0D1B2A] text-xs">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span class="text-[#0D1B2A] font-bold ml-1 text-xs">5.0</span>
-                </div>
-                <span class="badge-events px-2.5 py-0.5 rounded-full text-[10px] font-bold">
-                  A² Royal Events • Wedding
-                </span>
-              </div>
-              <p class="text-[#0D1B2A] text-xs sm:text-sm leading-relaxed italic mb-4">
-                "A² Royal Events transformed our family wedding into a regal fairytale! The stage architecture and luxury car convoy exceeded all our expectations."
-              </p>
-            </div>
-            <div class="flex items-center justify-between border-t border-[#415A77]/50 pt-3">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-[#415A77]/25 text-[#0D1B2A] flex items-center justify-center font-bold text-xs border border-[#415A77]/40">
-                  SM
-                </div>
-                <div>
-                  <h4 class="font-bold text-[#0D1B2A] text-xs">S. Murugan & Family</h4>
-                  <span class="text-[10px] text-[#0D1B2A]">Ambasamudram, TN</span>
-                </div>
-              </div>
-              <span class="text-[10px] text-[#0D1B2A] font-semibold flex items-center gap-1">
-                <i class="fa-solid fa-circle-check text-[#0D1B2A]"></i> Verified
-              </span>
-            </div>
-          </div>
-
-          <!-- Review 3: SB Food Production -->
-          <div class="testimonial-slide absolute inset-0 opacity-0 pointer-events-none transition-all duration-500 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white border border-[#415A77] shadow-lg">
-            <div>
-              <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-                <div class="flex items-center gap-1 text-[#0D1B2A] text-xs">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span class="text-[#0D1B2A] font-bold ml-1 text-xs">5.0</span>
-                </div>
-                <span class="badge-food px-2.5 py-0.5 rounded-full text-[10px] font-bold">
-                  SB Food • Spices
-                </span>
-              </div>
-              <p class="text-[#0D1B2A] text-xs sm:text-sm leading-relaxed italic mb-4">
-                "We procure SB Food's authentic sambar powder for our catering in bulk. Aroma and flavor consistency are unparalleled."
-              </p>
-            </div>
-            <div class="flex items-center justify-between border-t border-[#415A77]/50 pt-3">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-[#415A77]/25 text-[#0D1B2A] flex items-center justify-center font-bold text-xs border border-[#415A77]/40">
-                  AP
-                </div>
-                <div>
-                  <h4 class="font-bold text-[#0D1B2A] text-xs">Anand Prabhu</h4>
-                  <span class="text-[10px] text-[#0D1B2A]">Commercial Kitchens</span>
-                </div>
-              </div>
-              <span class="text-[10px] text-[#0D1B2A] font-semibold flex items-center gap-1">
-                <i class="fa-solid fa-circle-check text-[#0D1B2A]"></i> Verified
-              </span>
-            </div>
+          <!-- Dynamic Feedback Feed Container -->
+          <div id="feedbackListContainer" class="flex flex-col gap-4 max-h-[640px] overflow-y-auto pr-1 scrollbar-thin">
+            <!-- Populated dynamically via JS -->
           </div>
 
         </div>
 
-        <!-- Navigation Controls & Dots -->
-        <div class="flex items-center justify-between mt-4">
-          <div class="flex items-center gap-1.5" id="testimonialDots">
-            <button class="w-6 h-2 rounded-full bg-[#0D1B2A] transition-all" data-index="0"></button>
-            <button class="w-2 h-2 rounded-full bg-[#415A77] hover:bg-[#0D1B2A] transition-all" data-index="1"></button>
-            <button class="w-2 h-2 rounded-full bg-[#415A77] hover:bg-[#0D1B2A] transition-all" data-index="2"></button>
-          </div>
-          
-          <div class="flex items-center gap-1.5">
-            <button id="prevTestimonialBtn" class="w-8 h-8 rounded-full bg-white border border-[#415A77] text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-[#FFFFFF] transition-all flex items-center justify-center shadow-sm">
-              <i class="fa-solid fa-arrow-left text-[10px]"></i>
-            </button>
-            <button id="nextTestimonialBtn" class="w-8 h-8 rounded-full bg-white border border-[#415A77] text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-[#FFFFFF] transition-all flex items-center justify-center shadow-sm">
-              <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </button>
+        <!-- Right Column (5 cols): Interactive Customer Feedback Submission Form -->
+        <div class="lg:col-span-5" id="feedbackFormCard">
+          <div class="p-6 sm:p-7 rounded-2xl bg-white border border-[#415A77]/50 shadow-xl relative overflow-hidden">
+            
+            <div class="flex items-center gap-3 mb-4 pb-4 border-b border-[#415A77]/30">
+              <div class="w-10 h-10 rounded-xl bg-[#0D1B2A] text-[#B3AF8F] flex items-center justify-center text-base shadow-sm border border-[#415A77]/40">
+                <i class="fa-solid fa-comment-dots"></i>
+              </div>
+              <div>
+                <h3 class="text-base sm:text-lg font-extrabold text-[#0D1B2A] font-heading">
+                  Share Your Experience
+                </h3>
+                <p class="text-[11px] text-[#415A77] font-medium">
+                  Help us serve you better across Tamil Nadu
+                </p>
+              </div>
+            </div>
+
+            <!-- Feedback Submission Form -->
+            <form id="customerFeedbackForm" class="space-y-4">
+              
+              <!-- Star Rating Interactive Selector -->
+              <div>
+                <label class="block text-xs font-bold text-[#0D1B2A] mb-1.5">
+                  Your Overall Rating <span class="text-rose-500">*</span>
+                </label>
+                <div class="flex items-center gap-2 p-3 rounded-xl bg-[#E0E1DD]/50 border border-[#415A77]/40">
+                  <div class="flex items-center gap-1.5 text-xl cursor-pointer" id="starRatingGroup">
+                    <i class="fa-solid fa-star star-item text-[#B3AF8F] hover:scale-110 transition-transform" data-value="1"></i>
+                    <i class="fa-solid fa-star star-item text-[#B3AF8F] hover:scale-110 transition-transform" data-value="2"></i>
+                    <i class="fa-solid fa-star star-item text-[#B3AF8F] hover:scale-110 transition-transform" data-value="3"></i>
+                    <i class="fa-solid fa-star star-item text-[#B3AF8F] hover:scale-110 transition-transform" data-value="4"></i>
+                    <i class="fa-solid fa-star star-item text-[#B3AF8F] hover:scale-110 transition-transform" data-value="5"></i>
+                  </div>
+                  <input type="hidden" id="feedbackRatingInput" name="rating" value="5" />
+                  <span id="starRatingLabel" class="text-xs font-bold text-[#0D1B2A] ml-2">5.0 (Excellent)</span>
+                </div>
+              </div>
+
+              <!-- Customer Name & Location Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="feedbackName" class="block text-xs font-bold text-[#0D1B2A] mb-1">
+                    Your Name <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="feedbackName" required placeholder="e.g. S. Murugan" class="w-full px-3.5 py-2.5 rounded-xl border border-[#415A77]/40 bg-[#FFFFFF] text-[#0D1B2A] text-xs focus:ring-2 focus:ring-[#415A77] focus:border-[#415A77] outline-none transition-all" />
+                </div>
+                <div>
+                  <label for="feedbackLocation" class="block text-xs font-bold text-[#0D1B2A] mb-1">
+                    City / Location <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="feedbackLocation" required placeholder="e.g. Tirunelveli" class="w-full px-3.5 py-2.5 rounded-xl border border-[#415A77]/40 bg-[#FFFFFF] text-[#0D1B2A] text-xs focus:ring-2 focus:ring-[#415A77] focus:border-[#415A77] outline-none transition-all" />
+                </div>
+              </div>
+
+              <!-- Division & Service Availed Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="feedbackDivision" class="block text-xs font-bold text-[#0D1B2A] mb-1">
+                    Subsidiary Division <span class="text-rose-500">*</span>
+                  </label>
+                  <select id="feedbackDivision" required class="w-full px-3 py-2.5 rounded-xl border border-[#415A77]/40 bg-[#FFFFFF] text-[#0D1B2A] text-xs focus:ring-2 focus:ring-[#415A77] focus:border-[#415A77] outline-none transition-all">
+                    <option value="A2 Royal Events">A² Royal Events</option>
+                    <option value="AM Infotech">AM Infotech</option>
+                    <option value="SB Food Production">SB Food Production</option>
+                    <option value="AM Consultancy">AM Consultancy</option>
+                    <option value="AM Real Estate">AM Real Estate</option>
+                    <option value="AM Global Groups">AM Global Groups (General)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="feedbackService" class="block text-xs font-bold text-[#0D1B2A] mb-1">
+                    Service / Event Availed
+                  </label>
+                  <input type="text" id="feedbackService" placeholder="e.g. Wedding Decor / Web Design" class="w-full px-3.5 py-2.5 rounded-xl border border-[#415A77]/40 bg-[#FFFFFF] text-[#0D1B2A] text-xs focus:ring-2 focus:ring-[#415A77] focus:border-[#415A77] outline-none transition-all" />
+                </div>
+              </div>
+
+              <!-- Feedback Comment Message -->
+              <div>
+                <label for="feedbackComment" class="block text-xs font-bold text-[#0D1B2A] mb-1">
+                  Your Feedback / Review <span class="text-rose-500">*</span>
+                </label>
+                <textarea id="feedbackComment" required rows="3" placeholder="Describe your experience with our team punctuality, quality, support..." class="w-full px-3.5 py-2.5 rounded-xl border border-[#415A77]/40 bg-[#FFFFFF] text-[#0D1B2A] text-xs focus:ring-2 focus:ring-[#415A77] focus:border-[#415A77] outline-none transition-all resize-none"></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="submitFeedbackBtn" class="w-full py-3 px-5 rounded-xl bg-[#0D1B2A] hover:bg-[#1B263B] text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2 border border-[#415A77]/60 hover:border-[#B3AF8F]">
+                <i class="fa-solid fa-paper-plane text-[#B3AF8F]"></i>
+                <span>Post Customer Feedback</span>
+              </button>
+
+              <!-- Feedback Status Alert -->
+              <div id="feedbackStatusAlert" class="hidden p-3.5 rounded-xl text-xs font-medium flex items-center gap-2"></div>
+
+            </form>
+
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
@@ -2931,6 +2989,7 @@
             <li><a href="#calculator" class="text-[#415A77] hover:text-white transition-colors">Cost Estimator</a></li>
             <li><a href="#credentials" class="text-[#415A77] hover:text-white transition-colors">MSME Certificate</a></li>
             <li><a href="#locations" class="text-[#415A77] hover:text-white transition-colors">Offices & Plants</a></li>
+            <li><a href="admin.html" class="text-blue-400 hover:text-blue-300 font-bold transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lock text-[10px]"></i> Owner Executive Portal</a></li>
           </ul>
         </div>
 

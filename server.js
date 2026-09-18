@@ -272,6 +272,122 @@ app.get(['/download/zip', '/api/download/project-zip', '/download/project.zip'],
   }
 });
 
+// ==========================================
+// CUSTOMER FEEDBACK & REVIEWS API
+// ==========================================
+
+// 9. Get Customer Feedback List
+app.get('/api/feedback', (req, res) => {
+  try {
+    const { division, search, limit, status } = req.query;
+    const feedbackList = db.getFeedbackList({
+      division,
+      search,
+      limit: limit ? parseInt(limit, 10) : 50,
+      status: status || 'Approved'
+    });
+    return res.json({
+      success: true,
+      count: feedbackList.length,
+      data: feedbackList
+    });
+  } catch (err) {
+    console.error('Error fetching customer feedback:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Internal Server Error fetching reviews'
+    });
+  }
+});
+
+// 10. Submit New Customer Feedback
+app.post('/api/feedback', (req, res) => {
+  try {
+    const { name, location, division, rating, serviceAvailed, comment } = req.body;
+
+    if (!name || !name.trim()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Customer name is required.'
+      });
+    }
+
+    if (!comment || !comment.trim()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Feedback message / review comment is required.'
+      });
+    }
+
+    const created = db.createFeedback({
+      name: name.trim(),
+      location: location ? location.trim() : 'Tamil Nadu',
+      division: division || 'AM Global Groups',
+      rating: rating ? parseInt(rating, 10) : 5,
+      serviceAvailed: serviceAvailed || 'Client Experience',
+      comment: comment.trim(),
+      status: 'Approved'
+    });
+
+    console.log(`[FEEDBACK INSERT] ${created.id} - ${created.name} (${created.rating}★, ${created.division})`);
+
+    return res.status(201).json({
+      success: true,
+      message: 'Thank you! Your feedback has been published successfully.',
+      data: created
+    });
+  } catch (err) {
+    console.error('Error submitting feedback:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to record customer feedback'
+    });
+  }
+});
+
+// 11. Aggregate Feedback Stats
+app.get('/api/feedback/stats', (req, res) => {
+  try {
+    const stats = db.getFeedbackStats();
+    return res.json({
+      success: true,
+      data: stats
+    });
+  } catch (err) {
+    console.error('Error getting feedback stats:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to compute feedback stats'
+    });
+  }
+});
+
+// 12. Admin Feedback Management
+app.get('/api/admin/feedback', (req, res) => {
+  try {
+    const { division, search, limit } = req.query;
+    const allFeedback = db.getFeedbackList({ division, search, limit, status: 'All' });
+    return res.json({
+      success: true,
+      data: allFeedback
+    });
+  } catch (err) {
+    console.error('Error fetching admin feedback:', err);
+    return res.status(500).json({ success: false, error: 'Internal Error' });
+  }
+});
+
+app.delete('/api/admin/feedback/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const ok = db.deleteFeedback(id);
+    return res.json({ success: ok, message: 'Feedback entry deleted.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: 'Delete error' });
+  }
+});
+
+
 app.listen(PORT, () => {
   const dbStatus = db.getDatabaseStatus();
   console.log('====================================================');

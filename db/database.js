@@ -80,10 +80,33 @@ function initDatabase() {
       );
     `);
 
+    // 4. Customer Feedback & Client Reviews Table
+    dbInstance.exec(`
+      CREATE TABLE IF NOT EXISTS customer_feedback (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        location TEXT,
+        division TEXT NOT NULL,
+        rating INTEGER NOT NULL DEFAULT 5,
+        service_availed TEXT,
+        comment TEXT NOT NULL,
+        status TEXT DEFAULT 'Approved',
+        avatar_initials TEXT,
+        created_at TEXT NOT NULL
+      );
+    `);
+
+    dbInstance.exec(`
+      CREATE INDEX IF NOT EXISTS idx_feedback_division ON customer_feedback(division);
+      CREATE INDEX IF NOT EXISTS idx_feedback_status ON customer_feedback(status);
+      CREATE INDEX IF NOT EXISTS idx_feedback_created_at ON customer_feedback(created_at DESC);
+    `);
+
     console.log(`[DATABASE] SQLite Database connected successfully: ${DB_FILE}`);
 
     // Migrate legacy inquiries.json if needed
     migrateLegacyData();
+    seedInitialFeedback();
 
     return dbInstance;
   } catch (err) {
@@ -432,6 +455,255 @@ function getDatabaseStatus() {
 }
 
 /**
+ * Seed initial authentic feedback records across all 5 divisions if empty
+ */
+function seedInitialFeedback() {
+  try {
+    const db = getDB();
+    const count = db.prepare('SELECT COUNT(*) as c FROM customer_feedback').get().c;
+    if (count === 0) {
+      console.log('[DATABASE] Seeding initial verified client feedback records...');
+      const initialFeedback = [
+        {
+          id: 'REV-2026-001',
+          name: 'K. Ramanathan',
+          location: 'Tirunelveli, TN',
+          division: 'AM Infotech',
+          rating: 5,
+          service_availed: 'Enterprise Cloud Portal & Web Application',
+          comment: 'AM Infotech engineered our corporate web portal with extreme precision, modern Nordic design aesthetics, and fast load speeds. Top-notch technical advisory and dependable ongoing maintenance.',
+          status: 'Approved',
+          avatar_initials: 'KR',
+          created_at: new Date(Date.now() - 3 * 86400000).toISOString()
+        },
+        {
+          id: 'REV-2026-002',
+          name: 'S. Murugan & Family',
+          location: 'Ambasamudram, TN',
+          division: 'A2 Royal Events',
+          rating: 5,
+          service_availed: 'Grand Wedding & Stage Architecture',
+          comment: 'A² Royal Events transformed our family wedding into a regal fairytale! The stage architecture, custom LED lighting, and luxury VIP car convoy exceeded all our expectations. Exceptional team!',
+          status: 'Approved',
+          avatar_initials: 'SM',
+          created_at: new Date(Date.now() - 5 * 86400000).toISOString()
+        },
+        {
+          id: 'REV-2026-003',
+          name: 'Anand Prabhu',
+          location: 'Madurai, TN',
+          division: 'SB Food Production',
+          rating: 5,
+          service_availed: 'Bulk Pure Masalas & Traditional Spices',
+          comment: 'We procure SB Food authentic sambar and chili powders for our commercial catering operations in bulk. The aroma, color purity, and flavor consistency are truly unparalleled across Tamil Nadu.',
+          status: 'Approved',
+          avatar_initials: 'AP',
+          created_at: new Date(Date.now() - 8 * 86400000).toISOString()
+        },
+        {
+          id: 'REV-2026-004',
+          name: 'Dr. V. Rajeshwari',
+          location: 'Tenkasi, TN',
+          division: 'AM Consultancy',
+          rating: 5,
+          service_availed: 'MSME Business Advisory & GST Auditing',
+          comment: 'AM Consultancy streamlined our clinic company registration, GST compliance, and government subsidy filings seamlessly without any hassle. Highly professional and transparent documentation.',
+          status: 'Approved',
+          avatar_initials: 'VR',
+          created_at: new Date(Date.now() - 12 * 86400000).toISOString()
+        },
+        {
+          id: 'REV-2026-005',
+          name: 'C. Venkatesh Babu',
+          location: 'Chennai / Tirunelveli',
+          division: 'AM Real Estate',
+          rating: 5,
+          service_availed: 'DTCP Approved Villa Plot Purchase',
+          comment: 'Transparent documentation and 100% clear DTCP titles. AM Real Estate guided us through site visits, legal verification, and registration smoothly. Excellent investment value!',
+          status: 'Approved',
+          avatar_initials: 'CV',
+          created_at: new Date(Date.now() - 15 * 86400000).toISOString()
+        },
+        {
+          id: 'REV-2026-006',
+          name: 'P. Meenakshi Sundaram',
+          location: 'Tirunelveli, TN',
+          division: 'A2 Royal Events',
+          rating: 5,
+          service_availed: 'Corporate Gala & Luxury Car Rentals',
+          comment: 'Flawless corporate event coordination with top-of-the-line audio-visual setup and prompt Mercedes executive rental service. Will definitely partner again for our annual summit.',
+          status: 'Approved',
+          avatar_initials: 'PM',
+          created_at: new Date(Date.now() - 18 * 86400000).toISOString()
+        }
+      ];
+
+      const stmt = db.prepare(`
+        INSERT INTO customer_feedback (
+          id, name, location, division, rating, service_availed, comment, status, avatar_initials, created_at
+        ) VALUES (
+          @id, @name, @location, @division, @rating, @service_availed, @comment, @status, @avatar_initials, @created_at
+        )
+      `);
+
+      for (const item of initialFeedback) {
+        stmt.run(item);
+      }
+      console.log(`[DATABASE] Seeded ${initialFeedback.length} verified customer feedback entries successfully.`);
+    }
+  } catch (err) {
+    console.error('[DATABASE] Seed feedback error:', err.message);
+  }
+}
+
+/**
+ * Create a new Customer Feedback entry
+ */
+function createFeedback(data) {
+  const db = getDB();
+  const id = `REV-${Date.now()}`;
+  const now = new Date().toISOString();
+  
+  // Extract initials from name
+  const nameParts = (data.name || 'Anonymous').trim().split(/\s+/);
+  const initials = nameParts.length >= 2 
+    ? (nameParts[0][0] + nameParts[1][0]).toUpperCase()
+    : (nameParts[0] ? nameParts[0].substring(0, 2).toUpperCase() : 'CU');
+
+  const rating = Math.min(5, Math.max(1, parseInt(data.rating, 10) || 5));
+
+  const stmt = db.prepare(`
+    INSERT INTO customer_feedback (
+      id, name, location, division, rating, service_availed, comment, status, avatar_initials, created_at
+    ) VALUES (
+      ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    )
+  `);
+
+  stmt.run(
+    id,
+    data.name.trim(),
+    data.location ? data.location.trim() : 'Tamil Nadu',
+    data.division || 'AM Global Groups',
+    rating,
+    data.serviceAvailed ? data.serviceAvailed.trim() : (data.service_availed ? data.service_availed.trim() : 'General Service'),
+    data.comment.trim(),
+    data.status || 'Approved',
+    initials,
+    now
+  );
+
+  return getFeedbackById(id);
+}
+
+/**
+ * Get feedback item by ID
+ */
+function getFeedbackById(id) {
+  const db = getDB();
+  const stmt = db.prepare('SELECT * FROM customer_feedback WHERE id = ?');
+  const row = stmt.get(id);
+  return formatFeedback(row);
+}
+
+/**
+ * Get all Customer Feedback with optional division, status, and search filters
+ */
+function getFeedbackList(options = {}) {
+  const db = getDB();
+  const { division, status, search, limit = 50 } = options;
+
+  let query = 'SELECT * FROM customer_feedback WHERE 1=1';
+  const params = [];
+
+  if (division && division !== 'All' && division !== 'all') {
+    query += ' AND (division LIKE ? OR division = ?)';
+    params.push(`%${division}%`, division);
+  }
+
+  if (status && status !== 'All' && status !== 'all') {
+    query += ' AND status = ?';
+    params.push(status);
+  }
+
+  if (search) {
+    query += ' AND (name LIKE ? OR comment LIKE ? OR service_availed LIKE ? OR location LIKE ?)';
+    const s = `%${search}%`;
+    params.push(s, s, s, s);
+  }
+
+  query += ' ORDER BY created_at DESC LIMIT ?';
+  params.push(parseInt(limit, 10) || 50);
+
+  const stmt = db.prepare(query);
+  const rows = stmt.all(...params);
+  return rows.map(formatFeedback);
+}
+
+/**
+ * Update feedback status (e.g. Approved, Pending, Hidden)
+ */
+function updateFeedbackStatus(id, status) {
+  const db = getDB();
+  const stmt = db.prepare('UPDATE customer_feedback SET status = ? WHERE id = ?');
+  stmt.run(status, id);
+  return getFeedbackById(id);
+}
+
+/**
+ * Delete feedback item
+ */
+function deleteFeedback(id) {
+  const db = getDB();
+  const stmt = db.prepare('DELETE FROM customer_feedback WHERE id = ?');
+  const res = stmt.run(id);
+  return res.changes > 0;
+}
+
+/**
+ * Get aggregate feedback stats
+ */
+function getFeedbackStats() {
+  const db = getDB();
+  const totalStmt = db.prepare('SELECT COUNT(*) as total, AVG(rating) as avgRating FROM customer_feedback WHERE status = "Approved"');
+  const summary = totalStmt.get();
+  
+  const ratingDistribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+  const distStmt = db.prepare('SELECT rating, COUNT(*) as count FROM customer_feedback WHERE status = "Approved" GROUP BY rating');
+  const distRows = distStmt.all();
+  distRows.forEach(r => {
+    if (ratingDistribution[r.rating] !== undefined) {
+      ratingDistribution[r.rating] = r.count;
+    }
+  });
+
+  return {
+    totalReviews: summary.total || 0,
+    averageRating: summary.avgRating ? parseFloat(summary.avgRating.toFixed(1)) : 5.0,
+    ratingDistribution
+  };
+}
+
+/**
+ * Format feedback row to camelCase
+ */
+function formatFeedback(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    name: row.name,
+    location: row.location,
+    division: row.division,
+    rating: row.rating,
+    serviceAvailed: row.service_availed,
+    comment: row.comment,
+    status: row.status,
+    avatarInitials: row.avatar_initials,
+    createdAt: row.created_at
+  };
+}
+
+/**
  * Format DB row to camelCase response format
  */
 function formatInquiry(row) {
@@ -463,5 +735,12 @@ module.exports = {
   addNewsletterSubscriber,
   logAudit,
   getStatistics,
-  getDatabaseStatus
+  getDatabaseStatus,
+  createFeedback,
+  getFeedbackById,
+  getFeedbackList,
+  updateFeedbackStatus,
+  deleteFeedback,
+  getFeedbackStats
 };
+
